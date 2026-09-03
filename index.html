@@ -3,21 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <!-- ✏️ EDIT everything from <title> down to the favicon links: title, description,
-       og:/twitter: tags, og:url + og:image (your domain), theme-color. -->
-  <title>REMY OS — Client Systems · Websites, Paid Ads &amp; Fundability</title>
-  <meta name="description" content="One operator, one system. A website engineered to convert, ad campaigns that produce leads, and a business made fundable enough to borrow and scale. Built through REMY OS." />
-  <meta property="og:title" content="OPM Ventures — One system: Websites, Paid Ads & Fundability" />
-  <meta property="og:description" content="A website that converts, paid traffic engineered to feed it, and a business made lender-ready. One system." />
+  <title>Shakur Remy — Luxury Real Estate in San Antonio</title>
+  <meta name="description" content="San Antonio luxury homes with Shakur Remy, REALTOR® at Relive Realty. Buyer and seller representation, off-market access, and white-glove service from first tour to closing." />
+  <meta property="og:title" content="Shakur Remy — San Antonio Luxury Real Estate" />
+  <meta property="og:description" content="Buyer and seller representation across Alamo Heights, Stone Oak, The Dominion and San Antonio's luxury market. Off-market access. White-glove from tour to closing." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://opmventuresllc.com/" />
-  <meta property="og:image" content="https://opmventuresllc.com/assets/img/og.jpg" />
+  <meta property="og:url" content="https://shakurremy.com/" />
+  <meta property="og:image" content="https://shakurremy.com/assets/img/og.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="OPM Ventures — One system" />
-  <meta name="twitter:description" content="Websites, paid ads and fundability, built as one system." />
-  <meta name="twitter:image" content="https://opmventuresllc.com/assets/img/og.jpg" />
+  <meta name="twitter:title" content="Shakur Remy — San Antonio Luxury Real Estate" />
+  <meta name="twitter:description" content="Buyer and seller representation across San Antonio's luxury market. Off-market access, white-glove service." />
+  <meta name="twitter:image" content="https://shakurremy.com/assets/img/og.jpg" />
   <meta name="theme-color" content="#05070c" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png" />
@@ -27,8 +25,8 @@
       --sw-bg: #05070c;          /* == generated scene background */
       --sw-ink: #f2f6fc;
       --sw-ink-soft: #93a2b8;
-      --sw-accent: #3da9fc;      /* per-section accents override at runtime */
-      --sw-font-display: "Chakra Petch", "Inter", system-ui, sans-serif;
+      --sw-accent: #c9a86a;      /* champagne — per-section accents override at runtime */
+      --sw-font-display: "Playfair Display", Georgia, "Times New Roman", serif;
       --sw-font-body: "Inter", system-ui, sans-serif;
     }
     html, body { background: #05070c; }
@@ -72,7 +70,7 @@
          this section — no seam, one continuous space into the face and beyond */
       background:
         linear-gradient(180deg, transparent 0, rgba(5,7,12,.55) 16vh, #05070c 40vh),
-        radial-gradient(62% 58% at 82% 24%, color-mix(in srgb, #3da9fc 16%, transparent), transparent 64%);
+        radial-gradient(62% 58% at 82% 24%, color-mix(in srgb, #c9a86a 16%, transparent), transparent 64%);
       color: #f2f6fc;
       padding: clamp(120px, 24vh, 260px) clamp(20px, 6vw, 80px) clamp(72px, 12vh, 150px);
     }
@@ -87,7 +85,7 @@
     }
     .founder__portrait::before {   /* soft glow behind the head — no frame */
       content: ""; position: absolute; inset: -6% -4% -2%;
-      background: radial-gradient(56% 52% at 50% 40%, color-mix(in srgb, #3da9fc 24%, transparent), transparent 72%);
+      background: radial-gradient(56% 52% at 50% 40%, color-mix(in srgb, #c9a86a 24%, transparent), transparent 72%);
       pointer-events: none;
     }
     .founder__portrait::after {    /* warm pedestal so the face is grounded, not floating */
@@ -108,7 +106,7 @@
     .founder__eyebrow {
       display: block; font-family: var(--sw-font-display);
       font-weight: 700; font-size: .8rem; letter-spacing: .16em; text-transform: uppercase;
-      color: #68d0ff;
+      color: #e0c48c;
     }
     .founder__title {
       font-family: var(--sw-font-display); font-weight: 700;
@@ -146,7 +144,7 @@
 
     }
     .tiers__head { max-width: 1140px; margin: 0 auto 44px; }
-    .tiers__eyebrow { font-family: var(--sw-font-display); font-weight: 700; font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; color: #68d0ff; }
+    .tiers__eyebrow { font-family: var(--sw-font-display); font-weight: 700; font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; color: #e0c48c; }
     .tiers__title { font-family: var(--sw-font-display); font-weight: 700; font-size: clamp(1.7rem, 3.6vw, 2.6rem); line-height: 1.06; margin: 12px 0 0; letter-spacing: -.01em; }
     .tiers__grid { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
     .tier {
@@ -156,18 +154,18 @@
       padding: 26px 22px;
     }
     .tier--feature {
-      border-color: color-mix(in srgb, #3da9fc 55%, transparent);
-      background: linear-gradient(180deg, color-mix(in srgb, #3da9fc 12%, transparent), rgba(255,255,255,.02)), #0b1424;
-      box-shadow: 0 0 0 1px color-mix(in srgb, #3da9fc 35%, transparent), 0 30px 70px -40px color-mix(in srgb, #3da9fc 60%, transparent);
+      border-color: color-mix(in srgb, #c9a86a 55%, transparent);
+      background: linear-gradient(180deg, color-mix(in srgb, #c9a86a 12%, transparent), rgba(255,255,255,.02)), #0b1424;
+      box-shadow: 0 0 0 1px color-mix(in srgb, #c9a86a 35%, transparent), 0 30px 70px -40px color-mix(in srgb, #c9a86a 60%, transparent);
       position: relative;
     }
     .tier__badge {
       align-self: flex-start; margin: -2px 0 12px;
       font-family: var(--sw-font-display); font-size: 10px; font-weight: 700;
       letter-spacing: .16em; text-transform: uppercase; color: #05070c;
-      background: linear-gradient(100deg, #3da9fc, #68d0ff);
+      background: linear-gradient(100deg, #c9a86a, #e0c48c);
       padding: 5px 12px; border-radius: 999px;
-      box-shadow: 0 6px 18px -8px color-mix(in srgb, #3da9fc 80%, transparent);
+      box-shadow: 0 6px 18px -8px color-mix(in srgb, #c9a86a 80%, transparent);
     }
     .tier:not(.tier--feature) .tier__badge { display: none; }
     @media (min-width: 1001px) {
@@ -180,12 +178,12 @@
     .tier__sub { font-size: 11px; color: #d9b26a; min-height: 15px; margin-bottom: 16px; }
     .tier ul { list-style: none; margin: 2px 0 20px; padding: 0; flex: 1; }
     .tier li { font-size: 13px; color: #aab6c8; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.07); display: flex; gap: 9px; }
-    .tier li::before { content: "▪"; color: #68d0ff; flex: 0 0 auto; }
+    .tier li::before { content: "▪"; color: #e0c48c; flex: 0 0 auto; }
     .tier li em { color: #f2f6fc; font-style: normal; }
     .tier__btn {
       display: block; text-align: center; text-decoration: none;
       padding: 12px 10px; border-radius: 999px; font-weight: 600; font-size: .9rem;
-      background: var(--sw-accent, #3da9fc); color: #05070c; transition: transform .2s ease;
+      background: var(--sw-accent, #c9a86a); color: #05070c; transition: transform .2s ease;
     }
     .tier__btn:hover { transform: translateY(-2px); }
     .tier__btn--ghost { background: transparent; color: #f2f6fc; border: 1.5px solid rgba(255,255,255,.26); }
@@ -197,7 +195,7 @@
     .contact {
       position: relative; z-index: 45; overflow: hidden;
       background:
-        radial-gradient(70% 60% at 50% 0%, color-mix(in srgb, #3da9fc 10%, transparent), transparent 70%),
+        radial-gradient(70% 60% at 50% 0%, color-mix(in srgb, #c9a86a 10%, transparent), transparent 70%),
         #05070c;
       color: #f2f6fc;
       padding: clamp(72px, 12vh, 150px) clamp(20px, 6vw, 80px);
@@ -206,7 +204,7 @@
     .contact::before {   /* slow aurora drift behind the headline */
       content: ""; position: absolute; left: 50%; top: -10%;
       width: min(760px, 92vw); height: 340px; transform: translateX(-50%);
-      background: radial-gradient(50% 50% at 50% 50%, color-mix(in srgb, #3da9fc 16%, transparent), transparent 70%);
+      background: radial-gradient(50% 50% at 50% 50%, color-mix(in srgb, #c9a86a 16%, transparent), transparent 70%);
       pointer-events: none; filter: blur(20px);
     }
     @media (prefers-reduced-motion: no-preference) {
@@ -217,7 +215,7 @@
       }
     }
     .contact__inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
-    .contact__eyebrow { font-family: var(--sw-font-display); font-weight: 700; font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: #68d0ff; }
+    .contact__eyebrow { font-family: var(--sw-font-display); font-weight: 700; font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: #e0c48c; }
     .contact__title { font-family: var(--sw-font-display); font-weight: 700; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.04; margin: 14px 0 0; letter-spacing: -.015em; }
     .contact__lead { margin: 18px auto 0; max-width: 40ch; font-size: clamp(1rem, 1.2vw, 1.14rem); line-height: 1.55; color: color-mix(in srgb, #f2f6fc 80%, #8898ac); }
     .contact__actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 34px; }
@@ -249,7 +247,7 @@
     #fx-glow {
       position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity .5s ease;
       background: radial-gradient(360px circle at var(--fx-x, 50%) var(--fx-y, 40%),
-        color-mix(in srgb, var(--df-accent, #3da9fc) 12%, transparent), transparent 62%);
+        color-mix(in srgb, var(--df-accent, #c9a86a) 12%, transparent), transparent 62%);
     }
     @media (hover: hover) and (pointer: fine) { #fx-glow { opacity: 1; } }
     @media (prefers-reduced-motion: reduce) { #fx-grain, #fx-glow { display: none; } }
@@ -275,7 +273,7 @@
     .df-bar__cta:active, .tier__btn:active, .contact__btn:active, .founder__btn:active,
     .mv2-btn:active, .contact__top:active { transform: translateY(0) scale(.96); }
     /* brand-tinted text selection + a clean keyboard focus ring */
-    ::selection { background: color-mix(in srgb, #3da9fc 42%, transparent); color: #fff; }
+    ::selection { background: color-mix(in srgb, #c9a86a 42%, transparent); color: #fff; }
     :focus-visible { outline: 2px solid #d9b26a; outline-offset: 3px; border-radius: 4px; }
     :focus:not(:focus-visible) { outline: none; }
     @media (max-width: 1000px) { .tiers__grid { grid-template-columns: repeat(2, 1fr); } }
@@ -309,12 +307,12 @@
     .tier__ring {
       position: absolute; inset: -2px; border-radius: calc(18px + 2px); z-index: -1; pointer-events: none;
       background: conic-gradient(from var(--fx-ang),
-        color-mix(in srgb, var(--sw-accent, #3da9fc) 96%, #fff) 0deg,
+        color-mix(in srgb, var(--sw-accent, #c9a86a) 96%, #fff) 0deg,
         transparent 70deg, transparent 180deg,
-        color-mix(in srgb, #68d0ff 96%, #fff) 250deg, transparent 320deg,
-        color-mix(in srgb, var(--sw-accent, #3da9fc) 96%, #fff) 360deg);
+        color-mix(in srgb, #e0c48c 96%, #fff) 250deg, transparent 320deg,
+        color-mix(in srgb, var(--sw-accent, #c9a86a) 96%, #fff) 360deg);
     }
-    .tier--feature { box-shadow: 0 0 0 1px color-mix(in srgb, var(--sw-accent, #3da9fc) 30%, transparent), 0 24px 60px -34px color-mix(in srgb, var(--sw-accent, #3da9fc) 65%, transparent); }
+    .tier--feature { box-shadow: 0 0 0 1px color-mix(in srgb, var(--sw-accent, #c9a86a) 30%, transparent), 0 24px 60px -34px color-mix(in srgb, var(--sw-accent, #c9a86a) 65%, transparent); }
     @media (prefers-reduced-motion: no-preference) {
       .tier__ring { animation: fx-ring 5.5s linear infinite; }
       @keyframes fx-ring { to { --fx-ang: 360deg; } }
@@ -339,9 +337,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- fonts load non-render-blocking so the first scene paints immediately -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
         onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"></noscript>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"></noscript>
   <!-- paint the first scene's poster instantly while the engine boots -->
   <link rel="preload" as="image" href="assets/frames/f0001.jpg" media="(min-width: 861px)" fetchpriority="high" />
   <link rel="preload" as="image" href="assets/frames/f0002.jpg" media="(min-width: 861px)" />
@@ -411,19 +409,19 @@
   <!-- ✏️ EDIT: portrait img src/alt, eyebrow, <h2>, the two <p>, both buttons.
        The section top is deliberately see-through so the last flight frame
        dissolves into the face — don't add a background or border here. -->
-  <section id="founder" class="founder" aria-label="The operator">
+  <section id="founder" class="founder" aria-label="About Shakur Remy">
     <div class="founder__inner">
       <div class="founder__portrait">
-        <img src="assets/img/founder.png" alt="Shakur, founder of OPM Ventures LLC" decoding="async" loading="lazy" />
+        <img src="assets/img/founder.png" alt="Shakur Remy, REALTOR® with Relive Realty in San Antonio" decoding="async" loading="lazy" />
       </div>
       <div class="founder__body">
-        <span class="founder__eyebrow">The operator</span>
-        <h2 class="founder__title">One person runs your whole system.</h2>
-        <p>I'm Shakur — founder of OPM&nbsp;Ventures&nbsp;LLC. I build the website, run the paid traffic, and get your business lender-ready. One person accountable for the entire chain, not three vendors pointing at each other.</p>
-        <p>Every engagement starts the same way: a call and a blueprint — the offer, the customer, the tier, the dates — then I build.</p>
+        <span class="founder__eyebrow">Your agent</span>
+        <h2 class="founder__title">One agent. Both sides of the deal.</h2>
+        <p>I'm Shakur&nbsp;Remy, a San&nbsp;Antonio REALTOR® with Relive&nbsp;Realty. I represent buyers and sellers across Alamo&nbsp;Heights, Olmos&nbsp;Park, Stone&nbsp;Oak and The&nbsp;Dominion — with the same standard on every deal: know the number, move fast, and protect your position.</p>
+        <p>Start with a conversation. We'll talk through what you're buying or selling, the neighborhoods that fit, and the timeline — then I go to work.</p>
         <div class="founder__cta">
-          <a class="founder__btn founder__btn--primary" data-calendly href="https://calendly.com/shakur-opmventuresllc/30min">Book a call</a>
-          <a class="founder__btn founder__btn--ghost" href="#tiers">See the tiers</a>
+          <a class="founder__btn founder__btn--primary" href="https://a.nhb.app/u/shakur-remy">View listings</a>
+          <a class="founder__btn founder__btn--ghost" href="#contact">Contact Shakur</a>
         </div>
       </div>
     </div>
@@ -435,80 +433,67 @@
        class="tier tier--feature" AND <span class="tier__badge">Recommended</span>
        as its first child. Buttons: class="tier__btn" (filled) or
        "tier__btn tier__btn--ghost" (outline). data-calendly for a booking link. -->
-  <section id="tiers" class="tiers" aria-label="Pick your tier">
+  <section id="tiers" class="tiers" aria-label="Featured San Antonio neighborhoods">
     <div class="tiers__head">
-      <span class="tiers__eyebrow">Pick your tier</span>
-      <h2 class="tiers__title">Priced so the math works for both of us.</h2>
+      <span class="tiers__eyebrow">Where I work</span>
+      <h2 class="tiers__title">San Antonio's luxury pockets.</h2>
     </div>
     <div class="tiers__grid">
 
       <div class="tier">
-        <h3>Foundation</h3>
-        <div class="tier__blurb">Get seen. A conversion site, live in 14 days.</div>
-        <div class="tier__price">$2,000 <small>one-time</small></div>
-        <div class="tier__sub">&nbsp;</div>
+        <h3>Alamo Heights</h3>
+        <div class="tier__blurb">Live-oak streets and historic estates, walk to the village.</div>
+        <div class="tier__price">$700K–$4M</div>
+        <div class="tier__sub">Inside Loop 410</div>
         <ul>
-          <li>5-page conversion website</li>
-          <li>Copywriting + mobile build</li>
-          <li>On-page SEO basics</li>
-          <li>Lead form → your inbox / CRM</li>
-          <li>Google Business Profile tune-up</li>
-          <li>1 revision round · 14-day delivery</li>
+          <li>Historic architecture</li>
+          <li>Top-rated AHISD schools</li>
+          <li>Five minutes to downtown</li>
         </ul>
-        <a class="tier__btn" href="https://whop.com/checkout/plan_2T2XreGKBAbHd">Start Foundation</a>
-        <div class="tier__mini">One payment. No retainer.</div>
-      </div>
-
-      <div class="tier tier--feature">
-        <span class="tier__badge">Recommended</span>
-        <h3>Growth</h3>
-        <div class="tier__blurb">Get leads. Site plus one ad platform, run weekly.</div>
-        <div class="tier__price">$2,500 <small>setup</small></div>
-        <div class="tier__sub">then $1,500 / month · 3-mo min</div>
-        <ul>
-          <li>Everything in Foundation</li>
-          <li>Meta <em>or</em> Google ads: full build</li>
-          <li>5 ad creatives + landing page</li>
-          <li>Weekly optimization</li>
-          <li>Lead tracking dashboard</li>
-          <li>Monthly report + strategy call</li>
-        </ul>
-        <a class="tier__btn" href="https://whop.com/checkout/plan_Je2JIYPJq7F01">Start Growth — $2,500</a>
-        <div class="tier__mini">Monthly retainer (<a href="https://whop.com/checkout/plan_kUi4ob9FHMpuI">$1,500/mo</a>) begins after onboarding.</div>
+        <a class="tier__btn" href="https://a.nhb.app/u/shakur-remy">View homes</a>
+        <div class="tier__mini">Updated from the MLS.</div>
       </div>
 
       <div class="tier">
-        <h3>Scale &amp; Fund</h3>
-        <div class="tier__blurb">Get capital. Both platforms plus a fundability program.</div>
-        <div class="tier__price">$4,000 <small>setup</small></div>
-        <div class="tier__sub">then $3,000 / month · 6-mo min</div>
+        <h3>Olmos Park</h3>
+        <div class="tier__blurb">A leafy enclave of custom homes minutes from the Pearl.</div>
+        <div class="tier__price">$800K–$5M</div>
+        <div class="tier__sub">Its own municipality</div>
         <ul>
-          <li>Everything in Growth</li>
-          <li>Both ad platforms + retargeting</li>
-          <li>10 creatives/mo · 2 landing pages</li>
-          <li>Business credit profile (D-U-N-S, tradelines)</li>
-          <li>Lender-ready financial packet</li>
-          <li>Fundability scorecard + lender shortlist</li>
-          <li>Bi-weekly calls</li>
+          <li>Large wooded lots</li>
+          <li>Walk to Olmos Basin</li>
+          <li>Quiet, private feel</li>
         </ul>
-        <a class="tier__btn tier__btn--ghost" href="mailto:shakur@opmventuresllc.com?subject=Scale%20%26%20Fund%20%E2%80%94%20application">Request access</a>
-        <div class="tier__mini">Application only — limited slots.</div>
+        <a class="tier__btn" href="https://a.nhb.app/u/shakur-remy">View homes</a>
+        <div class="tier__mini">Updated from the MLS.</div>
       </div>
 
       <div class="tier">
-        <h3>Partner</h3>
-        <div class="tier__blurb">Multi-location or higher budgets. Custom scope.</div>
-        <div class="tier__price">From $6,000 <small>/ mo</small></div>
-        <div class="tier__sub">custom engagement</div>
+        <h3>Stone Oak</h3>
+        <div class="tier__blurb">Gated communities and new luxury builds in the far north.</div>
+        <div class="tier__price">$500K–$2M</div>
+        <div class="tier__sub">Far North Central</div>
         <ul>
-          <li>Everything in Scale &amp; Fund</li>
-          <li>Deeper platform + budget coverage</li>
-          <li>Quarterly planning</li>
-          <li>Priority capacity</li>
-          <li>Scope + price quoted per business</li>
+          <li>Newer construction</li>
+          <li>Hill-country views</li>
+          <li>Master-planned amenities</li>
         </ul>
-        <a class="tier__btn tier__btn--ghost" data-calendly href="https://calendly.com/shakur-opmventuresllc/30min">Book a call</a>
-        <div class="tier__mini">Pick a time that works.</div>
+        <a class="tier__btn" href="https://a.nhb.app/u/shakur-remy">View homes</a>
+        <div class="tier__mini">Updated from the MLS.</div>
+      </div>
+
+      <div class="tier">
+        <h3>The Dominion</h3>
+        <div class="tier__blurb">San Antonio's premier guard-gated golf community.</div>
+        <div class="tier__price">$700K–$6M+</div>
+        <div class="tier__sub">I-10 at Camp Bullis</div>
+        <ul>
+          <li>24/7 manned gate</li>
+          <li>Championship golf</li>
+          <li>Estate-size parcels</li>
+        </ul>
+        <a class="tier__btn" href="https://a.nhb.app/u/shakur-remy">View homes</a>
+        <div class="tier__mini">Updated from the MLS.</div>
       </div>
 
     </div>
@@ -517,26 +502,20 @@
   <!-- ============ CONTACT ============ -->
   <!-- ✏️ EDIT: eyebrow, <h2>, lead line, the 3 buttons, and the fine-print
        line (business name · domain · email). -->
-  <section id="contact" class="contact" aria-label="Get in touch">
+  <section id="contact" class="contact" aria-label="Contact Shakur Remy">
     <div class="contact__inner">
-      <span class="contact__eyebrow">Get started</span>
-      <h2 class="contact__title">Let&rsquo;s build your system.</h2>
-      <p class="contact__lead">One call to lock the offer, the customer and the scope. Then I build.</p>
+      <span class="contact__eyebrow">Get in touch</span>
+      <h2 class="contact__title">Let&rsquo;s find your next address.</h2>
+      <p class="contact__lead">Buying, selling, or just testing the water in San Antonio — start with a call or a text.</p>
       <div class="contact__actions">
-        <a class="contact__btn contact__btn--primary" data-calendly href="https://calendly.com/shakur-opmventuresllc/30min">Book a call</a>
-        <a class="contact__btn" href="mailto:shakur@opmventuresllc.com?subject=OPM%20Ventures%20%E2%80%94%20enquiry">Email</a>
-        <a class="contact__btn" href="#tiers">See plans</a>
+        <a class="contact__btn contact__btn--primary" href="tel:+16466883442">Call or text</a>
+        <a class="contact__btn" href="mailto:sremy@reliverealty.com?subject=San%20Antonio%20real%20estate%20enquiry">Email</a>
+        <a class="contact__btn" href="https://a.nhb.app/u/shakur-remy">View listings</a>
       </div>
-      <p class="contact__fine">OPM&nbsp;Ventures&nbsp;LLC &nbsp;·&nbsp; opmventuresllc.com &nbsp;·&nbsp; <a href="mailto:shakur@opmventuresllc.com">shakur@opmventuresllc.com</a></p>
+      <p class="contact__fine">Shakur&nbsp;Remy &nbsp;·&nbsp; REALTOR® &nbsp;·&nbsp; Relive&nbsp;Realty &nbsp;·&nbsp; TREC&nbsp;License&nbsp;#844622 &nbsp;·&nbsp; San&nbsp;Antonio,&nbsp;TX<br /><a href="tel:+16466883442">(646)&nbsp;688-3442</a> &nbsp;·&nbsp; <a href="mailto:sremy@reliverealty.com">sremy@reliverealty.com</a></p>
     </div>
     <a class="contact__top" href="#top" aria-label="Back to top">&uarr;</a>
   </section>
-
-  <script>
-    /* ✏️ EDIT: your booking URL. Every <a data-calendly> on the page uses it. */
-    (function(){ var CAL='https://calendly.com/shakur-opmventuresllc/30min';
-      document.querySelectorAll('[data-calendly]').forEach(function(a){ a.href=CAL; }); })();
-  </script>
 
   <script>
 /* ==== scrub-engine.js (inlined) ==== */
@@ -652,7 +631,7 @@ function mountMobileStory(container, config) {
   const panels = S.map((s, i) => {
     const sec = mel('section', 'mv2-panel' + (i === 0 ? ' mv2-panel--hero' : '') + (i === N - 1 ? ' mv2-panel--last' : ''));
     sec.id = ids[i];
-    sec.style.setProperty('--mv2-accent', s.accent || '#3da9fc');
+    sec.style.setProperty('--mv2-accent', s.accent || '#c9a86a');
     const bg = mel('div', 'mv2-panel__bg');
     const img = mel('img', 'mv2-panel__img');
     img.src = s.stillMobile && i === 0 ? s.stillMobile : (s.still || s.stillMobile || '');
@@ -746,7 +725,7 @@ function injectMobileCSS() {
   if (document.getElementById('mv-css')) return;
   const st = document.createElement('style'); st.id = 'mv-css';
   st.textContent = `
-  .mv2-root{position:relative;z-index:1;--mv2-accent:#3da9fc;}
+  .mv2-root{position:relative;z-index:1;--mv2-accent:#c9a86a;}
   .mv2-bar{position:fixed;top:0;left:0;right:0;z-index:70;display:flex;align-items:center;justify-content:space-between;
     padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:linear-gradient(180deg,rgba(5,7,12,.66),transparent);}
   .mv2-brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:#f2f6fc;}
@@ -762,7 +741,7 @@ function injectMobileCSS() {
     opacity:0;pointer-events:none;transform:translateY(-8px);transition:opacity .3s,transform .3s;}
   body.mv2-menu-open .mv2-menu{opacity:1;pointer-events:auto;transform:none;}
   .mv2-menu a{font-family:var(--sw-font-display,system-ui);font-weight:700;font-size:1.55rem;color:#f2f6fc;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08);}
-  .mv2-menu a:last-child{border:0;color:var(--mv2-accent,#3da9fc);}
+  .mv2-menu a:last-child{border:0;color:var(--mv2-accent,#c9a86a);}
   .mv2-rail{position:fixed;right:10px;top:50%;transform:translateY(-50%);z-index:65;display:flex;flex-direction:column;gap:9px;pointer-events:none;}
   .mv2-rail i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.24);transition:all .35s ease;}
   .mv2-rail i.on{background:var(--mv2-accent);height:20px;border-radius:3px;box-shadow:0 0 12px color-mix(in srgb,var(--mv2-accent) 70%,transparent);}
@@ -833,7 +812,7 @@ function mountDesktopFlight(container, config) {
   if (!N || !FRAMES) return false;
   injectDFCSS();
   container.classList.add('df-root');
-  container.style.setProperty('--df-accent', S[0].accent || '#3da9fc');
+  container.style.setProperty('--df-accent', S[0].accent || '#c9a86a');
   const FEXT = config.frameExt || 'jpg';
   const frameURL = i => FDIR + 'f' + String(i + 1).padStart(4, '0') + '.' + FEXT;
 
@@ -966,7 +945,7 @@ function mountDesktopFlight(container, config) {
       navItems.forEach((d, k) => d.classList.toggle('is-active', k === near));
       // accent eases between the outgoing and incoming scene colours
     }
-    const a0 = S[near].accent || '#3da9fc';
+    const a0 = S[near].accent || '#c9a86a';
     const a1 = S[Math.min(N - 1, near + 1)].accent || a0;
     const frac = clamp(pn - near - 0.5);
     container.style.setProperty('--df-accent', lerpColor(a0, a1, smooth(frac)));
@@ -992,7 +971,7 @@ function injectDFCSS() {
   if (document.getElementById('df-css')) return;
   const st = document.createElement('style'); st.id = 'df-css';
   st.textContent = `
-  .df-root{position:relative;z-index:1;--df-accent:#3da9fc;}
+  .df-root{position:relative;z-index:1;--df-accent:#c9a86a;}
   .df-bg{position:fixed;inset:0;z-index:0;background:#05070c;overflow:hidden;}
   .df-poster,.df-canvas{position:absolute;inset:0;width:100%;height:100%;}
   .df-poster{object-fit:cover;object-position:center 44%;}
@@ -1525,82 +1504,69 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
        frameCount / frameCountMobile MUST equal the number of files in
        assets/frames/ and assets/frames-m/. Keep them equal to each other. */
     mountScrollWorld(document.getElementById('world'), {
-      brand: { name: 'OPM Ventures', href: '#top', logo: 'assets/img/logo.png' },
-      cta: { label: 'Claim your system', href: '#tiers' },
-      mobileVideo: 'assets/vid/flight-m.mp4',
-      frameCount: 386,
+      brand: { name: 'Shakur Remy', href: '#top', logo: 'assets/img/logo.png' },
+      cta: { label: 'View listings', href: 'https://a.nhb.app/u/shakur-remy' },
+      frameCount: 384,
       frameDir: 'assets/frames/',
-      frameCountMobile: 386,
+      frameCountMobile: 384,
       frameDirMobile: 'assets/frames-m/',
       frameExtMobile: 'webp',
       scrollPerMobile: 1.15,
-      hint: 'scroll to fly in',
+      hint: 'scroll to step inside',
       diveScroll: 1.3,
       sections: [
         {
-          id: 's1', label: 'Invisible',
-          still: 'assets/s1.jpg', stillMobile: 'assets/s1-m.jpg',
-          clip: 'assets/vid/s1.mp4', clipMobile: 'assets/vid/s1-m.mp4',
-          accent: '#3da9fc',
+          id: 's1', label: 'Arrival',
+          accent: '#b7a06a',
           scroll: 1.7, linger: 0.4,
-          eyebrow: 'Where most businesses stall',
-          title: "You're invisible.",
-          body: 'No site that converts, no traffic engine, no financial story — so buyers and lenders both look past you.',
-          tags: ['Websites', 'Paid ads', 'Fundability'],
+          eyebrow: 'San Antonio luxury',
+          title: 'Homes like this rarely reach the open market.',
+          body: 'Off-market access and first looks across the city’s most sought-after streets.',
+          tags: ['Alamo Heights', 'Olmos Park', 'The Dominion'],
         },
         {
-          id: 's2', label: 'The System',
-          still: 'assets/s2.jpg', stillMobile: 'assets/s2-m.jpg',
-          clip: 'assets/vid/s2.mp4', clipMobile: 'assets/vid/s2-m.mp4',
-          accent: '#3da9fc',
-          eyebrow: 'Step one',
-          title: 'We build the system.',
-          body: 'A conversion-built website engineered as the core everything else plugs into.',
-          tags: ['Design + build', 'Copy', 'Analytics'],
+          id: 's2', label: 'The Door',
+          accent: '#c2a870',
+          eyebrow: 'Buyer representation',
+          title: 'Every door opens on your terms.',
+          body: 'Private tours, sharp negotiation, and a clear read on what a home is really worth.',
+          tags: ['Tours', 'Negotiation', 'Valuation'],
         },
         {
-          id: 's3', label: 'Paid Traffic',
-          still: 'assets/s3.jpg', stillMobile: 'assets/s3-m.jpg',
-          clip: 'assets/vid/s3.mp4', clipMobile: 'assets/vid/s3-m.mp4',
-          accent: '#68d0ff',
-          eyebrow: 'Step two',
-          title: 'Then we drive traffic.',
-          body: 'Paid campaigns tuned to push qualified buyers straight into the system.',
-          tags: ['Google', 'Meta', 'Tracking'],
+          id: 's3', label: 'The Rooms',
+          accent: '#c9a86a',
+          eyebrow: 'Seller representation',
+          title: 'Priced, staged, and shown to sell.',
+          body: 'Positioning and marketing that put your home in front of the right buyers, fast.',
+          tags: ['Staging', 'Marketing', 'Pricing'],
         },
         {
-          id: 's4', label: 'Lender-Ready',
-          still: 'assets/s4.jpg', stillMobile: 'assets/s4-m.jpg',
-          clip: 'assets/vid/s4.mp4', clipMobile: 'assets/vid/s4-m.mp4',
-          accent: '#d9b26a',
-          eyebrow: 'Step three',
-          title: 'We make you lender-ready.',
-          body: 'Your credit profile and financials organized until the paperwork says yes.',
-          tags: ['Credit profile', 'Documents', 'Structure'],
+          id: 's4', label: 'The Numbers',
+          accent: '#d3b779',
+          eyebrow: 'Market intelligence',
+          title: 'You’ll know the number before anyone else.',
+          body: 'Live San Antonio comps and pricing trends, read the way a buyer’s agent reads them.',
+          tags: ['Comps', 'Trends', 'Timing'],
         },
         {
-          id: 's5', label: 'Funded',
-          still: 'assets/s5.jpg', stillMobile: 'assets/s5-m.jpg',
-          clip: 'assets/vid/s5.mp4', clipMobile: 'assets/vid/s5-m.mp4',
-          accent: '#d9b26a',
-          eyebrow: 'The result',
-          title: 'Capital shows up.',
-          body: 'Approvals land because the system and the numbers finally back each other.',
-          tags: ['Approved', 'Funded'],
+          id: 's5', label: 'The Suite',
+          accent: '#ddc186',
+          eyebrow: 'Full service',
+          title: 'White-glove from first tour to closing.',
+          body: 'One point of contact for inspections, lenders, title, and every signature in between.',
+          tags: ['Inspections', 'Lenders', 'Closing'],
         },
         {
-          id: 's6', label: 'Scale',
-          still: 'assets/s6.jpg', stillMobile: 'assets/s6-m.jpg',
-          clip: 'assets/vid/s6.mp4', clipMobile: 'assets/vid/s6-m.mp4',
-          accent: '#d9b26a',
+          id: 's6', label: 'The View',
+          accent: '#e6c98a',
           scroll: 1.7, linger: 0.45,
-          eyebrow: 'What it is for',
-          title: 'A business that scales.',
-          body: 'One system — presence, traffic and capital compounding together.',
+          eyebrow: 'Start here',
+          title: 'See what’s on the market.',
+          body: 'Current San Antonio listings, updated straight from the MLS.',
           tags: [],
           cta: {
-            primary:   { label: 'Book a call', href: 'https://calendly.com/shakur-opmventuresllc/30min' },
-            secondary: { label: 'See the tiers', href: '#tiers' },
+            primary:   { label: 'View listings', href: 'https://a.nhb.app/u/shakur-remy' },
+            secondary: { label: 'Contact Shakur', href: '#contact' },
           },
         },
       ],
