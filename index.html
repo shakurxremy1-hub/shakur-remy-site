@@ -2413,7 +2413,9 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
           fetch(endpoint, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) })
             .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); })
             .then(function (res) {
-              if (!res.ok) throw new Error((res.d && res.d.message) || 'bad');
+              // FormSubmit returns HTTP 200 even on failure — the JSON `success` field is the truth
+              var ok = res.ok && String(res.d && res.d.success) !== 'false';
+              if (!ok) throw new Error((res.d && res.d.message) || 'bad');
               form.reset();
               if (status) { status.className = statusSel.slice(1) + ' ' + okCls; status.textContent = done; }
             })
