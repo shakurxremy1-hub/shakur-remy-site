@@ -1,0 +1,6 @@
+.DS_Store
+.claude-flow/
+.gstack/
+src/*.mp4
+src/portrait/*.mp4
+node_modules/
