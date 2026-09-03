@@ -958,10 +958,13 @@
       <p>A short monthly email &mdash; new and coming-soon listings in the top neighborhoods, plus what prices are actually doing. No spam, unsubscribe anytime.</p>
       <form class="news__form" method="POST"
             action="https://formsubmit.co/sremy@reliverealty.com"
-            data-endpoint="https://formsubmit.co/ajax/sremy@reliverealty.com">
+            data-endpoint="https://formsubmit.co/ajax/sremy@reliverealty.com"
+            data-welcome="">
+        <input type="hidden" name="form" value="newsletter" />
         <input type="hidden" name="_subject" value="Market-note signup from listedbyremy.com" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_autoresponse" value="You're on the list for the monthly San Antonio luxury market note. No spam — reply 'stop' any time to unsubscribe. — Shakur Remy, REALTOR®" />
         <input type="text" name="_honey" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <input type="hidden" name="list" value="Monthly market note" />
         <label class="cf-hp" for="news-email">Email</label>
@@ -986,13 +989,19 @@
         <a class="contact__btn" href="https://a.nhb.app/u/shakur-remy">View listings</a>
       </div>
 
+      <!-- data-welcome: paste your Google Apps Script /exec URL here to send the
+           personalised welcome email with the IABS + Consumer Notice attached.
+           See /automation/README.md. Leave blank to disable. -->
       <form id="contact-form" class="contact__form" method="POST"
             action="https://formsubmit.co/sremy@reliverealty.com"
-            data-endpoint="https://formsubmit.co/ajax/sremy@reliverealty.com">
+            data-endpoint="https://formsubmit.co/ajax/sremy@reliverealty.com"
+            data-welcome="">
+        <input type="hidden" name="form" value="contact" />
         <input type="hidden" name="_subject" value="New enquiry from listedbyremy.com" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://shakurxremy1-hub.github.io/shakur-remy-site/#contact" />
+        <input type="hidden" name="_next" value="https://listedbyremy.com/#contact" />
+        <input type="hidden" name="_autoresponse" value="Thanks for reaching out — I've received your message and will follow up personally within one business day. You can reach me any time at (646) 688-3442. Texas requires that I share these two disclosures with you: Information About Brokerage Services — https://agent.reliverealty.com/TREC_ReliveRE.pdf and the TREC Consumer Protection Notice — https://agent.reliverealty.com/TCPN_ReliveRE.pdf . — Shakur Remy, REALTOR®, Relive Real Estate Inc., TREC License #844622" />
         <input type="text" name="_honey" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <div class="contact__grid">
           <div class="cf-field">
@@ -2410,6 +2419,9 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
           if (status) { status.className = statusSel.slice(1); status.textContent = ''; }
           var label = btn ? btn.textContent : '';
           if (btn) { btn.disabled = true; btn.textContent = sending; }
+          // fire-and-forget: personalised welcome email via Google Apps Script (if configured)
+          var welcome = form.getAttribute('data-welcome');
+          if (welcome) { try { fetch(welcome, { method: 'POST', mode: 'no-cors', body: new FormData(form) }); } catch (err) {} }
           fetch(endpoint, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) })
             .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); })
             .then(function (res) {
