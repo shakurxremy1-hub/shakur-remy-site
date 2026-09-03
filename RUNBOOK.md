@@ -1,10 +1,13 @@
 # shakurremy.com — Operations Runbook
 
-Fill the {{blanks}} once the domain is registered.
+Live now at **https://shakurxremy1-hub.github.io/shakur-remy-site/**
+Fill the remaining {{blanks}} once the domain is registered.
 
 - Site: single `index.html`, no build. `main` == live.
-- Repo: {{GIT_REMOTE}}  (public — required for free GitHub Pages)
+- Repo: git@github.com:shakurxremy1-hub/shakur-remy-site.git  (public — required for free GitHub Pages)
 - Host: GitHub Pages, branch `main`, folder `/`
+- Known-good tag: `v1.0` (commit d179a48) — launch build
+- `main` branch protection: ON (no force-push, no deletion, enforce_admins)
 - Agent: Shakur Remy · REALTOR® · Relive Realty · TREC #844622 · San Antonio, TX
 - Contact shown on site: (646) 688-3442 · sremy@reliverealty.com
 - Listings CTA target: https://a.nhb.app/u/shakur-remy
@@ -18,7 +21,7 @@ Fill the {{blanks}} once the domain is registered.
 | A | @ | 185.199.109.153 |
 | A | @ | 185.199.110.153 |
 | A | @ | 185.199.111.153 |
-| CNAME | www | {{GH_OWNER}}.github.io |
+| CNAME | www | shakurxremy1-hub.github.io |
 
 Then: add `CNAME` file = `shakurremy.com`, set it in repo Settings → Pages,
 tick Enforce HTTPS.
