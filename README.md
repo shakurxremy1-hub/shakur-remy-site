@@ -33,5 +33,5 @@ To re-cut: drop new `src/sceneN.mp4` files, run `./build-frames.sh`, update
 ```bash
 ./serve.sh            # http://localhost:8899
 ```
-Deploy: GitHub Pages from `main` / root. Custom domain `listedbyremy.com` once registered —
+Deploy: GitHub Pages from `main` / root. Custom domain: https://listedbyremy.com (live) —
 see `DEPLOY.md`, then fill in `RUNBOOK.md`.

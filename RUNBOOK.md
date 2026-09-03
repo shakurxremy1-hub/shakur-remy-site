@@ -1,19 +1,19 @@
 # listedbyremy.com — Operations Runbook
 
-Live now at **https://shakurxremy1-hub.github.io/shakur-remy-site/**
-Fill the remaining {{blanks}} once the domain is registered.
+Live at **https://listedbyremy.com** (GitHub Pages, custom domain).
+Fallback URL: https://shakurxremy1-hub.github.io/shakur-remy-site/
 
-- Site: single `index.html`, no build. `main` == live.
+- Site: single `index.html` + `/areas/*` + `/guides/*`, no build. `main` == live.
 - Repo: git@github.com:shakurxremy1-hub/shakur-remy-site.git  (public — required for free GitHub Pages)
-- Host: GitHub Pages, branch `main`, folder `/`
-- Known-good tag: `v1.0` (commit d179a48) — launch build
+- Host: GitHub Pages, branch `main`, folder `/`. Repo `CNAME` file = `listedbyremy.com` (do not delete).
 - `main` branch protection: ON (no force-push, no deletion, enforce_admins)
 - Agent: Shakur Remy · REALTOR® · Relive Realty · TREC #844622 · San Antonio, TX
 - Contact shown on site: (646) 688-3442 · sremy@reliverealty.com
 - Listings CTA target: https://a.nhb.app/u/shakur-remy
-- Registrar: {{REGISTRAR}} · expires {{EXPIRY}} · auto-renew ON
+- Registrar: **GoDaddy.com, LLC** · registered 2026-09-03 · expires **2027-09-03** · keep auto-renew ON with a valid card
+- Nameservers: `ns67 / ns68.domaincontrol.com` (GoDaddy default — unchanged)
 
-## DNS (once listedbyremy.com is registered)
+## DNS (at GoDaddy — already set)
 
 | Type | Host | Value |
 |------|------|-------|
@@ -23,8 +23,20 @@ Fill the remaining {{blanks}} once the domain is registered.
 | A | @ | 185.199.111.153 |
 | CNAME | www | shakurxremy1-hub.github.io |
 
-Then: add `CNAME` file = `listedbyremy.com`, set it in repo Settings → Pages,
-tick Enforce HTTPS.
+The apex `@` must have **exactly these four** A records — no GoDaddy parking IPs
+(`76.223.105.230`, `13.248.243.5`). NS / SOA / default TXT are fine, leave them.
+
+## If the custom domain breaks
+
+```bash
+dig +short A listedbyremy.com          # expect the four 185.199.108-111.153
+curl -sI https://listedbyremy.com | head -3   # HTTP/2 200, server: GitHub.com
+```
+- Cert error / "Enforce HTTPS" greyed out → repo Settings → Pages → remove the
+  custom domain, save, re-enter `listedbyremy.com`, save. Wait for the cert.
+- Site shows a GoDaddy parking page for some visitors → a stray `@` A record is
+  back; delete everything on `@` except the four GitHub IPs.
+- `CNAME` file missing from repo root → re-create it containing `listedbyremy.com`.
 
 ## Health check
 ```bash
