@@ -1072,7 +1072,9 @@ function mountScrollWorld(container, config) {
       maxParallel: config.maxParallelMobile || 24,
       lookAhead: config.lookAheadMobile || 26,
       chase: config.chaseMobile || 0.12,
-      fit: config.fitMobile || 'cover'   // phone frames are a 4:5 crop — fill the screen
+      // 'contain' so the full 4:5 frame spans the width (≈58% of a phone's height) instead of
+      // 'cover' cropping another ~40% off the sides on a tall phone. Copy sits in the dark band below.
+      fit: config.fitMobile || 'contain'
     });
     if (mountDesktopFlight(container, mcfg)) return;
     container.classList.remove('df-root--m');
