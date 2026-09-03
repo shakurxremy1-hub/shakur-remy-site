@@ -1,4 +1,4 @@
-# shakurremy.com
+# listedbyremy.com
 
 Cinematic single-page site for **Shakur Remy**, REALTOR® — Relive Realty, San Antonio TX.
 Built from the [cinematic-scroll-template](https://github.com/shakurxremy1-hub/cinematic-scroll-template).
@@ -33,5 +33,5 @@ To re-cut: drop new `src/sceneN.mp4` files, run `./build-frames.sh`, update
 ```bash
 ./serve.sh            # http://localhost:8899
 ```
-Deploy: GitHub Pages from `main` / root. Custom domain `shakurremy.com` once registered —
+Deploy: GitHub Pages from `main` / root. Custom domain `listedbyremy.com` once registered —
 see `DEPLOY.md`, then fill in `RUNBOOK.md`.

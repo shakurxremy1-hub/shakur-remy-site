@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shakurremy.com/sitemap.xml
+Sitemap: https://listedbyremy.com/sitemap.xml

@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://shakurremy.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://listedbyremy.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://listedbyremy.com/guides/buying-a-home-in-san-antonio.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://listedbyremy.com/guides/selling-your-san-antonio-home.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://listedbyremy.com/areas/alamo-heights.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://listedbyremy.com/areas/olmos-park.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://listedbyremy.com/areas/stone-oak.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://listedbyremy.com/areas/the-dominion.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>

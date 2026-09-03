@@ -8,14 +8,14 @@
   <meta property="og:title" content="Shakur Remy — San Antonio Luxury Real Estate" />
   <meta property="og:description" content="Buyer and seller representation across Alamo Heights, Stone Oak, The Dominion and San Antonio's luxury market. Off-market access. White-glove from tour to closing." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://shakurremy.com/" />
-  <meta property="og:image" content="https://shakurremy.com/assets/img/og.jpg" />
+  <meta property="og:url" content="https://listedbyremy.com/" />
+  <meta property="og:image" content="https://listedbyremy.com/assets/img/og.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Shakur Remy — San Antonio Luxury Real Estate" />
   <meta name="twitter:description" content="Buyer and seller representation across San Antonio's luxury market. Off-market access, white-glove service." />
-  <meta name="twitter:image" content="https://shakurremy.com/assets/img/og.jpg" />
+  <meta name="twitter:image" content="https://listedbyremy.com/assets/img/og.jpg" />
   <meta name="theme-color" content="#05070c" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png" />
@@ -286,6 +286,8 @@
     .site-foot__mark { display: inline-flex; align-items: center; gap: 7px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; font-size: 11px; }
     .site-foot__legal { color: #737f92; font-size: 11.5px; }
     .site-foot__legal a { color: #8794a9; }
+    .site-foot__sitemap { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 20px; }
+    .site-foot__sitemap a { border: 0; font-size: 12px; }
 
     /* ============ PREMIUM DETAILS ============ */
     /* fine film grain over everything — static, no blend mode (cheap) */
@@ -387,7 +389,7 @@
 
     /* ============ SHARED SECTION SCAFFOLD ============ */
     .sec { position: relative; z-index: 45; color: #f2f6fc; padding: clamp(64px,10vh,128px) clamp(20px,6vw,80px); }
-    #founder, #tiers, #services, #process, #valuation, #faq, #references, #contact,
+    #founder, #tiers, #services, #process, #valuation, #calculator, #faq, #references, #contact,
     #contact-form { scroll-margin-top: 72px; }
     .sec--alt { background: #070a11; }
     .sec--dark { background: #05070c; }
@@ -502,11 +504,34 @@
     .topnav__cta { text-decoration: none; font-weight: 700; font-size: .84rem; color: #05070c; background: #d9b26a; padding: 9px 18px; border-radius: 999px; white-space: nowrap; }
     @media (max-width: 720px) { .topnav__links { display: none; } }
 
+    /* ---- mortgage calculator ---- */
+    .calc__wrap { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: start;
+      background: linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015)),#0b1220;
+      border: 1px solid rgba(255,255,255,.10); border-radius: 20px; padding: 30px; }
+    .calc__fields { display: grid; gap: 16px; }
+    .calc__row { display: flex; flex-direction: column; gap: 6px; }
+    .calc__row label { font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #9fb0c6; }
+    .calc__row input { box-sizing: border-box; font: inherit; font-size: .98rem; color: #f2f6fc; background: rgba(255,255,255,.03);
+      border: 1.5px solid rgba(255,255,255,.16); border-radius: 10px; padding: 12px 14px; }
+    .calc__row input:focus { outline: none; border-color: #d9b26a; background: rgba(255,255,255,.06); }
+    .calc__grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .calc__out { background: #05070c; border: 1px solid rgba(255,255,255,.10); border-radius: 16px; padding: 24px; text-align: center; }
+    .calc__big { font-family: var(--sw-font-display); font-weight: 700; font-size: clamp(2rem,5vw,2.8rem); color: #f2f6fc; letter-spacing: -.01em; }
+    .calc__big span { font-family: var(--sw-font-body); font-size: 1rem; color: #8898ac; font-weight: 400; }
+    .calc__brk { margin-top: 16px; display: grid; gap: 8px; font-size: .84rem; }
+    .calc__brk div { display: flex; justify-content: space-between; color: #aab6c8; border-top: 1px solid rgba(255,255,255,.08); padding-top: 8px; }
+    .calc__brk div:first-child { border-top: 0; padding-top: 0; }
+    .calc__brk b { color: #f2f6fc; font-weight: 600; }
+    .calc__note { margin: 14px 0 0; font-size: 11px; color: #6f7d92; line-height: 1.5; }
+    .calc__cta { display: inline-block; margin-top: 16px; text-decoration: none; font-weight: 700; font-size: .9rem;
+      color: #05070c; background: #d9b26a; border-radius: 999px; padding: 11px 22px; }
+
     /* ---- responsive collapses for the new sections ---- */
     @media (max-width: 940px) {
       .svc__grid { grid-template-columns: 1fr; }
       .proc__cols { grid-template-columns: 1fr; gap: 32px; }
       .refs__grid { grid-template-columns: 1fr; }
+      .calc__wrap { grid-template-columns: 1fr; }
     }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -529,15 +554,15 @@
   <link rel="preload" as="image" href="assets/frames-m/f0005.webp" media="(max-width: 860px)" />
   <link rel="preload" as="image" href="assets/frames-m/f0006.webp" media="(max-width: 860px)" />
 
-  <link rel="canonical" href="https://shakurremy.com/" />
+  <link rel="canonical" href="https://listedbyremy.com/" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
     "name": "Shakur Remy",
     "description": "Luxury residential real estate agent in San Antonio, Texas. Buyer and seller representation across Alamo Heights, Olmos Park, Stone Oak, and The Dominion.",
-    "url": "https://shakurremy.com/",
-    "image": "https://shakurremy.com/assets/img/og.jpg",
+    "url": "https://listedbyremy.com/",
+    "image": "https://listedbyremy.com/assets/img/og.jpg",
     "telephone": "+1-646-688-3442",
     "email": "sremy@reliverealty.com",
     "areaServed": [
@@ -694,7 +719,7 @@
           <li>Five minutes to downtown</li>
         </ul>
         <a class="tier__btn" href="https://www.homes.com/alamo-heights-tx/houses-for-sale/" target="_blank" rel="noopener">View homes</a>
-        <div class="tier__mini">Live Alamo Heights listings</div>
+        <div class="tier__mini"><a href="/areas/alamo-heights.html">Alamo Heights guide &rarr;</a></div>
       </div>
 
       <div class="tier">
@@ -708,7 +733,7 @@
           <li>Quiet, private feel</li>
         </ul>
         <a class="tier__btn" href="https://www.homes.com/olmos-park-tx/houses-for-sale/" target="_blank" rel="noopener">View homes</a>
-        <div class="tier__mini">Live Olmos Park listings</div>
+        <div class="tier__mini"><a href="/areas/olmos-park.html">Olmos Park guide &rarr;</a></div>
       </div>
 
       <div class="tier">
@@ -722,7 +747,7 @@
           <li>Master-planned amenities</li>
         </ul>
         <a class="tier__btn" href="https://www.homes.com/san-antonio-tx/stone-oak-neighborhood/houses-for-sale/" target="_blank" rel="noopener">View homes</a>
-        <div class="tier__mini">Live Stone Oak listings</div>
+        <div class="tier__mini"><a href="/areas/stone-oak.html">Stone Oak guide &rarr;</a></div>
       </div>
 
       <div class="tier">
@@ -736,7 +761,7 @@
           <li>Estate-size parcels</li>
         </ul>
         <a class="tier__btn" href="https://www.homes.com/san-antonio-tx/dominion-neighborhood/houses-for-sale/" target="_blank" rel="noopener">View homes</a>
-        <div class="tier__mini">Live Dominion listings</div>
+        <div class="tier__mini"><a href="/areas/the-dominion.html">The Dominion guide &rarr;</a></div>
       </div>
 
     </div>
@@ -761,6 +786,7 @@
           <li>Lender, title, and closing coordination</li>
         </ul>
         <a class="svc__link" href="#contact-form">Start a buyer search &rarr;</a>
+        <a class="svc__link" href="/guides/buying-a-home-in-san-antonio.html" style="margin-top:8px;font-weight:500;color:#9fb0c6;border-color:rgba(159,176,198,.35);">Read the buyer&rsquo;s guide</a>
       </div>
       <div class="svc__card">
         <h3>Sellers</h3>
@@ -773,6 +799,7 @@
           <li>Inspection response through funding</li>
         </ul>
         <a class="svc__link" href="#valuation">Get a home valuation &rarr;</a>
+        <a class="svc__link" href="/guides/selling-your-san-antonio-home.html" style="margin-top:8px;font-weight:500;color:#9fb0c6;border-color:rgba(159,176,198,.35);">Read the seller&rsquo;s guide</a>
       </div>
       <div class="svc__card">
         <h3>Relocation &amp; investment</h3>
@@ -821,6 +848,65 @@
     <h2>What is your San Antonio home worth today?</h2>
     <p>Get a considered, data-backed valuation &mdash; not an automated guess &mdash; usually within one business day.</p>
     <a class="val__btn" href="#contact-form" data-intent="A home valuation">Request my home valuation</a>
+  </section>
+
+  <!-- ============ PAYMENT CALCULATOR ============ -->
+  <section id="calculator" class="sec sec--dark" aria-label="Monthly payment estimator">
+    <div class="sec__head sec__head--center">
+      <span class="sec__eyebrow">Run the numbers</span>
+      <h2 class="sec__title">Estimate a monthly payment.</h2>
+      <p class="sec__intro">A quick principal, interest, tax, and insurance estimate. For a real pre-approval I&rsquo;ll introduce you to a local lender.</p>
+    </div>
+    <div class="calc__wrap">
+      <div class="calc__fields">
+        <div class="calc__row">
+          <label for="calc-price">Home price</label>
+          <input id="calc-price" type="text" inputmode="numeric" value="$900,000" />
+        </div>
+        <div class="calc__grid2">
+          <div class="calc__row">
+            <label for="calc-down">Down payment</label>
+            <input id="calc-down" type="text" inputmode="numeric" value="20%" />
+          </div>
+          <div class="calc__row">
+            <label for="calc-rate">Interest rate</label>
+            <input id="calc-rate" type="text" inputmode="decimal" value="6.5%" />
+          </div>
+        </div>
+        <div class="calc__grid2">
+          <div class="calc__row">
+            <label for="calc-term">Loan term (years)</label>
+            <input id="calc-term" type="text" inputmode="numeric" value="30" />
+          </div>
+          <div class="calc__row">
+            <label for="calc-tax">Property tax / yr</label>
+            <input id="calc-tax" type="text" inputmode="decimal" value="2.1%" />
+          </div>
+        </div>
+        <div class="calc__grid2">
+          <div class="calc__row">
+            <label for="calc-ins">Insurance / yr</label>
+            <input id="calc-ins" type="text" inputmode="numeric" value="$2,400" />
+          </div>
+          <div class="calc__row">
+            <label for="calc-hoa">HOA / mo</label>
+            <input id="calc-hoa" type="text" inputmode="numeric" value="$0" />
+          </div>
+        </div>
+      </div>
+      <div class="calc__out">
+        <div class="calc__big" id="calc-total">—<span>/mo</span></div>
+        <div class="calc__brk">
+          <div><span>Principal &amp; interest</span><b id="calc-pi">—</b></div>
+          <div><span>Property tax</span><b id="calc-pt">—</b></div>
+          <div><span>Insurance</span><b id="calc-hi">—</b></div>
+          <div><span>HOA</span><b id="calc-ho">—</b></div>
+          <div><span>Loan amount</span><b id="calc-loan">—</b></div>
+        </div>
+        <a class="calc__cta" href="#contact-form" data-intent="Buying">Get pre-approved</a>
+        <p class="calc__note">Estimate only. Not a loan offer, quote, or commitment to lend. Rates, taxes, and insurance vary.</p>
+      </div>
+    </div>
   </section>
 
   <!-- ============ FAQ ============ -->
@@ -873,7 +959,7 @@
       <form class="news__form" method="POST"
             action="https://formsubmit.co/sremy@reliverealty.com"
             data-endpoint="https://formsubmit.co/ajax/sremy@reliverealty.com">
-        <input type="hidden" name="_subject" value="Market-note signup from shakurremy.com" />
+        <input type="hidden" name="_subject" value="Market-note signup from listedbyremy.com" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="text" name="_honey" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
@@ -903,7 +989,7 @@
       <form id="contact-form" class="contact__form" method="POST"
             action="https://formsubmit.co/sremy@reliverealty.com"
             data-endpoint="https://formsubmit.co/ajax/sremy@reliverealty.com">
-        <input type="hidden" name="_subject" value="New enquiry from shakurremy.com" />
+        <input type="hidden" name="_subject" value="New enquiry from listedbyremy.com" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_next" value="https://shakurxremy1-hub.github.io/shakur-remy-site/#contact" />
@@ -966,6 +1052,14 @@
         <strong style="color:#96a3b7;font-weight:600;">Shakur Remy</strong>, Licensed Real Estate Sales Agent, TREC&nbsp;License&nbsp;#844622<br />
         Sponsoring broker: <strong style="color:#96a3b7;font-weight:600;">Relive Real Estate Inc.</strong> &nbsp;·&nbsp; TREC&nbsp;Firm&nbsp;License&nbsp;#9012318<br />
         500&nbsp;W&nbsp;2nd&nbsp;St, Ste&nbsp;1900&nbsp;#178, Austin,&nbsp;TX&nbsp;78701 &nbsp;·&nbsp; (737)&nbsp;285-7992 &nbsp;·&nbsp; Designated&nbsp;Broker:&nbsp;Alexa&nbsp;Ronci&nbsp;(#683611)
+      </div>
+      <div class="site-foot__sitemap">
+        <a href="/guides/buying-a-home-in-san-antonio.html">Buyer&rsquo;s guide</a>
+        <a href="/guides/selling-your-san-antonio-home.html">Seller&rsquo;s guide</a>
+        <a href="/areas/alamo-heights.html">Alamo Heights</a>
+        <a href="/areas/olmos-park.html">Olmos Park</a>
+        <a href="/areas/stone-oak.html">Stone Oak</a>
+        <a href="/areas/the-dominion.html">The Dominion</a>
       </div>
       <div>
         <a href="https://agent.reliverealty.com/TREC_ReliveRE.pdf" target="_blank" rel="noopener">Texas Real Estate Commission &mdash; Information About Brokerage Services</a>
@@ -2337,6 +2431,48 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
         'Thanks — your message is on its way. Shakur will be in touch within one business day.');
       wire(document.querySelector('.news__form'), '.news__status', 'Subscribing…',
         'You’re on the list. Watch for the next market note.');
+
+      /* ---- monthly payment estimator ---- */
+      (function () {
+        var C = document.getElementById('calculator');
+        if (!C) return;
+        var $ = function (id) { return document.getElementById(id); };
+        var num = function (v) { return parseFloat(String(v).replace(/[^0-9.]/g, '')) || 0; };
+        var usd = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
+        var ids = ['calc-price', 'calc-down', 'calc-rate', 'calc-term', 'calc-tax', 'calc-ins', 'calc-hoa'];
+
+        function calc() {
+          var price = num($('calc-price').value);
+          var dRaw = $('calc-down').value, dn = num(dRaw);
+          var down = /%/.test(dRaw) ? price * dn / 100 : dn;
+          var loan = Math.max(0, price - down);
+          var r = num($('calc-rate').value) / 100 / 12;
+          var n = num($('calc-term').value) * 12;
+          var pi = (r > 0 && n > 0) ? loan * r / (1 - Math.pow(1 + r, -n)) : (n > 0 ? loan / n : 0);
+          var tRaw = $('calc-tax').value, tn = num(tRaw);
+          var tax = (/%/.test(tRaw) ? price * tn / 100 : tn) / 12;
+          var ins = num($('calc-ins').value) / 12;
+          var hoa = num($('calc-hoa').value);
+          var total = pi + tax + ins + hoa;
+          $('calc-total').innerHTML = usd(total) + '<span>/mo</span>';
+          $('calc-pi').textContent = usd(pi);
+          $('calc-pt').textContent = usd(tax);
+          $('calc-hi').textContent = usd(ins);
+          $('calc-ho').textContent = usd(hoa);
+          $('calc-loan').textContent = usd(loan);
+        }
+        ids.forEach(function (id) {
+          var el = $(id); if (!el) return;
+          el.addEventListener('input', calc);
+          el.addEventListener('blur', function () {
+            if (id === 'calc-rate' || id === 'calc-tax') { var v = num(el.value); if (v) el.value = v + '%'; }
+            else if (id === 'calc-down') { /* leave as typed */ }
+            else if (id === 'calc-term') { el.value = String(num(el.value) || 30); }
+            else { var d = num(el.value); if (d) el.value = '$' + d.toLocaleString('en-US'); }
+          });
+        });
+        calc();
+      })();
     })();
   </script>
 </body>

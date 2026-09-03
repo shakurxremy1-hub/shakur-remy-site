@@ -1,4 +1,4 @@
-# shakurremy.com — Operations Runbook
+# listedbyremy.com — Operations Runbook
 
 Live now at **https://shakurxremy1-hub.github.io/shakur-remy-site/**
 Fill the remaining {{blanks}} once the domain is registered.
@@ -13,7 +13,7 @@ Fill the remaining {{blanks}} once the domain is registered.
 - Listings CTA target: https://a.nhb.app/u/shakur-remy
 - Registrar: {{REGISTRAR}} · expires {{EXPIRY}} · auto-renew ON
 
-## DNS (once shakurremy.com is registered)
+## DNS (once listedbyremy.com is registered)
 
 | Type | Host | Value |
 |------|------|-------|
@@ -23,13 +23,13 @@ Fill the remaining {{blanks}} once the domain is registered.
 | A | @ | 185.199.111.153 |
 | CNAME | www | shakurxremy1-hub.github.io |
 
-Then: add `CNAME` file = `shakurremy.com`, set it in repo Settings → Pages,
+Then: add `CNAME` file = `listedbyremy.com`, set it in repo Settings → Pages,
 tick Enforce HTTPS.
 
 ## Health check
 ```bash
-curl -sI https://shakurremy.com | head -3
-curl -s https://shakurremy.com | grep -c df-root
+curl -sI https://listedbyremy.com | head -3
+curl -s https://listedbyremy.com | grep -c df-root
 ```
 
 ## Deploy / roll back
@@ -57,9 +57,18 @@ Contact form + market-note signup POST to `formsubmit.co/…/sremy@reliverealty.
 Measurement ID (analytics.google.com → Admin → Data streams). No-ops until set.
 Swap for Plausible/GoatCounter if you prefer no cookie banner.
 
-## After the domain is live
-Update to `shakurremy.com` in `index.html`: `og:url`, `og:image`, `<link rel=canonical>`,
-the JSON-LD `url`/`image`. `robots.txt` + `sitemap.xml` already use it.
+## Custom domain: listedbyremy.com (registered? then do this)
+1. All in-page URLs (`og:url`, `og:image`, canonical, JSON-LD, robots, sitemap)
+   already point to `https://listedbyremy.com/`.
+2. At the registrar, add the 5 DNS records in the table above
+   (4× A `@` → 185.199.108–111.153, plus `CNAME www` → `shakurxremy1-hub.github.io`).
+3. Create a file named `CNAME` in the repo root containing exactly
+   `listedbyremy.com` (no scheme, no trailing slash), commit, push.
+   ⚠️ Do this only AFTER the DNS records exist — once a custom domain is set,
+   GitHub redirects the `*.github.io` URL to it, so the site is unreachable
+   until DNS resolves.
+4. Repo → Settings → Pages: confirm the domain shows a green check, tick
+   "Enforce HTTPS" (cert can take up to ~1 hour).
 
 ## Edit content
 - Testimonials: `#references` — comment above the section shows the card format.
