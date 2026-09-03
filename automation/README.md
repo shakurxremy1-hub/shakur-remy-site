@@ -1,45 +1,53 @@
 # Welcome-email automation
 
-`welcome-email.gs` is a Google Apps Script web app that runs alongside FormSubmit:
+## Current state (parked)
 
-- **FormSubmit** still emails you the raw lead (already set up, already activated).
-- **This script** sends the person who submitted a personalised reply —
-  `Hi {first name}`, a different opening line per request type
-  (Buying / Selling / Valuation / Buying+Selling / other), with the
-  **IABS** and **Consumer Protection Notice** PDFs attached — and copies you.
-- Newsletter signups get a short "you're subscribed" note, no attachments.
+**Live now:** FormSubmit's built-in `_autoresponse` on both forms. Every inquiry
+gets an instant plain-text reply with **links** (not attachments) to the IABS
+and Consumer Protection Notice. The lead notification to `sremy@reliverealty.com`
+works. This is the interim.
 
-## One-time setup (~5 minutes)
+**Not done:** the personalised welcome (by first name + request type) with the
+two PDFs **attached**, sent from `sremy@reliverealty.com`.
 
-1. Go to **script.google.com** signed in as **sremy@reliverealty.com** → **New project**.
-2. Delete the sample code, paste in all of `welcome-email.gs`, **Save**.
-3. In the toolbar, pick function **`doGet`** → **Run**. Approve the permission
-   prompt (send email as you, connect to an external service). This only asks once.
-4. **Deploy** (top right) → **New deployment** → gear icon → **Web app**:
-   - Description: `welcome email`
-   - Execute as: **Me (sremy@reliverealty.com)**
-   - Who has access: **Anyone**
-   - **Deploy** → copy the **Web app URL** (ends in `/exec`).
-5. In `index.html`, paste that URL into `data-welcome="..."` on **both**
-   `<form id="contact-form">` and `<form class="news__form">`. Commit + push.
+### Why it's parked
 
-Done. Test by submitting the form on the live site — you should get the lead
-(twice: FormSubmit + this script) and the "person" should get the welcome.
+Two blockers, both about not controlling the `reliverealty.com` domain:
 
-## Changing the wording
+1. **FormSubmit cannot attach files** to an auto-reply. Plain text only. No
+   setting changes this.
+2. **Apps Script** (`welcome-email.gs` / `gas/Code.js`) was built and deployed
+   under `sremy@reliverealty.com` (script id `15wwOMwmy2pPrCXsrLD0g0U0RHRB8qtH8XrNOD752W3x5NSvnNy29FCOS`,
+   deployment `AKfycbzDslAhyVr7...`), but the `reliverealty.com` Google Workspace
+   admin has web-app deployment locked to domain-only, so the `/exec` URL returns
+   "You need access" to anonymous requests (i.e. the website).
 
-Edit the strings near the top of `welcome-email.gs` (or the `switch` bodies),
-then in Apps Script: **Deploy → Manage deployments → ✏️ edit → Version: New
-version → Deploy**. The `/exec` URL stays the same.
+### To finish it later, pick one
 
-## Limits
+- **Workspace admin flips one setting.** admin.google.com -> Apps -> Google
+  Apps Script -> allow web apps for "anyone, anonymous". Then:
+  `cd automation/gas && clasp push --force && clasp create-deployment` and paste
+  the new `/exec` URL into `data-welcome="..."` on both forms in `index.html`.
+  `Code.js` (MailApp version) already sends from `sremy@reliverealty.com`.
+- **Send from an `@listedbyremy.com` address.** Set up email on that domain
+  (Google Workspace / Zoho), use `gas/Code.js` (GmailApp version, currently in
+  the repo) with a "send mail as" alias, or point it at a transactional API
+  (Resend/Postmark) via `UrlFetchApp` from any Google account.
 
-Gmail/Workspace send quota is 1,500 recipients/day (100 for a personal
-@gmail) — far more than a lead form needs. PDFs are fetched fresh from
-`agent.reliverealty.com` on each send.
+## Files
 
-## Interim (already live)
+- `welcome-email.gs` — MailApp version (sends as the running account; needs the
+  Workspace admin fix above).
+- `gas/Code.js` — GmailApp version (sends from a verified "send mail as" alias;
+  for the personal-Gmail route). `gas/appsscript.json` has the web-app manifest.
+- `gas/.clasp.json` — points at the deployed script.
 
-Until the script is deployed, the contact form uses FormSubmit's built-in
-`_autoresponse`: a single generic reply with links (not attachments) to the
-two disclosures. It has no personalisation. The script replaces it.
+## Form wiring (already in index.html)
+
+Both `<form id="contact-form">` and `<form class="news__form">` carry:
+- `data-welcome=""` — paste the Apps Script `/exec` URL here to activate.
+- hidden `form` field (`contact` / `newsletter`) so the script branches.
+- `_autoresponse` — the interim FormSubmit reply.
+
+The submit handler fires a no-cors POST to `data-welcome` (if set) alongside the
+FormSubmit POST.
