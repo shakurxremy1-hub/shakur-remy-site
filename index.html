@@ -814,6 +814,7 @@ function mountDesktopFlight(container, config) {
   container.classList.add('df-root');
   container.style.setProperty('--df-accent', S[0].accent || '#c9a86a');
   const FEXT = config.frameExt || 'jpg';
+  const FIT = config.fit || 'contain';   // 'contain' shows the whole frame (true fly-through); 'cover' fills + crops
   const frameURL = i => FDIR + 'f' + String(i + 1).padStart(4, '0') + '.' + FEXT;
 
   // fixed background — a <canvas> we blit pre-rendered JPEG frames onto (Apple-style).
@@ -874,8 +875,17 @@ function mountDesktopFlight(container, config) {
     const cvW = canvas.width, cvH = canvas.height;
     const ir = im.width / im.height, cr = cvW / cvH;
     let w, h, x, y;
-    if (ir > cr) { h = cvH; w = h * ir; } else { w = cvW; h = w / ir; }
-    x = (cvW - w) / 2; y = (cvH - h) / 2 - h * 0.06;   // bias up a touch (matches object-position)
+    if (FIT === 'contain') {
+      // show the WHOLE frame — letterbox into the near-black backdrop so the full fly-through reads
+      if (ir > cr) { w = cvW; h = w / ir; } else { h = cvH; w = h * ir; }
+      x = (cvW - w) / 2;
+      y = (cvH - h) * 0.42;   // slight upward bias — wider dark band under the frame for the copy
+      if (w < cvW - 1 || h < cvH - 1) { ctx.fillStyle = '#05070c'; ctx.fillRect(0, 0, cvW, cvH); }
+    } else {
+      // cover — fill the viewport, crop the overflow
+      if (ir > cr) { h = cvH; w = h * ir; } else { w = cvW; h = w / ir; }
+      x = (cvW - w) / 2; y = (cvH - h) / 2 - h * 0.06;
+    }
     ctx.drawImage(im, x, y, w, h);
     if (!firstDrawn) { firstDrawn = true; bg.classList.add('df-on'); }
   }
@@ -1050,7 +1060,7 @@ function mountScrollWorld(container, config) {
   const isPhone = window.matchMedia('(hover: none) and (pointer: coarse)').matches || window.innerWidth <= 860;
 
   // Phones run the SAME canvas frame-sequence flight as desktop, just pointed at a
-  // portrait (720×1280) frame set. Canvas blitting has none of the iOS <video>
+  // 720×900 (4:5) frame set. Canvas blitting has none of the iOS <video>
   // autoplay / currentTime-seek limits that made the old per-scene clips freeze.
   if (isPhone && config.frameCountMobile) {
     container.classList.add('df-root--m');
@@ -1061,7 +1071,8 @@ function mountScrollWorld(container, config) {
       scrollPer: config.scrollPerMobile || 1.15,
       maxParallel: config.maxParallelMobile || 24,
       lookAhead: config.lookAheadMobile || 26,
-      chase: config.chaseMobile || 0.12
+      chase: config.chaseMobile || 0.12,
+      fit: config.fitMobile || 'cover'   // phone frames are a 4:5 crop — fill the screen
     });
     if (mountDesktopFlight(container, mcfg)) return;
     container.classList.remove('df-root--m');

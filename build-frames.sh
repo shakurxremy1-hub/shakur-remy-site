@@ -14,11 +14,11 @@
 set -euo pipefail
 
 FPS="${FPS:-8}"                 # frames per second of source -> flight frames
-DESKTOP_W="${DESKTOP_W:-1440}"
-MOBILE_W="${MOBILE_W:-640}"
-MOBILE_H="${MOBILE_H:-1138}"    # 640 * 16/9 rounded to even
-JPEG_Q="${JPEG_Q:-4}"           # ffmpeg -q:v, lower = better
-WEBP_Q="${WEBP_Q:-72}"
+DESKTOP_W="${DESKTOP_W:-1920}"  # native source width — no downscale, keeps it crisp
+MOBILE_W="${MOBILE_W:-720}"
+MOBILE_H="${MOBILE_H:-900}"     # 4:5 — a gentle crop of the 16:9 frame, far less "zoomed in" than 9:16
+JPEG_Q="${JPEG_Q:-2}"           # ffmpeg -q:v, lower = better (2 = near-lossless)
+WEBP_Q="${WEBP_Q:-74}"
 
 command -v ffmpeg >/dev/null || { echo "need ffmpeg"; exit 1; }
 command -v cwebp  >/dev/null || { echo "need cwebp (brew install webp)"; exit 1; }
@@ -65,8 +65,8 @@ if [ "${#PORT[@]}" -gt 0 ]; then
   ffmpeg -v error -y -f concat -safe 0 -i "$WORK/port.txt" -an -c copy "$WORK/port.mp4"
   SRC_M="$WORK/port.mp4"; VF_M="scale=${MOBILE_W}:${MOBILE_H}:flags=lanczos"
 else
-  echo "no src/portrait/ — centre-cropping mobile frames from the landscape concat"
-  SRC_M="$WORK/land.mp4"; VF_M="crop=ih*9/16:ih,scale=${MOBILE_W}:${MOBILE_H}:flags=lanczos"
+  echo "no src/portrait/ — centre-cropping mobile frames (4:5) from the landscape concat"
+  SRC_M="$WORK/land.mp4"; VF_M="crop=ih*4/5:ih,scale=${MOBILE_W}:${MOBILE_H}:flags=lanczos"
 fi
 
 rm -rf assets/frames-m "$WORK/m" && mkdir -p assets/frames-m "$WORK/m"
