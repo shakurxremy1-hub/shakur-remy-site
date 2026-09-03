@@ -43,6 +43,30 @@ git checkout {{LAST_GOOD_TAG}} -- . && git commit -m roll-back && git push
 Drop new clips in `src/sceneN.mp4`, `./build-frames.sh`, update `frameCount` /
 `frameCountMobile` in `index.html` to the printed number, commit.
 
+## Lead forms (FormSubmit)
+Contact form + market-note signup POST to `formsubmit.co/…/sremy@reliverealty.com`.
+- FIRST submission from the live domain triggers a one-time activation email to
+  that address — click the link once, then every submission is delivered.
+- To hide the raw email in page source: after activation, FormSubmit gives a
+  random alias (e.g. `formsubmit.co/ajax/xxxxxxxx`). Swap both `action` and
+  `data-endpoint` on `#contact-form` and `.news__form`.
+- Change recipient: edit those two attributes on both forms.
+
+## Analytics
+`index.html` head has a GA4 stub — replace `G-XXXXXXXXXX` with a real GA4
+Measurement ID (analytics.google.com → Admin → Data streams). No-ops until set.
+Swap for Plausible/GoatCounter if you prefer no cookie banner.
+
+## After the domain is live
+Update to `shakurremy.com` in `index.html`: `og:url`, `og:image`, `<link rel=canonical>`,
+the JSON-LD `url`/`image`. `robots.txt` + `sitemap.xml` already use it.
+
+## Edit content
+- Testimonials: `#references` — comment above the section shows the card format.
+- Neighborhood link targets: `.tier__btn` hrefs in `#tiers` (homes.com per area).
+- FAQ / Services / Process copy: plain markup in those sections.
+- Book-a-call button: not added yet — give a Calendly/Cal.com URL to wire in.
+
 ## Backups
 ```bash
 git bundle create ~/backups/shakur-remy-site-$(date +%Y%m%d).bundle --all
