@@ -384,6 +384,130 @@
       }
       .fx-rise.fx-in { opacity: 1; transform: none; }
     }
+
+    /* ============ SHARED SECTION SCAFFOLD ============ */
+    .sec { position: relative; z-index: 45; color: #f2f6fc; padding: clamp(64px,10vh,128px) clamp(20px,6vw,80px); }
+    #founder, #tiers, #services, #process, #valuation, #faq, #references, #contact,
+    #contact-form { scroll-margin-top: 72px; }
+    .sec--alt { background: #070a11; }
+    .sec--dark { background: #05070c; }
+    .sec__head { max-width: 1140px; margin: 0 auto 44px; }
+    .sec__head--center { text-align: center; }
+    .sec__eyebrow { font-family: var(--sw-font-display); font-weight: 700; font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; color: #e0c48c; }
+    .sec__title { font-family: var(--sw-font-display); font-weight: 700; font-size: clamp(1.7rem,3.6vw,2.6rem); line-height: 1.06; margin: 12px 0 0; letter-spacing: -.01em; }
+    .sec__intro { margin: 14px 0 0; max-width: 56ch; font-size: clamp(1rem,1.2vw,1.1rem); line-height: 1.6; color: color-mix(in srgb,#f2f6fc 80%,#8898ac); }
+    .sec__head--center .sec__intro { margin-left: auto; margin-right: auto; }
+
+    /* ---- services ---- */
+    .svc__grid { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .svc__card { display: flex; flex-direction: column; background: linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015)),#0b1220; border: 1px solid rgba(255,255,255,.10); border-radius: 18px; padding: 28px 24px; }
+    .svc__card h3 { font-family: var(--sw-font-display); font-weight: 700; font-size: 1.25rem; margin: 0 0 10px; }
+    .svc__card p { font-size: .95rem; line-height: 1.6; color: #aab6c8; margin: 0 0 16px; }
+    .svc__card ul { list-style: none; margin: 0 0 20px; padding: 0; flex: 1; }
+    .svc__card li { font-size: .9rem; color: #c3ccda; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.07); display: flex; gap: 9px; }
+    .svc__card li::before { content: "▪"; color: #e0c48c; }
+    .svc__link { align-self: flex-start; text-decoration: none; font-weight: 700; font-size: .9rem; color: #d9b26a; border-bottom: 1px solid color-mix(in srgb,#d9b26a 45%,transparent); padding-bottom: 2px; }
+    .svc__link:hover { color: #e6c485; }
+
+    /* ---- process ---- */
+    .proc__cols { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
+    .proc__col h3 { font-family: var(--sw-font-display); font-weight: 700; font-size: 1.15rem; margin: 0 0 18px; color: #e0c48c; letter-spacing: .02em; }
+    .proc__step { display: grid; grid-template-columns: 30px 1fr; gap: 14px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,.08); }
+    .proc__step:first-of-type { border-top: 0; }
+    .proc__num { font-family: var(--sw-font-display); font-weight: 700; color: #d9b26a; font-size: 1rem; }
+    .proc__step p { margin: 0; font-size: .92rem; line-height: 1.55; color: #b7c0ce; }
+    .proc__step b { color: #f2f6fc; font-weight: 600; }
+
+    /* ---- valuation CTA band ---- */
+    .val { position: relative; z-index: 45; text-align: center; color: #05070c;
+      background: linear-gradient(120deg,#c9a86a,#e6cf9c); padding: clamp(48px,8vh,84px) clamp(20px,6vw,80px); }
+    .val h2 { font-family: var(--sw-font-display); font-weight: 700; font-size: clamp(1.6rem,3.4vw,2.4rem); margin: 0 0 10px; letter-spacing: -.01em; }
+    .val p { margin: 0 auto 24px; max-width: 46ch; font-size: 1.02rem; line-height: 1.55; color: #2b2415; }
+    .val__btn { display: inline-flex; align-items: center; justify-content: center; padding: 15px 32px; border-radius: 999px;
+      background: #05070c; color: #f2f6fc; text-decoration: none; font-weight: 700; font-size: 1rem; transition: transform .2s ease; }
+    .val__btn:hover { transform: translateY(-2px); }
+
+    /* ---- FAQ ---- */
+    .faq__list { max-width: 820px; margin: 0 auto; }
+    .faq__item { border-top: 1px solid rgba(255,255,255,.10); }
+    .faq__item:last-child { border-bottom: 1px solid rgba(255,255,255,.10); }
+    .faq__item summary { cursor: pointer; list-style: none; padding: 20px 40px 20px 0; position: relative;
+      font-family: var(--sw-font-display); font-weight: 600; font-size: 1.06rem; color: #f2f6fc; }
+    .faq__item summary::-webkit-details-marker { display: none; }
+    .faq__item summary::after { content: "+"; position: absolute; right: 6px; top: 18px; font-size: 1.4rem; color: #d9b26a; transition: transform .2s ease; }
+    .faq__item[open] summary::after { transform: rotate(45deg); }
+    .faq__item p { margin: 0 0 22px; max-width: 68ch; font-size: .95rem; line-height: 1.65; color: #aab6c8; }
+    .faq__item p a { color: #d9b26a; }
+
+    /* ---- references / testimonials ---- */
+    .refs__wrap { max-width: 960px; margin: 0 auto; }
+    .refs__grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+    .refs__card { background: linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015)),#0b1220;
+      border: 1px solid rgba(255,255,255,.10); border-radius: 18px; padding: 26px 24px; }
+    .refs__quote { font-family: var(--sw-font-display); font-size: 1.05rem; line-height: 1.55; color: #eef2f8; margin: 0 0 14px; }
+    .refs__who { font-size: .82rem; letter-spacing: .04em; color: #d9b26a; text-transform: uppercase; font-weight: 600; }
+    .refs__note { margin: 26px auto 0; max-width: 60ch; text-align: center; font-size: .92rem; line-height: 1.6; color: #8898ac; }
+    .refs__note a { color: #d9b26a; }
+
+    /* ---- credentials strip ---- */
+    .creds { position: relative; z-index: 45; background: #05070c; border-top: 1px solid rgba(255,255,255,.06);
+      padding: 30px clamp(20px,6vw,80px); }
+    .creds__row { max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+      gap: 14px 28px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #8f9db2; }
+    .creds__row span { display: inline-flex; align-items: center; gap: 8px; }
+    .creds__row span::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #d9b26a; }
+
+    /* ---- newsletter ---- */
+    .news { max-width: 620px; margin: 0 auto; text-align: center; }
+    .news h3 { font-family: var(--sw-font-display); font-weight: 700; font-size: 1.25rem; margin: 0 0 8px; }
+    .news p { font-size: .92rem; color: #8898ac; margin: 0 0 18px; }
+    .news__form { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .news__form input[type=email] { flex: 1 1 260px; box-sizing: border-box; font: inherit; font-size: .95rem; color: #f2f6fc;
+      background: rgba(255,255,255,.04); border: 1.5px solid rgba(255,255,255,.16); border-radius: 999px; padding: 13px 20px; }
+    .news__form input[type=email]:focus { outline: none; border-color: #d9b26a; }
+    .news__form button { font: inherit; font-weight: 700; cursor: pointer; border: 0; border-radius: 999px; padding: 13px 26px; background: #d9b26a; color: #05070c; }
+    .news__form button:hover { background: #e6c485; }
+    .news__status { margin: 12px 0 0; font-size: .88rem; min-height: 1em; }
+    .news__status--ok { color: #7fd6a3; } .news__status--err { color: #f0a3a3; }
+
+    /* ---- sticky mobile call/text bar ---- */
+    .callbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 80; display: none;
+      grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: rgba(255,255,255,.10);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      transform: translateY(110%); transition: transform .35s cubic-bezier(.22,1,.36,1); }
+    .callbar a { background: #0a0e16; color: #f2f6fc; text-decoration: none; text-align: center;
+      padding: 14px 6px 13px; font-size: .78rem; font-weight: 600; letter-spacing: .04em; }
+    .callbar a:active { background: #141a26; }
+    .callbar a b { display: block; font-size: 1.02rem; margin-bottom: 2px; }
+    .callbar a.callbar--go { background: #d9b26a; color: #05070c; }
+    body.scrolled-in .callbar.is-on { transform: translateY(0); }
+    @media (max-width: 860px) { .callbar { display: grid; } }
+
+    /* ---- slim post-hero top nav ---- */
+    .topnav { position: fixed; top: 0; left: 0; right: 0; z-index: 70;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 12px clamp(16px,4vw,44px);
+      background: color-mix(in srgb,#05070c 96%,transparent); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      transform: translateY(-110%); transition: transform .35s cubic-bezier(.22,1,.36,1); }
+    body.scrolled-in .topnav.is-on { transform: translateY(0); }
+    /* once the page nav is showing, retire the flight's own top chrome */
+    body.scrolled-in .df-bar, body.scrolled-in .df-progress,
+    body.scrolled-in .sw-bar, body.scrolled-in .mv2-bar { opacity: 0 !important; pointer-events: none; }
+    .topnav__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #f2f6fc; font-family: var(--sw-font-display); font-weight: 700; font-size: 1rem; }
+    .topnav__brand img { width: 30px; height: 30px; border-radius: 50%; }
+    .topnav__links { display: flex; gap: 22px; }
+    .topnav__links a { color: #aab6c8; text-decoration: none; font-size: .86rem; font-weight: 500; }
+    .topnav__links a:hover { color: #fff; }
+    .topnav__cta { text-decoration: none; font-weight: 700; font-size: .84rem; color: #05070c; background: #d9b26a; padding: 9px 18px; border-radius: 999px; white-space: nowrap; }
+    @media (max-width: 720px) { .topnav__links { display: none; } }
+
+    /* ---- responsive collapses for the new sections ---- */
+    @media (max-width: 940px) {
+      .svc__grid { grid-template-columns: 1fr; }
+      .proc__cols { grid-template-columns: 1fr; gap: 32px; }
+      .refs__grid { grid-template-columns: 1fr; }
+    }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -404,6 +528,56 @@
   <link rel="preload" as="image" href="assets/frames-m/f0004.webp" media="(max-width: 860px)" />
   <link rel="preload" as="image" href="assets/frames-m/f0005.webp" media="(max-width: 860px)" />
   <link rel="preload" as="image" href="assets/frames-m/f0006.webp" media="(max-width: 860px)" />
+
+  <link rel="canonical" href="https://shakurremy.com/" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Shakur Remy",
+    "description": "Luxury residential real estate agent in San Antonio, Texas. Buyer and seller representation across Alamo Heights, Olmos Park, Stone Oak, and The Dominion.",
+    "url": "https://shakurremy.com/",
+    "image": "https://shakurremy.com/assets/img/og.jpg",
+    "telephone": "+1-646-688-3442",
+    "email": "sremy@reliverealty.com",
+    "areaServed": [
+      { "@type": "City", "name": "San Antonio", "containedInPlace": { "@type": "AdministrativeArea", "name": "Texas" } },
+      "Alamo Heights TX", "Olmos Park TX", "Stone Oak", "The Dominion"
+    ],
+    "knowsAbout": ["Luxury homes", "Buyer representation", "Seller representation", "Relocation", "New construction"],
+    "hasCredential": "Texas Real Estate Commission License #844622",
+    "worksFor": {
+      "@type": "RealEstateAgent",
+      "name": "Relive Real Estate Inc.",
+      "identifier": "TREC Firm License #9012318",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "500 W 2nd St, Ste 1900 #178",
+        "addressLocality": "Austin",
+        "addressRegion": "TX",
+        "postalCode": "78701",
+        "addressCountry": "US"
+      }
+    }
+  }
+  </script>
+
+  <!-- ✏️ ANALYTICS: replace G-XXXXXXXXXX with your GA4 Measurement ID
+       (analytics.google.com → Admin → Data streams). Until you do, this no-ops.
+       Prefer privacy-first + no cookie banner? Swap this block for a Plausible or
+       GoatCounter one-liner instead. -->
+  <script>
+    (function () {
+      var GA_ID = 'G-XXXXXXXXXX';
+      if (!/^G-[A-Z0-9]{6,}$/.test(GA_ID) || GA_ID === 'G-XXXXXXXXXX') return;
+      var s = document.createElement('script'); s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { dataLayer.push(arguments); };
+      gtag('js', new Date()); gtag('config', GA_ID);
+    })();
+  </script>
 </head>
 <body>
   <!-- ========================================================================
@@ -455,6 +629,24 @@
   <div id="fx-glow" aria-hidden="true"></div>
   <div id="fx-grain" aria-hidden="true"></div>
   <div id="world"></div>
+
+  <!-- slim nav + mobile call bar: hidden until the flight is done (body.past-flight) -->
+  <nav class="topnav" aria-label="Site">
+    <a class="topnav__brand" href="#top"><img src="assets/img/logo.png" alt="" />Shakur&nbsp;Remy</a>
+    <div class="topnav__links">
+      <a href="#founder">About</a>
+      <a href="#tiers">Areas</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="topnav__cta" href="#contact-form">Get in touch</a>
+  </nav>
+  <div class="callbar" aria-label="Quick contact">
+    <a href="tel:+16466883442"><b>Call</b>(646) 688-3442</a>
+    <a href="sms:+16466883442"><b>Text</b>Message</a>
+    <a class="callbar--go" href="#contact-form"><b>Enquire</b>Send a note</a>
+  </div>
 
   <!-- ============ FOUNDER (below the flight) ============ -->
   <!-- ✏️ EDIT: portrait img src/alt, eyebrow, <h2>, the two <p>, both buttons.
@@ -550,6 +742,150 @@
     </div>
   </section>
 
+  <!-- ============ SERVICES ============ -->
+  <section id="services" class="sec sec--alt" aria-label="Services">
+    <div class="sec__head sec__head--center">
+      <span class="sec__eyebrow">How I help</span>
+      <h2 class="sec__title">Full representation, both sides of the deal.</h2>
+      <p class="sec__intro">One agent from first tour to closing table &mdash; no handoffs, no call center. Here&rsquo;s what that looks like.</p>
+    </div>
+    <div class="svc__grid">
+      <div class="svc__card">
+        <h3>Buyers</h3>
+        <p>From your first search to the keys in your hand, with access to listings before they hit the open market.</p>
+        <ul>
+          <li>Private tours on your schedule</li>
+          <li>Off-market and coming-soon inventory</li>
+          <li>Comparable-sales analysis before you offer</li>
+          <li>Offer strategy, option period, and inspections</li>
+          <li>Lender, title, and closing coordination</li>
+        </ul>
+        <a class="svc__link" href="#contact-form">Start a buyer search &rarr;</a>
+      </div>
+      <div class="svc__card">
+        <h3>Sellers</h3>
+        <p>Priced with real data, prepared to show, and marketed to the buyers actually shopping your price band.</p>
+        <ul>
+          <li>Comparative market analysis and pricing plan</li>
+          <li>Staging, repairs, and photography direction</li>
+          <li>MLS, syndication, and targeted digital reach</li>
+          <li>Offer review, negotiation, and net-proceeds math</li>
+          <li>Inspection response through funding</li>
+        </ul>
+        <a class="svc__link" href="#valuation">Get a home valuation &rarr;</a>
+      </div>
+      <div class="svc__card">
+        <h3>Relocation &amp; investment</h3>
+        <p>Moving to San Antonio or adding a property? Neighborhood guidance, remote tours, and numbers that hold up.</p>
+        <ul>
+          <li>Video walkthroughs and remote closings</li>
+          <li>Neighborhood, school, and commute briefings</li>
+          <li>New-construction contract review</li>
+          <li>Rent-vs-buy and hold analysis</li>
+          <li>Trusted local vendor introductions</li>
+        </ul>
+        <a class="svc__link" href="#contact-form">Talk through a move &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section id="process" class="sec sec--dark" aria-label="How the process works">
+    <div class="sec__head sec__head--center">
+      <span class="sec__eyebrow">What to expect</span>
+      <h2 class="sec__title">A clear path to closing.</h2>
+      <p class="sec__intro">No surprises. You&rsquo;ll always know the next step and the timeline.</p>
+    </div>
+    <div class="proc__cols">
+      <div class="proc__col">
+        <h3>Buying</h3>
+        <div class="proc__step"><span class="proc__num">1</span><p><b>Consult &amp; pre-approve.</b> We define the brief and get you a lender letter or proof of funds so offers are taken seriously.</p></div>
+        <div class="proc__step"><span class="proc__num">2</span><p><b>Search &amp; tour.</b> On-market, coming-soon, and quiet listings &mdash; toured on your schedule.</p></div>
+        <div class="proc__step"><span class="proc__num">3</span><p><b>Offer &amp; option period.</b> We price the offer to the comps and use the Texas option period to inspect with a right to walk.</p></div>
+        <div class="proc__step"><span class="proc__num">4</span><p><b>Inspections &amp; appraisal.</b> Findings negotiated, lender ordered appraisal reviewed, title cleared.</p></div>
+        <div class="proc__step"><span class="proc__num">5</span><p><b>Close.</b> Final walkthrough, sign at title, keys in hand &mdash; typically 30&ndash;45 days financed.</p></div>
+      </div>
+      <div class="proc__col">
+        <h3>Selling</h3>
+        <div class="proc__step"><span class="proc__num">1</span><p><b>Walkthrough &amp; pricing.</b> A comparative market analysis and a pricing plan tied to current buyer demand.</p></div>
+        <div class="proc__step"><span class="proc__num">2</span><p><b>Prepare.</b> Staging, targeted repairs, and professional photo and video direction.</p></div>
+        <div class="proc__step"><span class="proc__num">3</span><p><b>List &amp; market.</b> MLS, portal syndication, and paid digital reach to buyers in your price band.</p></div>
+        <div class="proc__step"><span class="proc__num">4</span><p><b>Review offers.</b> Every term modeled to your net proceeds, not just the headline price.</p></div>
+        <div class="proc__step"><span class="proc__num">5</span><p><b>Under contract to close.</b> Manage the buyer&rsquo;s option period, appraisal, and financing through funding.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VALUATION CTA ============ -->
+  <section id="valuation" class="val" aria-label="Home valuation">
+    <h2>What is your San Antonio home worth today?</h2>
+    <p>Get a considered, data-backed valuation &mdash; not an automated guess &mdash; usually within one business day.</p>
+    <a class="val__btn" href="#contact-form" data-intent="A home valuation">Request my home valuation</a>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" class="sec sec--alt" aria-label="Frequently asked questions">
+    <div class="sec__head sec__head--center">
+      <span class="sec__eyebrow">Good to know</span>
+      <h2 class="sec__title">Questions buyers and sellers ask.</h2>
+    </div>
+    <div class="faq__list">
+      <details class="faq__item"><summary>How is my agent paid when I buy?</summary><p>Since 2024, buyers sign a written representation agreement that states the agent&rsquo;s compensation before touring homes. That fee is negotiable and may be paid by the seller, by you, or split &mdash; we go over the numbers up front so there are no surprises at closing.</p></details>
+      <details class="faq__item"><summary>What is the Texas option period?</summary><p>For a small option fee, the buyer gets a set number of days to terminate the contract for any reason. It&rsquo;s when inspections happen. If anything material turns up, you can renegotiate or walk and get your earnest money back.</p></details>
+      <details class="faq__item"><summary>How much earnest money do I need?</summary><p>In the San Antonio market it&rsquo;s commonly around 1% of the purchase price, held by the title company and credited to you at closing. Stronger earnest money can make an offer more competitive on a sought-after home.</p></details>
+      <details class="faq__item"><summary>What does it cost to sell?</summary><p>Typically: negotiated agent compensation, title and escrow fees, prorated property taxes, and sometimes a survey, HOA transfer, or buyer concessions. I give you a net-proceeds estimate before we list and update it with every offer.</p></details>
+      <details class="faq__item"><summary>Do I need to be pre-approved before touring luxury homes?</summary><p>Yes. Many higher-end listings require a lender pre-approval or proof of funds before a showing is confirmed. It also lets us move fast when the right home appears.</p></details>
+      <details class="faq__item"><summary>How long does a purchase take?</summary><p>About 30&ndash;45 days from accepted offer to closing when financed, faster for cash. New construction runs on the builder&rsquo;s timeline.</p></details>
+      <details class="faq__item"><summary>What are property taxes like here?</summary><p>Texas has no state income tax; property tax rates in Bexar County generally run a little over 2% of assessed value depending on the taxing entities. A homestead exemption lowers the taxable value on your primary residence.</p></details>
+      <details class="faq__item"><summary>Can you represent me on a new-construction home?</summary><p>Yes, and it&rsquo;s worth having representation &mdash; the builder&rsquo;s contract is written to protect the builder. I review the agreement, incentives, upgrades, and timeline with you.</p></details>
+    </div>
+  </section>
+
+  <!-- ============ REFERENCES ============ -->
+  <!-- ✏️ EDIT: when you have real client quotes, replace the .refs__note block
+       with a .refs__grid like this (2+ cards):
+       <div class="refs__grid">
+         <div class="refs__card">
+           <p class="refs__quote">&ldquo;Their exact words&hellip;&rdquo;</p>
+           <p class="refs__who">First name L. &middot; Neighborhood &middot; Buyer</p>
+         </div>
+       </div>
+  -->
+  <section id="references" class="sec sec--dark" aria-label="Client references">
+    <div class="sec__head sec__head--center">
+      <span class="sec__eyebrow">Working with me</span>
+      <h2 class="sec__title">References on request.</h2>
+    </div>
+    <div class="refs__wrap">
+      <p class="refs__note">
+        I&rsquo;ll gladly connect you with recent buyers and sellers &mdash; ideally in the
+        neighborhood and price range you&rsquo;re considering &mdash; so you can hear how a
+        deal actually went. <a href="#contact-form">Ask for a reference list.</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ NEWSLETTER ============ -->
+  <section class="sec sec--alt" aria-label="Market updates">
+    <div class="news">
+      <h3>San Antonio luxury market note</h3>
+      <p>A short monthly email &mdash; new and coming-soon listings in the top neighborhoods, plus what prices are actually doing. No spam, unsubscribe anytime.</p>
+      <form class="news__form" method="POST"
+            action="https://formsubmit.co/sremy@reliverealty.com"
+            data-endpoint="https://formsubmit.co/ajax/sremy@reliverealty.com">
+        <input type="hidden" name="_subject" value="Market-note signup from shakurremy.com" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <input type="hidden" name="list" value="Monthly market note" />
+        <label class="cf-hp" for="news-email">Email</label>
+        <input id="news-email" type="email" name="email" required placeholder="you@email.com" autocomplete="email" />
+        <button type="submit">Subscribe</button>
+        <p class="news__status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
   <!-- ============ CONTACT ============ -->
   <!-- ✏️ EDIT: eyebrow, <h2>, lead line, quick buttons, form recipient email
        (data-endpoint + <form action>), and the fine-print line. -->
@@ -613,6 +949,16 @@
     </div>
     <a class="contact__top" href="#top" aria-label="Back to top">&uarr;</a>
   </section>
+
+  <div class="creds" aria-label="Credentials">
+    <div class="creds__row">
+      <span>Licensed REALTOR&reg;</span>
+      <span>TREC License #844622</span>
+      <span>Relive Real Estate Inc.</span>
+      <span>Buyer &amp; seller representation</span>
+      <span>Serving Greater San Antonio</span>
+    </div>
+  </div>
 
   <footer class="site-foot" aria-label="Brokerage and legal disclosures">
     <div class="site-foot__inner">
@@ -1915,7 +2261,8 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
         var el = id === 'top' || id === '' ? document.body : document.getElementById(id);
         if (!el) return;
         e.preventDefault();
-        var top = id === 'top' || id === '' ? 0 : el.getBoundingClientRect().top + window.scrollY - 10;
+        var smt = parseFloat(getComputedStyle(el).scrollMarginTop) || 10;
+        var top = id === 'top' || id === '' ? 0 : el.getBoundingClientRect().top + window.scrollY - smt;
         scrollTo(top, Math.min(1100, 380 + Math.abs(top - window.scrollY) * 0.35));
         if (history.replaceState) history.replaceState(null, '', id ? '#' + id : location.pathname);
       }, { passive: false });
@@ -1923,49 +2270,73 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
   </script>
 
   <script>
-    /* ---- contact form: AJAX submit with graceful fallback ---- */
+    /* ---- footer year, lead forms, sticky nav/bar, valuation intent ---- */
     (function () {
       var y = document.getElementById('foot-year');
       if (y) y.textContent = new Date().getFullYear();
 
-      var form = document.getElementById('contact-form');
-      if (!form) return;
-      var status = form.querySelector('.cf-status');
-      var btn = form.querySelector('.cf-submit');
-      var endpoint = form.getAttribute('data-endpoint') || form.action;
+      // reveal the slim nav + mobile call bar once the About section is reached,
+      // and keep them until the user scrolls back to the very top
+      var nav = document.querySelector('.topnav');
+      var bar = document.querySelector('.callbar');
+      if (nav) nav.classList.add('is-on');
+      if (bar) bar.classList.add('is-on');
+      var anchor = document.getElementById('founder');
+      function checkNav() {
+        if (!anchor) return;
+        var on = anchor.getBoundingClientRect().top < window.innerHeight * 0.6;
+        document.body.classList.toggle('scrolled-in', on);
+      }
+      addEventListener('scroll', checkNav, { passive: true });
+      addEventListener('resize', checkNav, { passive: true });
+      checkNav();
 
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (form._honey && form._honey.value) return;            // bot trap
-        status.className = 'cf-status';
-        status.textContent = '';
-        btn.disabled = true;
-        var original = btn.textContent;
-        btn.textContent = 'Sending…';
-
-        fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: new FormData(form)
-        })
-          .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); })
-          .then(function (res) {
-            if (res.ok) {
-              form.reset();
-              status.className = 'cf-status cf-status--ok';
-              status.textContent = 'Thanks — your message is on its way. Shakur will be in touch within one business day.';
-            } else {
-              throw new Error((res.d && res.d.message) || 'bad response');
-            }
-          })
-          .catch(function () {
-            status.className = 'cf-status cf-status--err';
-            status.innerHTML = 'Something went wrong sending that. Please call or text ' +
-              '<a href="tel:+16466883442">(646)&nbsp;688-3442</a> or email ' +
-              '<a href="mailto:sremy@reliverealty.com">sremy@reliverealty.com</a>.';
-          })
-          .then(function () { btn.disabled = false; btn.textContent = original; });
+      // "Request a valuation" / service links: preselect the contact-form intent
+      document.querySelectorAll('[data-intent]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          var sel = document.getElementById('cf-intent');
+          if (!sel) return;
+          var want = el.getAttribute('data-intent');
+          for (var i = 0; i < sel.options.length; i++) {
+            if (sel.options[i].text === want) { sel.selectedIndex = i; break; }
+          }
+        });
       });
+
+      // generic AJAX submit for FormSubmit-backed forms
+      function wire(form, statusSel, sending, done) {
+        if (!form) return;
+        var status = form.querySelector(statusSel);
+        var btn = form.querySelector('button[type=submit], .cf-submit');
+        var okCls = statusSel.slice(1) + '--ok', errCls = statusSel.slice(1) + '--err';
+        var endpoint = form.getAttribute('data-endpoint') || form.action;
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (form._honey && form._honey.value) return;
+          if (status) { status.className = statusSel.slice(1); status.textContent = ''; }
+          var label = btn ? btn.textContent : '';
+          if (btn) { btn.disabled = true; btn.textContent = sending; }
+          fetch(endpoint, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) })
+            .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); })
+            .then(function (res) {
+              if (!res.ok) throw new Error((res.d && res.d.message) || 'bad');
+              form.reset();
+              if (status) { status.className = statusSel.slice(1) + ' ' + okCls; status.textContent = done; }
+            })
+            .catch(function () {
+              if (status) {
+                status.className = statusSel.slice(1) + ' ' + errCls;
+                status.innerHTML = 'Could not send that. Call or text <a href="tel:+16466883442">(646)&nbsp;688-3442</a> or email <a href="mailto:sremy@reliverealty.com">sremy@reliverealty.com</a>.';
+              }
+            })
+            .then(function () { if (btn) { btn.disabled = false; btn.textContent = label; } });
+        });
+      }
+
+      wire(document.getElementById('contact-form'), '.cf-status', 'Sending…',
+        'Thanks — your message is on its way. Shakur will be in touch within one business day.');
+      wire(document.querySelector('.news__form'), '.news__status', 'Subscribing…',
+        'You’re on the list. Watch for the next market note.');
     })();
   </script>
 </body>
