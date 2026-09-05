@@ -233,13 +233,11 @@ within 24–48h.
   Gmail connection is authorized it shows every new lead from
   sremy@reliverealty.com in real time.
 
-## Two things still need you (5 min each)
+## One thing still needs you (5 min)
 
-1. **Contact-form activation:** submit the form once at
-   https://listedbyremy.com/#contact with your own info, then click the
-   activation link FormSubmit emails to sremy@reliverealty.com. After that every
-   submission emails you.
-2. **Dashboard Gmail:** drop the Google OAuth `client_secret.json` into
+- Contact form + newsletter — **done, live.** Submissions email
+  sremy@reliverealty.com automatically.
+- **Dashboard Gmail:** drop the Google OAuth `client_secret.json` into
    `~/projects/remy-os/config/gmail-client-secret.json`, then run
    `backend/.venv/bin/python scripts/connect-gmail.py` and click Allow for each
    inbox. See `~/projects/remy-os/docs/gmail_leads_setup.md`.
