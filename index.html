@@ -201,6 +201,9 @@
     .tier__mini { font-size: 10px; color: #8898ac; margin-top: 10px; text-align: center; }
     .tier__mini a { color: #d9b26a; }
     .tiers__note { max-width: 1140px; margin: 30px auto 0; font-size: 12px; color: #8898ac; }
+    .tiers__note a { color: #d9b26a; font-weight: 600; }
+    .tiers__cta-wrap { text-align: center; margin: 34px auto 0; }
+    .tiers__cta-wrap .tier__btn { display: inline-block; padding: 14px 34px; font-size: .95rem; }
 
     /* ---- MODEL-HOME CARDS (extends .tier) ---- */
     .model { padding: 0; overflow: hidden; }
@@ -448,7 +451,7 @@
 
     /* ============ SHARED SECTION SCAFFOLD ============ */
     .sec { position: relative; z-index: 45; color: #f2f6fc; padding: clamp(64px,10vh,128px) clamp(20px,6vw,80px); }
-    #founder, #tiers, #listings, #services, #process, #valuation, #calculator, #faq, #references, #contact,
+    #founder, #tiers, #listings, #services, #process, #first-time, #valuation, #calculator, #faq, #references, #contact,
     #contact-form { scroll-margin-top: 72px; }
 
     /* hide the "01 / 06" scene counter in the flythrough */
@@ -504,14 +507,29 @@
     .faq__item p a { color: #d9b26a; }
 
     /* ---- references / testimonials ---- */
-    .refs__wrap { max-width: 960px; margin: 0 auto; }
-    .refs__grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+    .refs__wrap { max-width: 1040px; margin: 0 auto; }
+    .refs__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    @media (max-width: 900px) { .refs__grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 620px) { .refs__grid { grid-template-columns: 1fr; } }
     .refs__card { background: linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015)),#0b1220;
       border: 1px solid rgba(255,255,255,.10); border-radius: 18px; padding: 26px 24px; }
     .refs__quote { font-family: var(--sw-font-display); font-size: 1.05rem; line-height: 1.55; color: #eef2f8; margin: 0 0 14px; }
+    .refs__card::before { content: ""; display: block; width: 26px; height: 2px; background: #d9b26a; margin: 0 0 16px; border-radius: 2px; }
     .refs__who { font-size: .82rem; letter-spacing: .04em; color: #d9b26a; text-transform: uppercase; font-weight: 600; }
     .refs__note { margin: 26px auto 0; max-width: 60ch; text-align: center; font-size: .92rem; line-height: 1.6; color: #8898ac; }
     .refs__note a { color: #d9b26a; }
+
+    /* ---- trust strip (under the founder intro) ---- */
+    .trustbar { position: relative; z-index: 45; background: #05070c;
+      border-top: 1px solid rgba(217,178,106,.16); border-bottom: 1px solid rgba(217,178,106,.16);
+      padding: 16px clamp(20px,6vw,80px); }
+    .trustbar__row { max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: center; gap: 10px 22px;
+      font-family: var(--sw-font-display); font-size: .74rem; letter-spacing: .06em;
+      text-transform: uppercase; color: #8b98ac; }
+    .trustbar__row b { color: #e0c48c; font-weight: 700; }
+    .trustbar__row span { position: relative; }
+    .trustbar__row span + span::before { content: "·"; position: absolute; left: -12px; color: #4a5568; }
 
     /* ---- credentials strip ---- */
     .creds { position: relative; z-index: 45; background: #05070c; border-top: 1px solid rgba(255,255,255,.06);
@@ -743,10 +761,10 @@
       <a href="#tiers">Areas</a>
       <a href="#listings">Listings</a>
       <a href="#services">Services</a>
-      <a href="#process">Process</a>
+      <a href="#first-time">First-time</a>
       <a href="#faq">FAQ</a>
     </div>
-    <a class="topnav__cta" href="#contact-form">Get in touch</a>
+    <a class="topnav__cta" href="#contact-form" data-intent="Booking a call">Book a call</a>
   </nav>
   <div class="callbar" aria-label="Quick contact">
     <a href="tel:+12108711562"><b>Call</b>(210) 871-1562</a>
@@ -777,12 +795,24 @@
         <p>I'm Shakur&nbsp;Remy, a San&nbsp;Antonio REALTOR® with Relive&nbsp;Realty. I represent buyers and sellers across Alamo&nbsp;Heights, Olmos&nbsp;Park, Stone&nbsp;Oak and The&nbsp;Dominion — with the same standard on every deal: know the number, move fast, and protect your position.</p>
         <p>Start with a conversation. We'll talk through what you're buying or selling, the neighborhoods that fit, and the timeline — then I go to work.</p>
         <div class="founder__cta">
-          <a class="founder__btn founder__btn--primary" href="https://a.nhb.app/u/shakur-remy">View listings</a>
-          <a class="founder__btn founder__btn--ghost" href="#contact">Contact Shakur</a>
+          <a class="founder__btn founder__btn--primary" href="#contact-form" data-intent="Booking a call" data-note="I'd like to book a call to talk through buying or selling.">Book a call</a>
+          <a class="founder__btn founder__btn--ghost" href="https://a.nhb.app/u/shakur-remy">Browse homes</a>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- ============ TRUST STRIP ============ -->
+  <div class="trustbar" aria-label="Credentials">
+    <div class="trustbar__row">
+      <span><b>Licensed REALTOR&reg;</b></span>
+      <span>Relive&nbsp;Realty</span>
+      <span>TREC&nbsp;#844622</span>
+      <span>Buyer &amp; seller representation</span>
+      <span>All of Greater&nbsp;San&nbsp;Antonio</span>
+      <span>First-time to luxury</span>
+    </div>
+  </div>
 
   <!-- ============ TIERS ============ -->
   <!-- ✏️ EDIT: eyebrow + <h2>, then one <div class="tier"> per plan.
@@ -1034,10 +1064,57 @@
     </div>
   </section>
 
+  <!-- ============ FIRST-TIME BUYERS ============ -->
+  <section id="first-time" class="sec sec--alt" aria-label="First-time buyers">
+    <div class="sec__head sec__head--center">
+      <span class="sec__eyebrow">New to this</span>
+      <h2 class="sec__title">Buying your first home in San&nbsp;Antonio.</h2>
+      <p class="sec__intro">Most people I work with aren&rsquo;t buying luxury &mdash; they&rsquo;re buying their first place, and they have the same three questions. Here are straight answers.</p>
+    </div>
+    <div class="svc__grid">
+      <div class="svc__card">
+        <h3>&ldquo;Do I need 20% down?&rdquo;</h3>
+        <p>No. In this market most first-time buyers I work with put down far less.</p>
+        <ul>
+          <li>FHA loans start around 3.5% down</li>
+          <li>VA and USDA can be 0% down if you qualify</li>
+          <li>Texas has down-payment assistance and first-time buyer programs</li>
+          <li>We&rsquo;ll get you with a lender who&rsquo;ll lay out your real number for free</li>
+        </ul>
+      </div>
+      <div class="svc__card">
+        <h3>&ldquo;Is my credit good enough?&rdquo;</h3>
+        <p>Often yes &mdash; and if it&rsquo;s not quite there, we make a plan.</p>
+        <ul>
+          <li>Many loan programs start in the low-600s</li>
+          <li>A lender pull tells us exactly where you stand, no guessing</li>
+          <li>If you&rsquo;re a few months out, I&rsquo;ll tell you what to fix first</li>
+          <li>No pressure to buy before you&rsquo;re ready</li>
+        </ul>
+      </div>
+      <div class="svc__card">
+        <h3>&ldquo;What does the process even look like?&rdquo;</h3>
+        <p>Five steps, and I&rsquo;m with you on every one.</p>
+        <ul>
+          <li>Talk it through &mdash; budget, neighborhoods, timeline</li>
+          <li>Get pre-approved so we know your range</li>
+          <li>Tour homes on your schedule</li>
+          <li>Offer, option period, inspection</li>
+          <li>Close &mdash; usually 30&ndash;45 days &mdash; keys in hand</li>
+        </ul>
+        <a class="svc__link" href="/guides/buying-a-home-in-san-antonio.html">Read the full buyer&rsquo;s guide &rarr;</a>
+      </div>
+    </div>
+    <div class="tiers__cta-wrap">
+      <a class="tier__btn" href="#contact-form" data-intent="Booking a call" data-note="I'm a first-time buyer and want to talk through where to start.">Book a no-pressure call</a>
+      <p class="tiers__note" style="text-align:center;margin-top:14px;">We&rsquo;ll figure out if now&rsquo;s the right time, together &mdash; no obligation.</p>
+    </div>
+  </section>
+
   <!-- ============ VALUATION CTA ============ -->
   <section id="valuation" class="val" aria-label="Home valuation">
     <h2>What is your San Antonio home worth today?</h2>
-    <p>Get a considered, data-backed valuation &mdash; not an automated guess &mdash; usually within one business day.</p>
+    <p>Get a considered, data-backed valuation &mdash; not an automated guess. Send the address and you&rsquo;ll hear back from me personally the same day.</p>
     <a class="val__btn" href="#contact-form" data-intent="A home valuation">Request my home valuation</a>
   </section>
 
@@ -1119,25 +1196,38 @@
   </section>
 
   <!-- ============ REFERENCES ============ -->
-  <!-- ✏️ EDIT: when you have real client quotes, replace the .refs__note block
-       with a .refs__grid like this (2+ cards):
-       <div class="refs__grid">
+  <!-- ✏️ WHEN YOU HAVE REAL CLIENT QUOTES: replace the three .refs__card blocks
+       below with real ones. Keep the same markup:
          <div class="refs__card">
            <p class="refs__quote">&ldquo;Their exact words&hellip;&rdquo;</p>
-           <p class="refs__who">First name L. &middot; Neighborhood &middot; Buyer</p>
+           <p class="refs__who">First name L. &middot; Stone Oak &middot; Buyer, 2026</p>
          </div>
-       </div>
-  -->
+       Get permission first, use first name + last initial, and keep the
+       "references on request" line underneath — buyers still want to call someone. -->
   <section id="references" class="sec sec--dark" aria-label="Client references">
     <div class="sec__head sec__head--center">
       <span class="sec__eyebrow">Working with me</span>
-      <h2 class="sec__title">References on request.</h2>
+      <h2 class="sec__title">The standard on every deal.</h2>
     </div>
     <div class="refs__wrap">
+      <div class="refs__grid">
+        <div class="refs__card">
+          <p class="refs__quote">You&rsquo;ll always know the number before you need it &mdash; what a home is really worth, what you&rsquo;ll net, and what every next step costs.</p>
+          <p class="refs__who">Straight math, no surprises at the table</p>
+        </div>
+        <div class="refs__card">
+          <p class="refs__quote">One agent start to finish. The person you meet at the first showing is the person sitting next to you at closing.</p>
+          <p class="refs__who">No handoffs, no call center</p>
+        </div>
+        <div class="refs__card">
+          <p class="refs__quote">No pressure, ever. If a home isn&rsquo;t right, or the timing isn&rsquo;t right, I&rsquo;ll be the first to say so.</p>
+          <p class="refs__who">Your position comes before the commission</p>
+        </div>
+      </div>
       <p class="refs__note">
-        I&rsquo;ll gladly connect you with recent buyers and sellers &mdash; ideally in the
-        neighborhood and price range you&rsquo;re considering &mdash; so you can hear how a
-        deal actually went. <a href="#contact-form">Ask for a reference list.</a>
+        Want to hear it from someone who&rsquo;s closed with me? I&rsquo;ll connect you with recent
+        buyers and sellers &mdash; ideally in the neighborhood and price range you&rsquo;re
+        considering. <a href="#contact-form" data-intent="Booking a call" data-note="Please send me a few client references I can call.">Ask for a reference list.</a>
       </p>
     </div>
   </section>
@@ -1173,11 +1263,11 @@
     <div class="contact__inner">
       <span class="contact__eyebrow">Get in touch</span>
       <h2 class="contact__title">Let&rsquo;s find your next address.</h2>
-      <p class="contact__lead">Buying, selling, or curious what your San Antonio home is worth &mdash; send a note and I&rsquo;ll reply within one business day.</p>
+      <p class="contact__lead">Buying, selling, or curious what your San Antonio home is worth &mdash; send a note. You&rsquo;ll get an instant confirmation, and a personal reply from me the same day.</p>
       <div class="contact__actions">
         <a class="contact__btn contact__btn--primary" href="tel:+12108711562">Call or text</a>
         <a class="contact__btn" href="#contact-form">Send a message</a>
-        <a class="contact__btn" href="https://a.nhb.app/u/shakur-remy">View listings</a>
+        <a class="contact__btn" href="https://a.nhb.app/u/shakur-remy">Browse homes</a>
       </div>
 
       <!-- data-welcome: paste your Google Apps Script /exec URL here to send the
@@ -1192,7 +1282,7 @@
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_next" value="https://listedbyremy.com/#contact" />
-        <input type="hidden" name="_autoresponse" value="Thanks for reaching out — I've received your message and will follow up personally within one business day. You can reach me any time at (210) 871-1562. Texas requires that I share these two disclosures with you: Information About Brokerage Services — https://agent.reliverealty.com/TREC_ReliveRE.pdf and the TREC Consumer Protection Notice — https://agent.reliverealty.com/TCPN_ReliveRE.pdf . — Shakur Remy, REALTOR®, Relive Real Estate Inc., TREC License #844622" />
+        <input type="hidden" name="_autoresponse" value="Thanks for reaching out — I've received your message and will follow up personally the same day. You can reach me any time at (210) 871-1562. Texas requires that I share these two disclosures with you: Information About Brokerage Services — https://agent.reliverealty.com/TREC_ReliveRE.pdf and the TREC Consumer Protection Notice — https://agent.reliverealty.com/TCPN_ReliveRE.pdf . — Shakur Remy, REALTOR®, Relive Real Estate Inc., TREC License #844622" />
         <input type="text" name="_honey" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <div class="contact__grid">
           <div class="cf-field">
@@ -1211,6 +1301,7 @@
             <label for="cf-intent">I&rsquo;m interested in</label>
             <select id="cf-intent" name="interest" required>
               <option value="" selected disabled>Choose one</option>
+              <option>Booking a call</option>
               <option>Buying</option>
               <option>Scheduling a tour</option>
               <option>Selling</option>
@@ -2292,7 +2383,7 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
        assets/frames/ and assets/frames-m/. Keep them equal to each other. */
     mountScrollWorld(document.getElementById('world'), {
       brand: { name: 'Shakur Remy', href: '#top', logo: 'assets/img/logo.png' },
-      cta: { label: 'View listings', href: 'https://a.nhb.app/u/shakur-remy' },
+      cta: { label: 'Browse homes', href: 'https://a.nhb.app/u/shakur-remy' },
       frameCount: 384,
       frameDir: 'assets/frames/',
       frameExt: 'webp',
@@ -2355,8 +2446,8 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
           body: 'Current San Antonio listings, updated straight from the MLS.',
           tags: [],
           cta: {
-            primary:   { label: 'View listings', href: 'https://a.nhb.app/u/shakur-remy' },
-            secondary: { label: 'Contact Shakur', href: '#contact' },
+            primary:   { label: 'Browse homes', href: 'https://a.nhb.app/u/shakur-remy' },
+            secondary: { label: 'Book a call', href: '#contact-form' },
           },
         },
       ],
@@ -2670,7 +2761,7 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
       }
 
       wire(document.getElementById('contact-form'), '.cf-status', 'Sending…',
-        'Thanks — your message is on its way. Shakur will be in touch within one business day.');
+        'Thanks — your message is on its way. Shakur will follow up personally the same day.');
       wire(document.querySelector('.news__form'), '.news__status', 'Subscribing…',
         'You’re on the list. Watch for the next market note.');
 
