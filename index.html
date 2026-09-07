@@ -99,6 +99,17 @@
       display: block; width: 100%; height: auto;
       filter: drop-shadow(0 30px 55px rgba(0,0,0,.6));
     }
+    .founder__ig {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; gap: 9px; width: max-content;
+      margin: 16px auto 0; padding: 7px 15px;
+      border: 1px solid rgba(217,178,106,.42); border-radius: 999px;
+      font-family: var(--sw-font-display); font-weight: 700; font-size: 12.5px;
+      letter-spacing: .04em; color: #e0c48c; text-decoration: none;
+      transition: transform .25s ease, background .25s ease, border-color .25s ease;
+    }
+    .founder__ig svg { flex: none; }
+    .founder__ig:hover { transform: translateY(-2px); background: rgba(217,178,106,.12); border-color: #d9b26a; }
     @media (prefers-reduced-motion: no-preference) {
       .founder__portrait img { animation: founder-float 7s ease-in-out infinite; }
       @keyframes founder-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
@@ -616,6 +627,7 @@
     "image": "https://listedbyremy.com/assets/img/og.jpg",
     "telephone": "+1-210-871-1562",
     "email": "sremy@reliverealty.com",
+    "sameAs": ["https://www.instagram.com/listedbyshakur/"],
     "areaServed": [
       { "@type": "City", "name": "San Antonio", "containedInPlace": { "@type": "AdministrativeArea", "name": "Texas" } },
       "Alamo Heights TX", "Olmos Park TX", "Stone Oak", "The Dominion"
@@ -733,6 +745,14 @@
     <div class="founder__inner">
       <div class="founder__portrait">
         <img src="assets/img/founder.png" alt="Shakur Remy, REALTOR® with Relive Realty in San Antonio" decoding="async" loading="lazy" />
+        <a class="founder__ig" href="https://www.instagram.com/listedbyshakur/" target="_blank" rel="noopener" aria-label="Shakur Remy on Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+          @listedbyshakur
+        </a>
       </div>
       <div class="founder__body">
         <span class="founder__eyebrow">Your agent</span>
