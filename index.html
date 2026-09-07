@@ -602,19 +602,36 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
         onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"></noscript>
-  <!-- paint the first scene's poster instantly while the engine boots -->
-  <link rel="preload" as="image" href="assets/frames/f0001.jpg" media="(min-width: 861px)" fetchpriority="high" />
-  <link rel="preload" as="image" href="assets/frames/f0002.jpg" media="(min-width: 861px)" />
-  <link rel="preload" as="image" href="assets/frames/f0003.jpg" media="(min-width: 861px)" />
-  <link rel="preload" as="image" href="assets/frames/f0004.jpg" media="(min-width: 861px)" />
-  <link rel="preload" as="image" href="assets/frames/f0005.jpg" media="(min-width: 861px)" />
-  <link rel="preload" as="image" href="assets/frames/f0006.jpg" media="(min-width: 861px)" />
+  <!-- warm the first ~1.5 scenes so scrubbing is live the instant the page paints
+       (WebP frames ~50 KB each — 18 of them ≈ 0.9 MB) -->
+  <link rel="preload" as="image" href="assets/frames/f0001.webp" media="(min-width: 861px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/frames/f0002.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0003.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0004.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0005.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0006.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0008.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0010.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0012.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0014.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0016.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0019.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0022.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0026.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0030.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0035.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0040.webp" media="(min-width: 861px)" />
+  <link rel="preload" as="image" href="assets/frames/f0046.webp" media="(min-width: 861px)" />
   <link rel="preload" as="image" href="assets/frames-m/f0001.webp" media="(max-width: 860px)" fetchpriority="high" />
   <link rel="preload" as="image" href="assets/frames-m/f0002.webp" media="(max-width: 860px)" />
   <link rel="preload" as="image" href="assets/frames-m/f0003.webp" media="(max-width: 860px)" />
   <link rel="preload" as="image" href="assets/frames-m/f0004.webp" media="(max-width: 860px)" />
   <link rel="preload" as="image" href="assets/frames-m/f0005.webp" media="(max-width: 860px)" />
   <link rel="preload" as="image" href="assets/frames-m/f0006.webp" media="(max-width: 860px)" />
+  <link rel="preload" as="image" href="assets/frames-m/f0008.webp" media="(max-width: 860px)" />
+  <link rel="preload" as="image" href="assets/frames-m/f0010.webp" media="(max-width: 860px)" />
+  <link rel="preload" as="image" href="assets/frames-m/f0013.webp" media="(max-width: 860px)" />
+  <link rel="preload" as="image" href="assets/frames-m/f0016.webp" media="(max-width: 860px)" />
 
   <link rel="canonical" href="https://listedbyremy.com/" />
   <script type="application/ld+json">
@@ -2278,6 +2295,9 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
       cta: { label: 'View listings', href: 'https://a.nhb.app/u/shakur-remy' },
       frameCount: 384,
       frameDir: 'assets/frames/',
+      frameExt: 'webp',
+      maxParallel: 20,
+      lookAhead: 20,
       frameCountMobile: 384,
       frameDirMobile: 'assets/frames-m/',
       frameExtMobile: 'webp',
