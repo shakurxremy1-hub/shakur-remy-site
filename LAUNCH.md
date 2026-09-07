@@ -48,7 +48,7 @@ group text. Personalize the first line where you can.
 >
 > Shakur Remy
 > REALTOR® · Relive Realty
-> 646-688-3442 · sremy@reliverealty.com
+> 210-871-1562 · sremy@reliverealty.com
 > listedbyremy.com
 
 ### Social post (Instagram / Facebook / LinkedIn)
@@ -72,7 +72,7 @@ Create at **google.com/business** with sremy@reliverealty.com. Paste these field
 | Business name | Shakur Remy — Relive Realty |
 | Category (primary) | Real estate agent |
 | Category (additional) | Real estate consultant |
-| Phone | 646-688-3442 |
+| Phone | 210-871-1562 |
 | Website | https://listedbyremy.com |
 | Service area | San Antonio, Alamo Heights, Stone Oak, Schertz, Cibolo, Converse, Boerne, Helotes, Alamo Ranch, The Dominion |
 | Hours | Mon–Sat 8am–8pm, Sun by appointment |
@@ -151,7 +151,7 @@ working with an agent?" (paper sheet or a Google Form on a tablet).
 >
 > [3 links]
 >
-> Shakur · 646-688-3442 · listedbyremy.com
+> Shakur · 210-871-1562 · listedbyremy.com
 
 *Day 7 (text):*
 > [Name] — anything jump out from that list I sent? Happy to line up showings for
