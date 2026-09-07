@@ -389,7 +389,7 @@
 
     /* ============ SHARED SECTION SCAFFOLD ============ */
     .sec { position: relative; z-index: 45; color: #f2f6fc; padding: clamp(64px,10vh,128px) clamp(20px,6vw,80px); }
-    #founder, #tiers, #services, #process, #valuation, #calculator, #faq, #references, #contact,
+    #founder, #tiers, #listings, #services, #process, #valuation, #calculator, #faq, #references, #contact,
     #contact-form { scroll-margin-top: 72px; }
 
     /* hide the "01 / 06" scene counter in the flythrough */
@@ -664,6 +664,7 @@
     <div class="topnav__links">
       <a href="#founder">About</a>
       <a href="#tiers">Areas</a>
+      <a href="#listings">Listings</a>
       <a href="#services">Services</a>
       <a href="#process">Process</a>
       <a href="#faq">FAQ</a>
@@ -794,6 +795,75 @@
         </ul>
         <a class="tier__btn" href="https://www.homes.com/san-antonio-tx/dominion-neighborhood/houses-for-sale/" target="_blank" rel="noopener">View homes</a>
         <div class="tier__mini"><a href="/areas/the-dominion.html">The Dominion guide &rarr;</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ LISTINGS / BROWSE + BOOK A TOUR ============ -->
+  <!-- ✏️ EDIT: 3 budget bands + a "send me any address" card. The "See listings"
+       links go to live homes.com searches. The "Schedule a tour" buttons drop the
+       visitor into the contact form with intent + a starter message pre-filled. -->
+  <section id="listings" class="tiers" aria-label="Homes on the market">
+    <div class="tiers__head">
+      <span class="tiers__eyebrow">Homes on the market now</span>
+      <h2 class="tiers__title">See what's out there — then book a tour.</h2>
+      <p class="tiers__intro" style="max-width:58ch;margin:14px 0 0;font-size:1rem;line-height:1.6;color:#8898ac;">
+        Live San Antonio listings by budget. Find one you like, hit <b style="color:#c2a870;">Schedule a tour</b>,
+        and I'll get you inside this week — first home or fifth.
+      </p>
+    </div>
+    <div class="tiers__grid">
+
+      <div class="tier">
+        <h3>First homes &amp; starters</h3>
+        <div class="tier__blurb">Move-in ready 3-bed homes, plus newer builds on the city's edges.</div>
+        <div class="tier__price">Under $300K</div>
+        <div class="tier__sub">Converse · Universal City · far NE / SE / NW</div>
+        <ul>
+          <li>VA / FHA / first-time-buyer friendly</li>
+          <li>Down-payment help programs available</li>
+          <li>Payments from the low $1,000s/mo</li>
+        </ul>
+        <a class="tier__btn" href="https://www.homes.com/san-antonio-tx/under-300k/" target="_blank" rel="noopener">See these listings &#8599;</a>
+        <a class="tier__btn tier__btn--ghost" href="#contact-form" data-intent="Scheduling a tour" data-note="I'd like to tour San Antonio homes under $300K.">Schedule a tour</a>
+      </div>
+
+      <div class="tier">
+        <h3>Family homes</h3>
+        <div class="tier__blurb">3–4 bedrooms, good schools, newer master-planned neighborhoods.</div>
+        <div class="tier__price">$300K–$500K</div>
+        <div class="tier__sub">Schertz · Cibolo · Alamo Ranch · Potranco</div>
+        <ul>
+          <li>1,800–2,600 sq ft, two-car garage</li>
+          <li>Top-rated SCUCISD / NEISD zones</li>
+          <li>Easy 1604 / I-35 commutes</li>
+        </ul>
+        <a class="tier__btn" href="https://www.homes.com/san-antonio-tx/under-500k/" target="_blank" rel="noopener">See these listings &#8599;</a>
+        <a class="tier__btn tier__btn--ghost" href="#contact-form" data-intent="Scheduling a tour" data-note="I'd like to tour family homes in the $300K–$500K range.">Schedule a tour</a>
+      </div>
+
+      <div class="tier">
+        <h3>Move-up &amp; luxury</h3>
+        <div class="tier__blurb">Established streets, gated communities, and estates in the north.</div>
+        <div class="tier__price">$500K+</div>
+        <div class="tier__sub">Stone Oak · Alamo Heights · The Dominion · Fair Oaks</div>
+        <ul>
+          <li>Larger lots, custom and semi-custom builds</li>
+          <li>Off-market and coming-soon access</li>
+          <li>Pre-approval or proof of funds to tour</li>
+        </ul>
+        <a class="tier__btn" href="https://www.homes.com/san-antonio-tx/houses-for-sale/" target="_blank" rel="noopener">See these listings &#8599;</a>
+        <a class="tier__btn tier__btn--ghost" href="#contact-form" data-intent="Scheduling a tour" data-note="I'd like to tour homes in the $500K+ range.">Schedule a tour</a>
+      </div>
+
+      <div class="tier" style="grid-column:1/-1;text-align:center;">
+        <h3>Seen a home you love anywhere?</h3>
+        <div class="tier__blurb" style="max-width:52ch;margin:8px auto 0;">
+          Zillow, Realtor.com, a yard sign on your street — it doesn't matter where you found it.
+          Send me the address and I'll pull the details, set up the showing, and walk it with you.
+        </div>
+        <a class="tier__btn" href="#contact-form" data-intent="Scheduling a tour" data-note="I found a home I'd like to tour — address below." style="margin-top:16px;display:inline-block;">Send me an address</a>
       </div>
 
     </div>
@@ -952,7 +1022,7 @@
       <details class="faq__item"><summary>What is the Texas option period?</summary><p>For a small option fee, the buyer gets a set number of days to terminate the contract for any reason. It&rsquo;s when inspections happen. If anything material turns up, you can renegotiate or walk and get your earnest money back.</p></details>
       <details class="faq__item"><summary>How much earnest money do I need?</summary><p>In the San Antonio market it&rsquo;s commonly around 1% of the purchase price, held by the title company and credited to you at closing. Stronger earnest money can make an offer more competitive on a sought-after home.</p></details>
       <details class="faq__item"><summary>What does it cost to sell?</summary><p>Typically: negotiated agent compensation, title and escrow fees, prorated property taxes, and sometimes a survey, HOA transfer, or buyer concessions. I give you a net-proceeds estimate before we list and update it with every offer.</p></details>
-      <details class="faq__item"><summary>Do I need to be pre-approved before touring luxury homes?</summary><p>Yes. Many higher-end listings require a lender pre-approval or proof of funds before a showing is confirmed. It also lets us move fast when the right home appears.</p></details>
+      <details class="faq__item"><summary>Do I need to be pre-approved before we start touring?</summary><p>It's the right first step for any budget. A lender pre-approval tells us your real price range, and it lets us move fast and write a strong offer when the right home shows up. Some higher-priced listings require it before a showing is even confirmed.</p></details>
       <details class="faq__item"><summary>How long does a purchase take?</summary><p>About 30&ndash;45 days from accepted offer to closing when financed, faster for cash. New construction runs on the builder&rsquo;s timeline.</p></details>
       <details class="faq__item"><summary>What are property taxes like here?</summary><p>Texas has no state income tax; property tax rates in Bexar County generally run a little over 2% of assessed value depending on the taxing entities. A homestead exemption lowers the taxable value on your primary residence.</p></details>
       <details class="faq__item"><summary>Can you represent me on a new-construction home?</summary><p>Yes, and it&rsquo;s worth having representation &mdash; the builder&rsquo;s contract is written to protect the builder. I review the agreement, incentives, upgrades, and timeline with you.</p></details>
@@ -1053,6 +1123,7 @@
             <select id="cf-intent" name="interest" required>
               <option value="" selected disabled>Choose one</option>
               <option>Buying</option>
+              <option>Scheduling a tour</option>
               <option>Selling</option>
               <option>Buying and selling</option>
               <option>A home valuation</option>
@@ -2146,10 +2217,10 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
           id: 's1', label: 'Arrival',
           accent: '#b7a06a',
           scroll: 1.7, linger: 0.4,
-          eyebrow: 'San Antonio luxury',
-          title: 'Homes like this rarely reach the open market.',
-          body: 'Off-market access and first looks across the city’s most sought-after streets.',
-          tags: ['Alamo Heights', 'Olmos Park', 'The Dominion'],
+          eyebrow: 'San Antonio real estate',
+          title: 'From your first place to your forever home.',
+          body: 'First-time buyers, growing families, relocations, and luxury — one agent, full service, first tour to closing.',
+          tags: ['First-time buyers', 'Move-up', 'Luxury'],
         },
         {
           id: 's2', label: 'The Door',
@@ -2426,15 +2497,27 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
       addEventListener('resize', checkNav, { passive: true });
       checkNav();
 
-      // "Request a valuation" / service links: preselect the contact-form intent
+      // Service / "schedule a tour" links: preselect the contact-form intent,
+      // and (for tour links) carry the home address + a starter message.
       document.querySelectorAll('[data-intent]').forEach(function (el) {
         el.addEventListener('click', function () {
           var sel = document.getElementById('cf-intent');
-          if (!sel) return;
-          var want = el.getAttribute('data-intent');
-          for (var i = 0; i < sel.options.length; i++) {
-            if (sel.options[i].text === want) { sel.selectedIndex = i; break; }
+          if (sel) {
+            var want = el.getAttribute('data-intent');
+            for (var i = 0; i < sel.options.length; i++) {
+              if (sel.options[i].text === want) { sel.selectedIndex = i; break; }
+            }
           }
+          var addr = el.getAttribute('data-address');
+          var note = el.getAttribute('data-note');
+          var addrEl = document.getElementById('cf-address');
+          var msgEl = document.getElementById('cf-msg');
+          if (addr && addrEl && !addrEl.value) addrEl.value = addr;
+          if (msgEl && !msgEl.value) {
+            if (addr) msgEl.value = "I'd like to tour " + addr + ". ";
+            else if (note) msgEl.value = note + " ";
+          }
+          if (addrEl && addr) { setTimeout(function () { try { document.getElementById('cf-name').focus(); } catch (e) {} }, 350); }
         });
       });
 
