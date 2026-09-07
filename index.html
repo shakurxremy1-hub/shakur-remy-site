@@ -2693,28 +2693,60 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
       if (y) y.textContent = new Date().getFullYear();
 
       /* ========================================================================
-         ✏️  TWO LINKS TO PASTE — everything else is already wired.
+         ✏️  TWO LINKS — everything else is already wired.
 
-         CAL     — your scheduling link (Cal.com or Calendly). See NEXT-STEPS.md.
-                   e.g. 'https://cal.com/shakur-remy/call'
-                   When set: every "Book a call" button opens it in a new tab.
-                   When blank: those buttons scroll to the contact form instead.
+         CAL     — scheduling link (Calendly or Cal.com). When set, every
+                   "Book a call" button opens it: as an on-page popup if the
+                   Calendly widget loads, otherwise a new tab. Blank = the
+                   buttons scroll to the contact form instead.
 
-         REVIEW  — your Google Business Profile "write a review" link.
-                   e.g. 'https://g.page/r/XXXXXXXXXXXX/review'
-                   When set: a "Leave a Google review" line appears in the
-                   References section. When blank: that line stays hidden.
+         REVIEW  — Google Business Profile "write a review" link
+                   (e.g. 'https://g.page/r/XXXXXXXXXXXX/review'). When set, a
+                   "Leave a Google review" line appears in the References
+                   section. Blank = that line stays hidden.
          ======================================================================== */
-      var CAL = '';
+      var CAL = 'https://calendly.com/shakur-opmventuresllc/30min';
       var REVIEW = '';
 
       if (CAL) {
+        var isCalendly = /calendly\.com/.test(CAL);
+        var calReady = false, calLoading = false;
+
+        function loadCalendly() {
+          if (calLoading || calReady || !isCalendly) return;
+          calLoading = true;
+          var css = document.createElement('link');
+          css.rel = 'stylesheet';
+          css.href = 'https://assets.calendly.com/assets/external/widget.css';
+          document.head.appendChild(css);
+          var js = document.createElement('script');
+          js.src = 'https://assets.calendly.com/assets/external/widget.js';
+          js.async = true;
+          js.onload = function () { calReady = true; };
+          document.head.appendChild(js);
+        }
+        // warm it up when the browser is idle, and on first hover/focus of a button
+        if ('requestIdleCallback' in window) requestIdleCallback(loadCalendly, { timeout: 4000 });
+        else setTimeout(loadCalendly, 2500);
+
         document.querySelectorAll('[data-book-call]').forEach(function (el) {
           el.setAttribute('href', CAL);
-          el.setAttribute('target', '_blank');
           el.setAttribute('rel', 'noopener');
           el.removeAttribute('data-intent');   // don't also drive the form
           el.removeAttribute('data-note');
+          el.addEventListener('mouseenter', loadCalendly, { once: true });
+          el.addEventListener('focus', loadCalendly, { once: true });
+          el.addEventListener('click', function (e) {
+            loadCalendly();
+            if (isCalendly && window.Calendly && window.Calendly.initPopupWidget) {
+              e.preventDefault();
+              window.Calendly.initPopupWidget({ url: CAL });
+            } else {
+              // widget not ready (or non-Calendly link): open in a new tab
+              e.preventDefault();
+              window.open(CAL, '_blank', 'noopener');
+            }
+          });
         });
       }
       if (REVIEW) {
