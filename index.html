@@ -248,6 +248,43 @@
     .model__builders { font-size: 11px; color: #7c8aa0; margin-bottom: 15px; }
     .model__body .tier__btn { margin-top: auto; }
 
+    /* ---- LISTINGS: full-bleed editorial panels instead of a cramped 3-up grid ---- */
+    #listings .tiers__grid { grid-template-columns: 1fr; gap: 28px; max-width: 980px; }
+    #listings .model__media { aspect-ratio: 16 / 8; }
+    #listings .model__from { font-size: clamp(1.5rem, 2.8vw, 2.1rem); }
+    #listings .model__body { padding: 22px 26px 26px; }
+    @media (min-width: 720px) {
+      #listings .tiers__grid { max-width: 1080px; }
+      #listings .model__media { aspect-ratio: 21 / 9; }
+    }
+
+    /* ---- TIERS: neighborhood cards carry a tinted still from the hero flight sequence,
+       so the "what's on the market" grid reads as a continuation of the flight rather than
+       a flat card list. Accents reuse the flight's own per-scene champagne easing. ---- */
+    #tiers .tier { position: relative; overflow: hidden; min-height: 320px; border-top: 3px solid var(--tint, #c9a86a); }
+    #tiers .tier::before {
+      content: ""; position: absolute; inset: 0; z-index: 0;
+      background-size: cover; background-position: center;
+      filter: saturate(.82) brightness(.92);
+    }
+    #tiers .tier::after {
+      content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(180deg, rgba(5,7,12,.42) 0%, rgba(5,7,12,.64) 42%, rgba(5,7,12,.95) 100%);
+    }
+    #tiers .tier > * { position: relative; z-index: 2; }
+    #tiers .tier:nth-child(1) { --tint: #b7a06a; }
+    #tiers .tier:nth-child(1)::before { background-image: url('assets/frames/f0001.webp'); }
+    #tiers .tier:nth-child(2) { --tint: #c2a870; }
+    #tiers .tier:nth-child(2)::before { background-image: url('assets/frames/f0065.webp'); }
+    #tiers .tier:nth-child(3) { --tint: #c9a86a; }
+    #tiers .tier:nth-child(3)::before { background-image: url('assets/frames/f0129.webp'); }
+    #tiers .tier:nth-child(4) { --tint: #d3b779; }
+    #tiers .tier:nth-child(4)::before { background-image: url('assets/frames/f0193.webp'); }
+    #tiers .tier:nth-child(5) { --tint: #ddc186; }
+    #tiers .tier:nth-child(5)::before { background-image: url('assets/frames/f0257.webp'); }
+    #tiers .tier:nth-child(6) { --tint: #e6c98a; }
+    #tiers .tier:nth-child(6)::before { background-image: url('assets/frames/f0321.webp'); }
+
     /* scroll-reveal — transform+opacity only (GPU), no layout work */
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s cubic-bezier(.22,1,.36,1); }
     .reveal.in { opacity: 1; transform: none; }
@@ -257,6 +294,7 @@
     .contact {
       position: relative; z-index: 45; overflow: hidden;
       background:
+        linear-gradient(180deg, transparent 0, rgba(5,7,12,.6) 10vh, #05070c 22vh),
         radial-gradient(70% 60% at 50% 0%, color-mix(in srgb, #c9a86a 10%, transparent), transparent 70%),
         #05070c;
       color: #f2f6fc;
@@ -458,6 +496,21 @@
     .df-copy__num, .sw-copy__num, .mv2-panel__num { display: none !important; }
     .sec--alt { background: #070a11; }
     .sec--dark { background: #05070c; }
+    /* ---- reusable gradient seam (generalized from .founder's transparent-top trick) ----
+       add alongside sec--alt/sec--dark + optional inline --seam-accent to blend a section's
+       top edge into whatever precedes it instead of a hard color-block cut. */
+    .sec--seamed.sec--alt {
+      background:
+        linear-gradient(180deg, transparent 0, rgba(7,10,17,.6) 10vh, #070a11 22vh),
+        radial-gradient(56% 50% at 50% 4%, color-mix(in srgb, var(--seam-accent, #c9a86a) 14%, transparent), transparent 64%),
+        #070a11;
+    }
+    .sec--seamed.sec--dark {
+      background:
+        linear-gradient(180deg, transparent 0, rgba(5,7,12,.6) 10vh, #05070c 22vh),
+        radial-gradient(56% 50% at 50% 4%, color-mix(in srgb, var(--seam-accent, #c9a86a) 14%, transparent), transparent 64%),
+        #05070c;
+    }
     .sec__head { max-width: 1140px; margin: 0 auto 44px; }
     .sec__head--center { text-align: center; }
     .sec__eyebrow { font-family: var(--sw-font-display); font-weight: 700; font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; color: #e0c48c; }
@@ -991,7 +1044,7 @@
   </section>
 
   <!-- ============ SERVICES ============ -->
-  <section id="services" class="sec sec--alt" aria-label="Services">
+  <section id="services" class="sec sec--alt sec--seamed" aria-label="Services">
     <div class="sec__head sec__head--center">
       <span class="sec__eyebrow">How I help</span>
       <h2 class="sec__title">Full representation, both sides of the deal.</h2>
@@ -1040,7 +1093,7 @@
   </section>
 
   <!-- ============ PROCESS ============ -->
-  <section id="process" class="sec sec--dark" aria-label="How the process works">
+  <section id="process" class="sec sec--dark sec--seamed" aria-label="How the process works">
     <div class="sec__head sec__head--center">
       <span class="sec__eyebrow">What to expect</span>
       <h2 class="sec__title">A clear path to closing.</h2>
@@ -1067,7 +1120,7 @@
   </section>
 
   <!-- ============ FIRST-TIME BUYERS ============ -->
-  <section id="first-time" class="sec sec--alt" aria-label="First-time buyers">
+  <section id="first-time" class="sec sec--alt sec--seamed" aria-label="First-time buyers">
     <div class="sec__head sec__head--center">
       <span class="sec__eyebrow">New to this</span>
       <h2 class="sec__title">Buying your first home in San&nbsp;Antonio.</h2>
@@ -1121,7 +1174,7 @@
   </section>
 
   <!-- ============ PAYMENT CALCULATOR ============ -->
-  <section id="calculator" class="sec sec--dark" aria-label="Monthly payment estimator">
+  <section id="calculator" class="sec sec--dark sec--seamed" aria-label="Monthly payment estimator">
     <div class="sec__head sec__head--center">
       <span class="sec__eyebrow">Run the numbers</span>
       <h2 class="sec__title">Estimate a monthly payment.</h2>
@@ -1180,7 +1233,7 @@
   </section>
 
   <!-- ============ FAQ ============ -->
-  <section id="faq" class="sec sec--alt" aria-label="Frequently asked questions">
+  <section id="faq" class="sec sec--alt sec--seamed" aria-label="Frequently asked questions">
     <div class="sec__head sec__head--center">
       <span class="sec__eyebrow">Good to know</span>
       <h2 class="sec__title">Questions buyers and sellers ask.</h2>
@@ -1206,7 +1259,7 @@
          </div>
        Get permission first, use first name + last initial, and keep the
        "references on request" line underneath — buyers still want to call someone. -->
-  <section id="references" class="sec sec--dark" aria-label="Client references">
+  <section id="references" class="sec sec--dark sec--seamed" aria-label="Client references">
     <div class="sec__head sec__head--center">
       <span class="sec__eyebrow">Working with me</span>
       <h2 class="sec__title">The standard on every deal.</h2>
@@ -1240,7 +1293,7 @@
   </section>
 
   <!-- ============ NEWSLETTER ============ -->
-  <section class="sec sec--alt" aria-label="Market updates">
+  <section class="sec sec--alt sec--seamed" aria-label="Market updates">
     <div class="news">
       <h3>San Antonio market note</h3>
       <p>A short monthly email &mdash; new and coming-soon listings in the top neighborhoods, plus what prices are actually doing. No spam, unsubscribe anytime.</p>
