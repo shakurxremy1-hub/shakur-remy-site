@@ -336,6 +336,21 @@
       border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.04);
     }
 
+    /* ---- ambient sound toggle (opt-in, off by default) ---- */
+    .ambient-toggle {
+      position: fixed; left: clamp(16px, 4vw, 28px); bottom: clamp(16px, 4vh, 28px); z-index: 200;
+      width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center;
+      color: #f2f6fc; border: 1px solid rgba(255,255,255,.22); background: rgba(10,14,22,.72);
+      backdrop-filter: blur(6px); cursor: pointer; transition: border-color .2s ease, color .2s ease;
+    }
+    .ambient-toggle:hover { border-color: rgba(214,175,106,.55); }
+    .ambient-toggle.is-on { color: #d6af6a; border-color: rgba(214,175,106,.55); }
+    .ambient-toggle svg { width: 20px; height: 20px; }
+    .ambient-toggle .icon-off { display: block; }
+    .ambient-toggle .icon-on { display: none; }
+    .ambient-toggle.is-on .icon-off { display: none; }
+    .ambient-toggle.is-on .icon-on { display: block; }
+
     /* ---- contact form ---- */
     .contact__form { margin: 34px auto 0; max-width: 560px; text-align: left; display: grid; gap: 14px; }
     .contact__grid { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
@@ -2940,6 +2955,46 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
         });
         calc();
       })();
+    })();
+  </script>
+
+  <!-- ---- ambient sound: opt-in only, never autoplays ---- -->
+  <audio id="ambientAudio" src="assets/audio/ambient.mp3" loop preload="none"></audio>
+  <button type="button" id="ambientToggle" class="ambient-toggle" aria-pressed="false" aria-label="Play ambient sound">
+    <svg class="icon-off" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M17 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 4l16 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <svg class="icon-on" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M16.5 8a6 6 0 010 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M19 5.5a10 10 0 010 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <script>
+    (function () {
+      var btn = document.getElementById('ambientToggle');
+      var audio = document.getElementById('ambientAudio');
+      if (!btn || !audio) return;
+      audio.volume = 0.35;
+      var KEY = 'ambient-sound-on';
+      function setOn(on) {
+        btn.classList.toggle('is-on', on);
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        btn.setAttribute('aria-label', on ? 'Mute ambient sound' : 'Play ambient sound');
+        if (on) { audio.play().catch(function () {}); } else { audio.pause(); }
+      }
+      btn.addEventListener('click', function () {
+        var next = !btn.classList.contains('is-on');
+        try { localStorage.setItem(KEY, next ? '1' : '0'); } catch (e) {}
+        setOn(next);
+      });
+      // Only ever resumes if THIS visitor previously opted in — never autoplays cold.
+      // Browsers still block play() outside a user gesture even here, so also
+      // retry once on the visitor's first interaction with the page.
+      var wantsOn = false;
+      try { wantsOn = localStorage.getItem(KEY) === '1'; } catch (e) {}
+      if (wantsOn) {
+        setOn(true);
+        var retry = function () {
+          if (audio.paused && btn.classList.contains('is-on')) audio.play().catch(function () {});
+          ['pointerdown', 'keydown', 'scroll'].forEach(function (ev) { window.removeEventListener(ev, retry); });
+        };
+        ['pointerdown', 'keydown', 'scroll'].forEach(function (ev) { window.addEventListener(ev, retry, { once: true, passive: true }); });
+      }
     })();
   </script>
 

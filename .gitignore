@@ -4,3 +4,5 @@
 src/*.mp4
 src/portrait/*.mp4
 node_modules/
+scripts/logo/.venv/
+assets/audio/ambient.wav
