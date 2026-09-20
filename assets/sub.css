@@ -1,7 +1,7 @@
 /* shared styling for area + guide sub-pages */
 :root {
   --ink: #f2f6fc; --ink-soft: #aab6c8; --bg: #05070c; --panel: #0b1220;
-  --accent: #d9b26a; --line: rgba(255,255,255,.10);
+  --accent: #c9a86a; --line: rgba(255,255,255,.10);
   --serif: "Playfair Display", Georgia, "Times New Roman", serif;
   --sans: "Inter", system-ui, -apple-system, sans-serif;
 }
