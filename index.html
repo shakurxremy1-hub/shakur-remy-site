@@ -258,14 +258,14 @@
       #listings .model__media { aspect-ratio: 21 / 9; }
     }
 
-    /* ---- TIERS: neighborhood cards carry a tinted still from the hero flight sequence,
-       so the "what's on the market" grid reads as a continuation of the flight rather than
-       a flat card list. Accents reuse the flight's own per-scene champagne easing. ---- */
+    /* ---- TIERS: neighborhood cards carry a real photo of that specific area
+       (not a shared still from the hero flight sequence — each area gets its
+       own actual home). Accents reuse the flight's own per-scene champagne
+       easing. Grading is pre-baked into these images, not applied here. ---- */
     #tiers .tier { position: relative; overflow: hidden; min-height: 320px; border-top: 3px solid var(--tint, #c9a86a); }
     #tiers .tier::before {
       content: ""; position: absolute; inset: 0; z-index: 0;
       background-size: cover; background-position: center;
-      filter: saturate(.82) brightness(.92);
     }
     #tiers .tier::after {
       content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
@@ -273,17 +273,17 @@
     }
     #tiers .tier > * { position: relative; z-index: 2; }
     #tiers .tier:nth-child(1) { --tint: #b7a06a; }
-    #tiers .tier:nth-child(1)::before { background-image: url('assets/frames/f0001.webp'); }
+    #tiers .tier:nth-child(1)::before { background-image: url('assets/img/areas/converse.webp'); }
     #tiers .tier:nth-child(2) { --tint: #c2a870; }
-    #tiers .tier:nth-child(2)::before { background-image: url('assets/frames/f0065.webp'); }
+    #tiers .tier:nth-child(2)::before { background-image: url('assets/img/areas/schertz.webp'); }
     #tiers .tier:nth-child(3) { --tint: #c9a86a; }
-    #tiers .tier:nth-child(3)::before { background-image: url('assets/frames/f0129.webp'); }
+    #tiers .tier:nth-child(3)::before { background-image: url('assets/img/areas/alamo-ranch.webp'); }
     #tiers .tier:nth-child(4) { --tint: #d3b779; }
-    #tiers .tier:nth-child(4)::before { background-image: url('assets/frames/f0193.webp'); }
+    #tiers .tier:nth-child(4)::before { background-image: url('assets/img/areas/stone-oak.webp'); }
     #tiers .tier:nth-child(5) { --tint: #ddc186; }
-    #tiers .tier:nth-child(5)::before { background-image: url('assets/frames/f0257.webp'); }
+    #tiers .tier:nth-child(5)::before { background-image: url('assets/img/areas/alamo-heights.webp'); }
     #tiers .tier:nth-child(6) { --tint: #e6c98a; }
-    #tiers .tier:nth-child(6)::before { background-image: url('assets/frames/f0321.webp'); }
+    #tiers .tier:nth-child(6)::before { background-image: url('assets/img/areas/the-dominion.webp'); }
 
     /* scroll-reveal — transform+opacity only (GPU), no layout work */
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s cubic-bezier(.22,1,.36,1); }
