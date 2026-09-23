@@ -273,6 +273,45 @@
       #listings .model__media { aspect-ratio: 21 / 9; }
     }
 
+    /* ---- VIDEO TOURS ---- */
+    .vtour__grid { max-width: 1080px; }
+    .vtour { padding: 0; overflow: hidden; }
+    .vtour__media {
+      position: relative; aspect-ratio: 16 / 10; overflow: hidden; cursor: pointer;
+      background: linear-gradient(150deg, #10192b 0%, #0a111e 55%, #060b16 100%);
+    }
+    .vtour__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .vtour__media video { width: 100%; height: 100%; object-fit: cover; display: block; background: #05070c; }
+    .vtour__play {
+      position: absolute; inset: 0; margin: auto; width: 58px; height: 58px; border: 0;
+      border-radius: 50%; background: rgba(5,7,12,.55); color: #f2f6fc;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      backdrop-filter: blur(2px); transition: transform .2s ease, background .2s ease;
+    }
+    .vtour__play svg { width: 24px; height: 24px; margin-left: 3px; }
+    .vtour__media:hover .vtour__play { transform: scale(1.08); background: rgba(201,168,106,.85); color: #05070c; }
+    .vtour__badge {
+      position: absolute; left: 14px; top: 13px; z-index: 2;
+      font-family: var(--sw-font-display); font-weight: 700; font-size: 9.5px;
+      letter-spacing: .14em; text-transform: uppercase; color: #05070c;
+      background: #e0c48c; padding: 4px 9px; border-radius: 3px;
+    }
+    .vtour__body { padding: 17px 19px 19px; display: flex; flex-direction: column; gap: 10px; }
+    .vtour__body h3 { font-family: var(--sw-font-display); font-weight: 700; font-size: 1.1rem; margin: 0; }
+    .vtour__alt {
+      align-self: flex-start; background: none; border: 0; padding: 0; margin-top: -6px;
+      font-size: 11px; color: #c9a86a; cursor: pointer; text-decoration: underline;
+      text-underline-offset: 2px; font-family: var(--sw-font-body);
+    }
+    .vtour__schedule { margin-top: 2px; }
+    .vtour__share { display: flex; gap: 14px; align-items: center; }
+    .vtour__share a, .vtour__share button {
+      background: none; border: 0; padding: 0; margin: 0; cursor: pointer;
+      font-family: var(--sw-font-body); font-size: 11px; color: #8898ac;
+      text-decoration: none; border-bottom: 1px solid rgba(136,152,172,.35);
+    }
+    .vtour__share a:hover, .vtour__share button:hover { color: #c9a86a; border-color: #c9a86a; }
+
     /* ---- TIERS: neighborhood cards carry a real photo of that specific area
        (not a shared still from the hero flight sequence — each area gets its
        own actual home). Accents reuse the flight's own per-scene champagne
@@ -845,6 +884,7 @@
       <a href="#founder">About</a>
       <a href="#tiers">Areas</a>
       <a href="#listings">Listings</a>
+      <a href="#video-tours">Tours</a>
       <a href="#services">Services</a>
       <a href="#first-time">First-time</a>
       <a href="#faq">FAQ</a>
@@ -1072,6 +1112,102 @@
     <p class="tiers__note reveal" style="text-align:center;">
       Not sure which community fits? <a href="#contact-form" data-intent="Buying" data-note="I'm interested in new construction, help me pick a community.">Tell me your budget and commute</a> and I'll hand you back two or three that actually make sense.
     </p>
+  </section>
+
+  <!-- ============ VIDEO TOURS ============ -->
+  <section id="video-tours" class="tiers sec--seamed" aria-label="Video tours">
+    <div class="tiers__head reveal">
+      <span class="tiers__eyebrow">Walk it before you visit</span>
+      <h2 class="tiers__title">Video tours of homes I&rsquo;m showing.</h2>
+      <p class="tiers__intro" style="max-width:58ch;margin:14px 0 0;font-size:1rem;line-height:1.6;color:#8898ac;">
+        A real walkthrough beats a photo gallery. Watch any of these, then text me and I&rsquo;ll set the in-person tour.
+      </p>
+    </div>
+    <div class="tiers__grid vtour__grid">
+
+      <div class="tier vtour reveal">
+        <div class="vtour__media" data-video="assets/video/saddleback-run-1634.mp4" data-poster="assets/img/video-tours/saddleback-run-1634.webp">
+          <img src="assets/img/video-tours/saddleback-run-1634.webp" alt="Video tour of 1634 Saddleback Run" loading="lazy" decoding="async" />
+          <button type="button" class="vtour__play" aria-label="Play video tour of 1634 Saddleback Run"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+        </div>
+        <div class="vtour__body">
+          <h3>1634 Saddleback Run</h3>
+          <button type="button" class="vtour__alt" data-video="assets/video/saddleback-run-1634-alt.mp4" data-poster="assets/img/video-tours/saddleback-run-1634-alt.webp">Watch the alternate cut</button>
+          <a class="tier__btn vtour__schedule" href="sms:+12108711562?&amp;body=Shakur%20Remy%20-%20I%27d%20like%20to%20schedule%20a%20tour%20of%201634%20Saddleback%20Run.">Schedule a tour</a>
+          <div class="vtour__share">
+            <a href="mailto:?subject=1634%20Saddleback%20Run%3A%20video%20tour&amp;body=Take%20a%20look%3A%20https%3A%2F%2Flistedbyremy.com%2Fassets%2Fvideo%2Fsaddleback-run-1634.mp4" aria-label="Share by email">Email</a>
+            <a href="sms:?&amp;body=1634%20Saddleback%20Run%20video%20tour%3A%20https%3A%2F%2Flistedbyremy.com%2Fassets%2Fvideo%2Fsaddleback-run-1634.mp4" aria-label="Share by text">Text</a>
+            <button type="button" class="vtour__copy" data-link="https://listedbyremy.com/assets/video/saddleback-run-1634.mp4">Copy link</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier vtour reveal">
+        <div class="vtour__media" data-video="assets/video/hayes-horizon-7045.mp4" data-poster="assets/img/video-tours/hayes-horizon-7045.webp">
+          <img src="assets/img/video-tours/hayes-horizon-7045.webp" alt="Video tour of 7045 Hayes Horizon" loading="lazy" decoding="async" />
+          <button type="button" class="vtour__play" aria-label="Play video tour of 7045 Hayes Horizon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+        </div>
+        <div class="vtour__body">
+          <h3>7045 Hayes Horizon</h3>
+          <a class="tier__btn vtour__schedule" href="sms:+12108711562?&amp;body=Shakur%20Remy%20-%20I%27d%20like%20to%20schedule%20a%20tour%20of%207045%20Hayes%20Horizon.">Schedule a tour</a>
+          <div class="vtour__share">
+            <a href="mailto:?subject=7045%20Hayes%20Horizon%3A%20video%20tour&amp;body=Take%20a%20look%3A%20https%3A%2F%2Flistedbyremy.com%2Fassets%2Fvideo%2Fhayes-horizon-7045.mp4" aria-label="Share by email">Email</a>
+            <a href="sms:?&amp;body=7045%20Hayes%20Horizon%20video%20tour%3A%20https%3A%2F%2Flistedbyremy.com%2Fassets%2Fvideo%2Fhayes-horizon-7045.mp4" aria-label="Share by text">Text</a>
+            <button type="button" class="vtour__copy" data-link="https://listedbyremy.com/assets/video/hayes-horizon-7045.mp4">Copy link</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier vtour reveal">
+        <div class="vtour__media" data-video="assets/video/hayes-horizon-7059.mp4" data-poster="assets/img/video-tours/hayes-horizon-7059.webp">
+          <img src="assets/img/video-tours/hayes-horizon-7059.webp" alt="Video tour of 7059 Hayes Horizon" loading="lazy" decoding="async" />
+          <button type="button" class="vtour__play" aria-label="Play video tour of 7059 Hayes Horizon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+        </div>
+        <div class="vtour__body">
+          <h3>7059 Hayes Horizon</h3>
+          <a class="tier__btn vtour__schedule" href="sms:+12108711562?&amp;body=Shakur%20Remy%20-%20I%27d%20like%20to%20schedule%20a%20tour%20of%207059%20Hayes%20Horizon.">Schedule a tour</a>
+          <div class="vtour__share">
+            <a href="mailto:?subject=7059%20Hayes%20Horizon%3A%20video%20tour&amp;body=Take%20a%20look%3A%20https%3A%2F%2Flistedbyremy.com%2Fassets%2Fvideo%2Fhayes-horizon-7059.mp4" aria-label="Share by email">Email</a>
+            <a href="sms:?&amp;body=7059%20Hayes%20Horizon%20video%20tour%3A%20https%3A%2F%2Flistedbyremy.com%2Fassets%2Fvideo%2Fhayes-horizon-7059.mp4" aria-label="Share by text">Text</a>
+            <button type="button" class="vtour__copy" data-link="https://listedbyremy.com/assets/video/hayes-horizon-7059.mp4">Copy link</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier vtour reveal">
+        <div class="vtour__media" data-video="assets/video/walkers-loop-7309.mp4" data-poster="assets/img/video-tours/walkers-loop-7309.webp">
+          <img src="assets/img/video-tours/walkers-loop-7309.webp" alt="Video tour of 7309 Walkers Loop" loading="lazy" decoding="async" />
+          <button type="button" class="vtour__play" aria-label="Play video tour of 7309 Walkers Loop"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+        </div>
+        <div class="vtour__body">
+          <h3>7309 Walkers Loop</h3>
+          <a class="tier__btn vtour__schedule" href="sms:+12108711562?&amp;body=Shakur%20Remy%20-%20I%27d%20like%20to%20schedule%20a%20tour%20of%207309%20Walkers%20Loop.">Schedule a tour</a>
+          <div class="vtour__share">
+            <a href="mailto:?subject=7309%20Walkers%20Loop%3A%20video%20tour&amp;body=Take%20a%20look%3A%20https%3A%2F%2Flistedbyremy.com%2Fassets%2Fvideo%2Fwalkers-loop-7309.mp4" aria-label="Share by email">Email</a>
+            <a href="sms:?&amp;body=7309%20Walkers%20Loop%20video%20tour%3A%20https%3A%2F%2Flistedbyremy.com%2Fassets%2Fvideo%2Fwalkers-loop-7309.mp4" aria-label="Share by text">Text</a>
+            <button type="button" class="vtour__copy" data-link="https://listedbyremy.com/assets/video/walkers-loop-7309.mp4">Copy link</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier vtour reveal">
+        <div class="vtour__media" data-video="assets/video/carlyle-springs-1112.mp4" data-poster="assets/img/video-tours/carlyle-springs-1112.webp">
+          <img src="assets/img/video-tours/carlyle-springs-1112.webp" alt="Video tour of 1112 Carlyle Springs" loading="lazy" decoding="async" />
+          <button type="button" class="vtour__play" aria-label="Play video tour of 1112 Carlyle Springs"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+          <span class="vtour__badge">Full walkthrough</span>
+        </div>
+        <div class="vtour__body">
+          <h3>1112 Carlyle Springs</h3>
+          <a class="tier__btn vtour__schedule" href="sms:+12108711562?&amp;body=Shakur%20Remy%20-%20I%27d%20like%20to%20schedule%20a%20tour%20of%201112%20Carlyle%20Springs.">Schedule a tour</a>
+          <div class="vtour__share">
+            <a href="mailto:?subject=1112%20Carlyle%20Springs%3A%20video%20tour&amp;body=Take%20a%20look%3A%20https%3A%2F%2Flistedbyremy.com%2Fassets%2Fvideo%2Fcarlyle-springs-1112.mp4" aria-label="Share by email">Email</a>
+            <a href="sms:?&amp;body=1112%20Carlyle%20Springs%20video%20tour%3A%20https%3A%2F%2Flistedbyremy.com%2Fassets%2Fvideo%2Fcarlyle-springs-1112.mp4" aria-label="Share by text">Text</a>
+            <button type="button" class="vtour__copy" data-link="https://listedbyremy.com/assets/video/carlyle-springs-1112.mp4">Copy link</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </section>
 
   <!-- ============ SERVICES ============ -->
@@ -2391,6 +2527,48 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
         };
         ['pointerdown', 'keydown', 'scroll'].forEach(function (ev) { window.addEventListener(ev, retry, { once: true, passive: true }); });
       }
+    })();
+  </script>
+
+  <script>
+    (function () {
+      function playInto(media, src, poster) {
+        var video = document.createElement('video');
+        video.src = src; video.poster = poster;
+        video.controls = true; video.playsInline = true; video.autoplay = true;
+        media.innerHTML = '';
+        media.appendChild(video);
+        video.play().catch(function () {});
+      }
+      document.querySelectorAll('.vtour__media').forEach(function (media) {
+        media.addEventListener('click', function () {
+          playInto(media, media.getAttribute('data-video'), media.getAttribute('data-poster'));
+        });
+      });
+      document.querySelectorAll('.vtour__alt').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var card = btn.closest('.vtour');
+          var media = card && card.querySelector('.vtour__media');
+          if (!media) return;
+          playInto(media, btn.getAttribute('data-video'), btn.getAttribute('data-poster'));
+          media.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+      });
+      document.querySelectorAll('.vtour__copy').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var link = btn.getAttribute('data-link');
+          var done = function () {
+            var was = btn.textContent;
+            btn.textContent = 'Copied';
+            setTimeout(function () { btn.textContent = was; }, 1800);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(link).then(done).catch(function () { prompt('Copy this link:', link); });
+          } else {
+            prompt('Copy this link:', link);
+          }
+        });
+      });
     })();
   </script>
 
