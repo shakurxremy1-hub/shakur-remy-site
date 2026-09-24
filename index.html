@@ -20,8 +20,8 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' 'unsafe-inline' https://unpkg.com https://www.googletagmanager.com https://assets.calendly.com;
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com;
+    script-src 'self' 'unsafe-inline' https://unpkg.com https://www.googletagmanager.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     font-src 'self' https://fonts.gstatic.com;
     img-src 'self' data: https:;
     connect-src 'self' https: wss:;
@@ -858,8 +858,8 @@
           #contact  - eyebrow + <h2> + lead + 3 buttons + fine print
 
        4. BOOKING LINK
-          One place: the Calendly IIFE just after the CONTACT section.
-          Set CAL = your scheduling URL. Every <a data-calendly> inherits it.
+          One place: the CAL block just after the CONTACT section.
+          Set CAL = your scheduling contact. Every <a data-book-call> inherits it.
 
        5. FLIGHT CONFIG
           The mountScrollWorld({...}) call at the very bottom of the file:
@@ -944,7 +944,7 @@
        Grid auto-fits 1 / 2 / 4 columns. The recommended plan gets
        class="tier tier--feature" AND <span class="tier__badge">Recommended</span>
        as its first child. Buttons: class="tier__btn" (filled) or
-       "tier__btn tier__btn--ghost" (outline). data-calendly for a booking link. -->
+       "tier__btn tier__btn--ghost" (outline). data-book-call for a booking link. -->
   <section id="tiers" class="tiers" aria-label="Featured San Antonio neighborhoods">
     <div class="tiers__head">
       <span class="tiers__eyebrow">What's on the market</span>
@@ -2301,9 +2301,10 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
       /* ========================================================================
          ✏️  TWO LINKS — everything else is already wired.
 
-         CAL     — scheduling link (Calendly or Cal.com). When set, every
-                   "Book a call" button opens it: as an on-page popup if the
-                   Calendly widget loads, otherwise a new tab. Blank = the
+         CAL     — scheduling contact, an sms: deep link to Shakur's own number.
+                   Every "Book a call" button texts this number directly (with
+                   a pre-filled message built from the button's own data-note),
+                   no third-party scheduler or widget to go down. Blank = the
                    buttons scroll to the contact form instead.
 
          REVIEW  — Google Business Profile "write a review" link
@@ -2311,48 +2312,15 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
                    "Leave a Google review" line appears in the References
                    section. Blank = that line stays hidden.
          ======================================================================== */
-      var CAL = 'https://calendly.com/shakur-opmventuresllc/30min';
+      var CAL = 'sms:+12108711562';
       var REVIEW = '';
 
       if (CAL) {
-        var isCalendly = /calendly\.com/.test(CAL);
-        var calReady = false, calLoading = false;
-
-        function loadCalendly() {
-          if (calLoading || calReady || !isCalendly) return;
-          calLoading = true;
-          var css = document.createElement('link');
-          css.rel = 'stylesheet';
-          css.href = 'https://assets.calendly.com/assets/external/widget.css';
-          document.head.appendChild(css);
-          var js = document.createElement('script');
-          js.src = 'https://assets.calendly.com/assets/external/widget.js';
-          js.async = true;
-          js.onload = function () { calReady = true; };
-          document.head.appendChild(js);
-        }
-        // warm it up when the browser is idle, and on first hover/focus of a button
-        if ('requestIdleCallback' in window) requestIdleCallback(loadCalendly, { timeout: 4000 });
-        else setTimeout(loadCalendly, 2500);
-
         document.querySelectorAll('[data-book-call]').forEach(function (el) {
-          el.setAttribute('href', CAL);
-          el.setAttribute('rel', 'noopener');
+          var note = el.getAttribute('data-note') || "I'd like to book a call.";
+          el.setAttribute('href', CAL + '?&body=' + encodeURIComponent('Shakur Remy - ' + note));
           el.removeAttribute('data-intent');   // don't also drive the form
           el.removeAttribute('data-note');
-          el.addEventListener('mouseenter', loadCalendly, { once: true });
-          el.addEventListener('focus', loadCalendly, { once: true });
-          el.addEventListener('click', function (e) {
-            loadCalendly();
-            if (isCalendly && window.Calendly && window.Calendly.initPopupWidget) {
-              e.preventDefault();
-              window.Calendly.initPopupWidget({ url: CAL });
-            } else {
-              // widget not ready (or non-Calendly link): open in a new tab
-              e.preventDefault();
-              window.open(CAL, '_blank', 'noopener');
-            }
-          });
         });
       }
       if (REVIEW) {
