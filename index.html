@@ -2561,7 +2561,16 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
   </script>
 
   <script src="https://unpkg.com/@tavus/widget@latest"></script>
-  <tavus-widget deployment-id="8841cb38-7eec-4d0f-9d8f-9d9be9822b59"></tavus-widget>
+  <!-- camera-on-start="off": this PAL is configured for voice+video, so the
+       widget auto-requests the VISITOR's camera by default (cameraOnStart
+       defaults to "on" per the widget's own source). That camera negotiation
+       is what was hanging on "Getting your microphone ready" with no popup
+       ever shown — confirmed the same PAL works fine via Tavus's own
+       dashboard test call, and that zero network requests fire from the
+       embedded widget, isolating the bug to the widget's camera-acquisition
+       path. Turning this off means only mic access is requested; Remy's own
+       video still plays normally, that's Tavus's output, not the visitor's. -->
+  <tavus-widget deployment-id="8841cb38-7eec-4d0f-9d8f-9d9be9822b59" camera-on-start="off"></tavus-widget>
 
   <!-- Fallback for when the Tavus chat widget hangs (e.g. stuck on "Getting
        your microphone ready" with no permission prompt ever shown — reported
