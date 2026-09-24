@@ -30,7 +30,7 @@
     worker-src 'self' blob:;
     object-src 'none';
     base-uri 'self';
-    form-action 'self' https://formsubmit.co;
+    form-action 'self' https://api.web3forms.com;
   " />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png" />
@@ -1465,15 +1465,14 @@
       <h3>San Antonio market note</h3>
       <p>A short monthly email with new and coming-soon listings in the top neighborhoods, plus what prices are actually doing while everyone else is still guessing. No spam, unsubscribe anytime.</p>
       <form class="news__form" method="POST"
-            action="https://formsubmit.co/sremy@reliverealty.com"
-            data-endpoint="https://formsubmit.co/ajax/sremy@reliverealty.com"
+            action="https://api.web3forms.com/submit"
+            data-endpoint="https://api.web3forms.com/submit"
             data-welcome="">
+        <input type="hidden" name="access_key" value="4f908217-b505-4472-b25e-c87da7a62a10" />
         <input type="hidden" name="form" value="newsletter" />
-        <input type="hidden" name="_subject" value="Market-note signup from listedbyremy.com" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_autoresponse" value="You're on the list for the monthly San Antonio market note. No spam, reply 'stop' any time to unsubscribe. Shakur Remy, REALTOR®" />
+        <input type="hidden" name="subject" value="Market-note signup from listedbyremy.com" />
         <input type="text" name="_honey" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <input type="checkbox" name="botcheck" class="cf-hp" tabindex="-1" aria-hidden="true" style="display:none;" />
         <input type="hidden" name="list" value="Monthly market note" />
         <label class="cf-hp" for="news-email">Email</label>
         <input id="news-email" type="email" name="email" required placeholder="you@email.com" autocomplete="email" />
@@ -1501,16 +1500,15 @@
            personalised welcome email with the IABS + Consumer Notice attached.
            See /automation/README.md. Leave blank to disable. -->
       <form id="contact-form" class="contact__form" method="POST"
-            action="https://formsubmit.co/sremy@reliverealty.com"
-            data-endpoint="https://formsubmit.co/ajax/sremy@reliverealty.com"
+            action="https://api.web3forms.com/submit"
+            data-endpoint="https://api.web3forms.com/submit"
             data-welcome="">
+        <input type="hidden" name="access_key" value="4f908217-b505-4472-b25e-c87da7a62a10" />
         <input type="hidden" name="form" value="contact" />
-        <input type="hidden" name="_subject" value="New enquiry from listedbyremy.com" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://listedbyremy.com/#contact" />
-        <input type="hidden" name="_autoresponse" value="Thanks for reaching out. I've received your message and will follow up personally the same day. You can reach me any time at (210) 871-1562. Texas requires that I share these two disclosures with you: Information About Brokerage Services, https://agent.reliverealty.com/TREC_ReliveRE.pdf, and the TREC Consumer Protection Notice, https://agent.reliverealty.com/TCPN_ReliveRE.pdf. Shakur Remy, REALTOR®, Relive Real Estate Inc., TREC License #844622" />
+        <input type="hidden" name="subject" value="New enquiry from listedbyremy.com" />
+        <input type="hidden" name="redirect" value="https://listedbyremy.com/#contact" />
         <input type="text" name="_honey" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <input type="checkbox" name="botcheck" class="cf-hp" tabindex="-1" aria-hidden="true" style="display:none;" />
         <div class="contact__grid">
           <div class="cf-field">
             <label for="cf-name">Name</label>
@@ -2406,7 +2404,7 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
         });
       });
 
-      // generic AJAX submit for FormSubmit-backed forms
+      // generic AJAX submit for Web3Forms-backed forms
       function wire(form, statusSel, sending, done) {
         if (!form) return;
         var status = form.querySelector(statusSel);
@@ -2416,6 +2414,7 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
         form.addEventListener('submit', function (e) {
           e.preventDefault();
           if (form._honey && form._honey.value) return;
+          if (form.botcheck && form.botcheck.checked) return;
           if (status) { status.className = statusSel.slice(1); status.textContent = ''; }
           var label = btn ? btn.textContent : '';
           if (btn) { btn.disabled = true; btn.textContent = sending; }

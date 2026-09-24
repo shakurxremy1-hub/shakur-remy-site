@@ -2,10 +2,16 @@
 
 ## Current state (parked)
 
-**Live now:** FormSubmit's built-in `_autoresponse` on both forms. Every inquiry
-gets an instant plain-text reply with **links** (not attachments) to the IABS
-and Consumer Protection Notice. The lead notification to `sremy@reliverealty.com`
-works. This is the interim.
+**Live now:** the forms submit to Web3Forms (`access_key` hidden field in
+`index.html`), which delivers the lead notification to `sremy@reliverealty.com`
+reliably. FormSubmit was dropped: its mail to `sremy@reliverealty.com` was
+being silently swallowed (no bounce, no inbox delivery, no way to fix from
+our side), so no leads were arriving at all. There is currently **no
+auto-reply to the lead**. Web3Forms' free tier has no autoresponder
+(it's a paid feature), so the IABS/Consumer Protection Notice links that
+FormSubmit used to send instantly are not sent automatically right now.
+Shakur still replies personally the same day per the site's own copy, and
+can share those two links manually until this is wired back up.
 
 **Not done:** the personalised welcome (by first name + request type) with the
 two PDFs **attached**, sent from `sremy@reliverealty.com`.
@@ -47,7 +53,7 @@ Two blockers, both about not controlling the `reliverealty.com` domain:
 Both `<form id="contact-form">` and `<form class="news__form">` carry:
 - `data-welcome=""` — paste the Apps Script `/exec` URL here to activate.
 - hidden `form` field (`contact` / `newsletter`) so the script branches.
-- `_autoresponse` — the interim FormSubmit reply.
+- `access_key`, the Web3Forms access key tied to `sremy@reliverealty.com`.
 
 The submit handler fires a no-cors POST to `data-welcome` (if set) alongside the
-FormSubmit POST.
+Web3Forms POST.
