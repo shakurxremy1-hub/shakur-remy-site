@@ -1467,7 +1467,8 @@
       <form class="news__form" method="POST"
             action="https://api.web3forms.com/submit"
             data-endpoint="https://api.web3forms.com/submit"
-            data-welcome="">
+            data-welcome=""
+            data-notify="https://listedbyremy-lead-notify-1136.twil.io/notify-lead?secret=Xt8vwl5hURFMAY1alI82REPwTWqMbJeH">
         <input type="hidden" name="access_key" value="4f908217-b505-4472-b25e-c87da7a62a10" />
         <input type="hidden" name="form" value="newsletter" />
         <input type="hidden" name="subject" value="Market-note signup from listedbyremy.com" />
@@ -1502,7 +1503,8 @@
       <form id="contact-form" class="contact__form" method="POST"
             action="https://api.web3forms.com/submit"
             data-endpoint="https://api.web3forms.com/submit"
-            data-welcome="">
+            data-welcome=""
+            data-notify="https://listedbyremy-lead-notify-1136.twil.io/notify-lead?secret=Xt8vwl5hURFMAY1alI82REPwTWqMbJeH">
         <input type="hidden" name="access_key" value="4f908217-b505-4472-b25e-c87da7a62a10" />
         <input type="hidden" name="form" value="contact" />
         <input type="hidden" name="subject" value="New enquiry from listedbyremy.com" />
@@ -2421,6 +2423,17 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
           // fire-and-forget: personalised welcome email via Google Apps Script (if configured)
           var welcome = form.getAttribute('data-welcome');
           if (welcome) { try { fetch(welcome, { method: 'POST', mode: 'no-cors', body: new FormData(form) }); } catch (err) {} }
+          // fire-and-forget: WhatsApp lead notification via Twilio Function (if configured)
+          // Twilio Functions' body parser rejects multipart/form-data, so this is sent
+          // urlencoded instead of as raw FormData.
+          var notify = form.getAttribute('data-notify');
+          if (notify) {
+            try {
+              var notifyBody = new URLSearchParams();
+              new FormData(form).forEach(function (v, k) { notifyBody.append(k, v); });
+              fetch(notify, { method: 'POST', mode: 'no-cors', body: notifyBody });
+            } catch (err) {}
+          }
           fetch(endpoint, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) })
             .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); })
             .then(function (res) {
