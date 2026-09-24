@@ -2562,5 +2562,50 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
           integrity="sha384-xkzIo1RZjsGTHuZ+jsRmpswL01B3Sck0bCX/I3SswqUZEv9RhZi0W0i3yo8qjkwN"
           crossorigin="anonymous"></script>
   <tavus-widget deployment-id="d94c7e46-e670-4b91-89aa-804fd7eb9e35"></tavus-widget>
+
+  <!-- Fallback for when the Tavus chat widget hangs (e.g. stuck on "Getting
+       your microphone ready" if the browser's mic-permission prompt never
+       resolves, or the call never connects). The widget dispatches
+       bubbling+composed CustomEvents we can listen for without touching its
+       internals: tavus:error, tavus:conversation-created, tavus:state-change.
+       If a conversation is created but never reaches "connected" within 15s,
+       or the widget reports an error, show a way out instead of leaving the
+       visitor stuck on a dead spinner. -->
+  <div id="tavus-fallback" role="status" hidden
+       style="position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:60;
+              max-width:min(90vw,320px);background:#12161f;color:#fff;
+              border:1px solid rgba(255,255,255,.15);border-radius:12px;
+              padding:12px 36px 12px 16px;font:14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+              box-shadow:0 8px 24px rgba(0,0,0,.35);">
+    Chat's taking longer than it should. Call or text
+    <a href="tel:+12108711562" style="color:#9fb0c6;">(210) 871-1562</a> instead.
+    <button type="button" aria-label="Dismiss" onclick="this.parentElement.hidden=true;"
+            style="position:absolute;top:6px;right:8px;background:none;border:none;color:#9fb0c6;font-size:16px;line-height:1;cursor:pointer;padding:4px;">&times;</button>
+  </div>
+  <script>
+    (function () {
+      var widget = document.querySelector('tavus-widget');
+      var fallback = document.getElementById('tavus-fallback');
+      if (!widget || !fallback) return;
+      var watchdog = null;
+      function clearWatchdog() {
+        if (watchdog) { clearTimeout(watchdog); watchdog = null; }
+      }
+      widget.addEventListener('tavus:error', function () {
+        clearWatchdog();
+        fallback.hidden = false;
+      });
+      widget.addEventListener('tavus:conversation-created', function () {
+        clearWatchdog();
+        watchdog = setTimeout(function () { fallback.hidden = false; }, 15000);
+      });
+      widget.addEventListener('tavus:state-change', function (e) {
+        if (e.detail && e.detail.state === 'connected') {
+          clearWatchdog();
+          fallback.hidden = true;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
