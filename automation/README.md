@@ -12,10 +12,15 @@ fire-and-forget requests on submit, plus the primary Web3Forms POST:
    (`https://listedbyremy-lead-notify-1136.twil.io/send-welcome`) that calls
    Resend to send the lead a branded welcome email with both required PDFs
    attached (IABS - Information About Brokerage Services, and the TREC
-   Consumer Protection Notice). Resend fetches the PDFs itself from
-   `https://agent.reliverealty.com/TREC_ReliveRE.pdf` and
-   `.../TCPN_ReliveRE.pdf` (attachments-by-URL), so the function never has to
-   store or stream the files.
+   Consumer Protection Notice). Resend fetches the PDFs itself
+   (attachments-by-URL), so the function never has to store or stream the
+   files:
+   - IABS: `https://listedbyremy-lead-notify-1136.twil.io/IABS_Relive_Realty.pdf`
+     — a public Twilio Asset in this same Serverless Service, uploaded from
+     `real-estate/07 Disclosures/IABS_Relive_Realty.pdf`. Re-upload a new
+     version the same way (Assets -> `IABS_Relive_Realty` -> new Version at
+     path `/IABS_Relive_Realty.pdf`) if the form ever needs to change.
+   - TCPN: `https://agent.reliverealty.com/TCPN_ReliveRE.pdf` (unchanged).
 3. **`data-notify`** — a second Twilio Function
    (`.../notify-lead`) that sends Shakur a WhatsApp message (via Twilio's
    WhatsApp Sandbox) with the lead's details.
