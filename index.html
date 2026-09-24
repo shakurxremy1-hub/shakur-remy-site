@@ -2566,21 +2566,28 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
   <tavus-widget deployment-id="d94c7e46-e670-4b91-89aa-804fd7eb9e35"></tavus-widget>
 
   <!-- Fallback for when the Tavus chat widget hangs (e.g. stuck on "Getting
-       your microphone ready" if the browser's mic-permission prompt never
-       resolves, or the call never connects). The widget dispatches
-       bubbling+composed CustomEvents we can listen for without touching its
-       internals: tavus:error, tavus:conversation-created, tavus:state-change.
-       If a conversation is created but never reaches "connected" within 15s,
-       or the widget reports an error, show a way out instead of leaving the
-       visitor stuck on a dead spinner. -->
+       your microphone ready" with no permission prompt ever shown — reported
+       live, reproducible on a real desktop browser, not just this session's
+       sandboxed testing). We poll the widget's own visible text directly
+       (rather than only listening for tavus:conversation-created, which
+       never fires in this failure mode since it stalls before that point)
+       and capture real diagnostics — mic permission state, device count,
+       any tavus:* events seen — the moment it looks stuck, so the next
+       report tells us exactly what's failing instead of guessing again. -->
   <div id="tavus-fallback" role="status" hidden
        style="position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:60;
-              max-width:min(90vw,320px);background:#12161f;color:#fff;
+              max-width:min(90vw,360px);background:#12161f;color:#fff;
               border:1px solid rgba(255,255,255,.15);border-radius:12px;
               padding:12px 36px 12px 16px;font:14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
               box-shadow:0 8px 24px rgba(0,0,0,.35);">
     Chat's taking longer than it should. Call or text
     <a href="tel:+12108711562" style="color:#9fb0c6;">(210) 871-1562</a> instead.
+    <div style="margin-top:8px;">
+      <button type="button" id="tavus-fallback-copy"
+              style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#9fb0c6;
+                     font-size:12px;border-radius:6px;padding:4px 10px;cursor:pointer;">Copy debug info</button>
+      <span id="tavus-fallback-copied" style="font-size:12px;color:#9fb0c6;margin-left:6px;display:none;">Copied</span>
+    </div>
     <button type="button" aria-label="Dismiss" onclick="this.parentElement.hidden=true;"
             style="position:absolute;top:6px;right:8px;background:none;border:none;color:#9fb0c6;font-size:16px;line-height:1;cursor:pointer;padding:4px;">&times;</button>
   </div>
@@ -2589,21 +2596,77 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
       var widget = document.querySelector('tavus-widget');
       var fallback = document.getElementById('tavus-fallback');
       if (!widget || !fallback) return;
-      var watchdog = null;
-      function clearWatchdog() {
-        if (watchdog) { clearTimeout(watchdog); watchdog = null; }
+
+      var seenEvents = [];
+      ['tavus:ready','tavus:error','tavus:conversation-created','tavus:conversation-started','tavus:state-change'].forEach(function (evt) {
+        widget.addEventListener(evt, function (e) {
+          seenEvents.push(evt + (e.detail ? ':' + JSON.stringify(e.detail) : ''));
+        });
+      });
+
+      var stuckSince = null, watchdog = null, shown = false;
+      function clearWatchdog() { if (watchdog) { clearTimeout(watchdog); watchdog = null; } stuckSince = null; }
+
+      async function collectDebugInfo() {
+        var lines = [];
+        lines.push('URL: ' + location.href);
+        lines.push('Time: ' + new Date().toISOString());
+        lines.push('UA: ' + navigator.userAgent);
+        try {
+          var mic = await navigator.permissions.query({ name: 'microphone' });
+          lines.push('Mic permission: ' + mic.state);
+        } catch (e) { lines.push('Mic permission query failed: ' + e); }
+        try {
+          var devices = await navigator.mediaDevices.enumerateDevices();
+          var mics = devices.filter(function (d) { return d.kind === 'audioinput'; });
+          lines.push('Audio input devices found: ' + mics.length);
+        } catch (e) { lines.push('enumerateDevices failed: ' + e); }
+        lines.push('Tavus events seen: ' + (seenEvents.length ? seenEvents.join(' | ') : 'none'));
+        return lines.join('\n');
       }
-      widget.addEventListener('tavus:error', function () {
-        clearWatchdog();
-        fallback.hidden = false;
+
+      function widgetText() {
+        try { return widget.shadowRoot.textContent || ''; } catch (e) { return ''; }
+      }
+
+      // Poll the widget's own visible text — this is what the visitor actually
+      // sees, so it's the one signal guaranteed to reflect reality regardless
+      // of which internal events do or don't fire.
+      setInterval(function () {
+        var stuck = widgetText().indexOf('Getting your microphone ready') !== -1;
+        if (stuck) {
+          if (!stuckSince) stuckSince = Date.now();
+          if (!shown && Date.now() - stuckSince > 15000) {
+            shown = true;
+            collectDebugInfo().then(function (info) {
+              console.warn('[Tavus stuck] ' + info);
+              fallback.hidden = false;
+              fallback.dataset.debug = info;
+            });
+          }
+        } else {
+          stuckSince = null;
+          shown = false;
+          fallback.hidden = true;
+        }
+      }, 1000);
+
+      document.getElementById('tavus-fallback-copy').addEventListener('click', function () {
+        var info = fallback.dataset.debug || 'no debug info captured';
+        var done = function () {
+          var s = document.getElementById('tavus-fallback-copied');
+          s.style.display = 'inline'; setTimeout(function () { s.style.display = 'none'; }, 2000);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(info).then(done).catch(function () { prompt('Copy this:', info); });
+        } else {
+          prompt('Copy this:', info);
+        }
       });
-      widget.addEventListener('tavus:conversation-created', function () {
-        clearWatchdog();
-        watchdog = setTimeout(function () { fallback.hidden = false; }, 15000);
-      });
+
       widget.addEventListener('tavus:state-change', function (e) {
         if (e.detail && e.detail.state === 'connected') {
-          clearWatchdog();
+          clearWatchdog(); shown = false;
           fallback.hidden = true;
         }
       });
