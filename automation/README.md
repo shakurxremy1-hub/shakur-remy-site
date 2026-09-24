@@ -1,59 +1,50 @@
 # Welcome-email automation
 
-## Current state (parked)
+## Current state (live)
 
-**Live now:** the forms submit to Web3Forms (`access_key` hidden field in
-`index.html`), which delivers the lead notification to `sremy@reliverealty.com`
-reliably. FormSubmit was dropped: its mail to `sremy@reliverealty.com` was
-being silently swallowed (no bounce, no inbox delivery, no way to fix from
-our side), so no leads were arriving at all. There is currently **no
-auto-reply to the lead**. Web3Forms' free tier has no autoresponder
-(it's a paid feature), so the IABS/Consumer Protection Notice links that
-FormSubmit used to send instantly are not sent automatically right now.
-Shakur still replies personally the same day per the site's own copy, and
-can share those two links manually until this is wired back up.
+Both forms in `index.html` (`#contact-form`, `.news__form`) fire three
+fire-and-forget requests on submit, plus the primary Web3Forms POST:
 
-**Not done:** the personalised welcome (by first name + request type) with the
-two PDFs **attached**, sent from `sremy@reliverealty.com`.
+1. **Web3Forms** (`data-endpoint`/`action`) — delivers the lead to
+   `sremy@reliverealty.com`. This is the one the on-page status message
+   waits on.
+2. **`data-welcome`** — a Twilio Function
+   (`https://listedbyremy-lead-notify-1136.twil.io/send-welcome`) that calls
+   Resend to send the lead a branded welcome email with both required PDFs
+   attached (IABS - Information About Brokerage Services, and the TREC
+   Consumer Protection Notice). Resend fetches the PDFs itself from
+   `https://agent.reliverealty.com/TREC_ReliveRE.pdf` and
+   `.../TCPN_ReliveRE.pdf` (attachments-by-URL), so the function never has to
+   store or stream the files.
+3. **`data-notify`** — a second Twilio Function
+   (`.../notify-lead`) that sends Shakur a WhatsApp message (via Twilio's
+   WhatsApp Sandbox) with the lead's details.
 
-### Why it's parked
+Both Twilio Functions live in the same Serverless Service
+(`listedbyremy-lead-notify`, SID `ZS96eb4e1eb87e3c2869c22e0b0af452fb`) and
+share the `NOTIFY_SECRET` environment variable, passed as a `?secret=`
+query param so random requests to the public URLs can't trigger sends.
+`send-welcome` additionally uses the `RESEND_API_KEY` environment variable
+(scoped to Resend's Sending-access-only, restricted to the
+`listedbyremy.com` domain — see `config/mail-accounts.json` in remy-os for
+the same key).
 
-Two blockers, both about not controlling the `reliverealty.com` domain:
+Both requests are sent as `application/x-www-form-urlencoded` (via
+`URLSearchParams`, not raw `FormData`) — Twilio Functions' body parser
+rejects `multipart/form-data` with a bare 415.
 
-1. **FormSubmit cannot attach files** to an auto-reply. Plain text only. No
-   setting changes this.
-2. **Apps Script** (`welcome-email.gs` / `gas/Code.js`) was built and deployed
-   under `sremy@reliverealty.com` (script id `15wwOMwmy2pPrCXsrLD0g0U0RHRB8qtH8XrNOD752W3x5NSvnNy29FCOS`,
-   deployment `AKfycbzDslAhyVr7...`), but the `reliverealty.com` Google Workspace
-   admin has web-app deployment locked to domain-only, so the `/exec` URL returns
-   "You need access" to anonymous requests (i.e. the website).
+## Superseded (no longer used)
 
-### To finish it later, pick one
+The original plan sent this from `sremy@reliverealty.com` via a Google Apps
+Script web app, blocked because the Workspace admin for `reliverealty.com`
+has web-app deployment locked to domain-only (`welcome-email.gs` /
+`gas/Code.js` in this directory are dead code now, kept for reference only).
+The current approach sidesteps that entirely by sending from
+`shakur@listedbyremy.com` (a domain Shakur owns and has verified in Resend)
+instead.
 
-- **Workspace admin flips one setting.** admin.google.com -> Apps -> Google
-  Apps Script -> allow web apps for "anyone, anonymous". Then:
-  `cd automation/gas && clasp push --force && clasp create-deployment` and paste
-  the new `/exec` URL into `data-welcome="..."` on both forms in `index.html`.
-  `Code.js` (MailApp version) already sends from `sremy@reliverealty.com`.
-- **Send from an `@listedbyremy.com` address.** Set up email on that domain
-  (Google Workspace / Zoho), use `gas/Code.js` (GmailApp version, currently in
-  the repo) with a "send mail as" alias, or point it at a transactional API
-  (Resend/Postmark) via `UrlFetchApp` from any Google account.
+## To change the welcome-email copy or attachments
 
-## Files
-
-- `welcome-email.gs` — MailApp version (sends as the running account; needs the
-  Workspace admin fix above).
-- `gas/Code.js` — GmailApp version (sends from a verified "send mail as" alias;
-  for the personal-Gmail route). `gas/appsscript.json` has the web-app manifest.
-- `gas/.clasp.json` — points at the deployed script.
-
-## Form wiring (already in index.html)
-
-Both `<form id="contact-form">` and `<form class="news__form">` carry:
-- `data-welcome=""` — paste the Apps Script `/exec` URL here to activate.
-- hidden `form` field (`contact` / `newsletter`) so the script branches.
-- `access_key`, the Web3Forms access key tied to `sremy@reliverealty.com`.
-
-The submit handler fires a no-cors POST to `data-welcome` (if set) alongside the
-Web3Forms POST.
+Edit the Twilio Function directly (Twilio Console -> Functions and Assets ->
+Services -> `listedbyremy-lead-notify` -> `send-welcome`), or redeploy via
+the Serverless REST API. The function body isn't stored in this repo.
