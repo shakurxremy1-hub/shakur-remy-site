@@ -20,7 +20,7 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' 'unsafe-inline' https://unpkg.com https://www.googletagmanager.com;
+    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     font-src 'self' https://fonts.gstatic.com;
     img-src 'self' data: https:;
@@ -2560,123 +2560,115 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
     })();
   </script>
 
-  <script src="https://unpkg.com/@tavus/widget@latest"></script>
-  <!-- camera-on-start="off": this PAL is configured for voice+video, so the
-       widget auto-requests the VISITOR's camera by default (cameraOnStart
-       defaults to "on" per the widget's own source). That camera negotiation
-       is what was hanging on "Getting your microphone ready" with no popup
-       ever shown — confirmed the same PAL works fine via Tavus's own
-       dashboard test call, and that zero network requests fire from the
-       embedded widget, isolating the bug to the widget's camera-acquisition
-       path. Turning this off means only mic access is requested; Remy's own
-       video still plays normally, that's Tavus's output, not the visitor's. -->
-  <tavus-widget deployment-id="8841cb38-7eec-4d0f-9d8f-9d9be9822b59" camera-on-start="off"></tavus-widget>
-
-  <!-- Fallback for when the Tavus chat widget hangs (e.g. stuck on "Getting
-       your microphone ready" with no permission prompt ever shown — reported
-       live, reproducible on a real desktop browser, not just this session's
-       sandboxed testing). We poll the widget's own visible text directly
-       (rather than only listening for tavus:conversation-created, which
-       never fires in this failure mode since it stalls before that point)
-       and capture real diagnostics — mic permission state, device count,
-       any tavus:* events seen — the moment it looks stuck, so the next
-       report tells us exactly what's failing instead of guessing again. -->
-  <div id="tavus-fallback" role="status" hidden
-       style="position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:60;
-              max-width:min(90vw,360px);background:#12161f;color:#fff;
-              border:1px solid rgba(255,255,255,.15);border-radius:12px;
-              padding:12px 36px 12px 16px;font:14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  <!-- Custom chat launcher — replaces @tavus/widget entirely.
+       That embed script has a confirmed bug: when the browser's mic
+       permission is anything other than a completely untouched default, the
+       widget never actually calls getUserMedia() to acquire the track, so
+       its own internal "ready" flag never flips and the Join button stays
+       disabled forever — reproduced across PALs, across widget versions
+       0.9.4 through @latest, with no popup ever shown to the visitor.
+       Tavus's own /v2/conversations API still works fine (verified via
+       their dashboard test tool with real video+audio), and it returns a
+       conversation_url that is just a plain Daily.co room. Daily's own
+       hosted call page handles all mic/camera negotiation itself — mature,
+       widely used, unaffected by the widget's bug — so we skip the
+       @tavus/widget script and load that room directly in an iframe.
+       A Twilio Function holds the Tavus API key server-side (same pattern
+       as data-notify/data-welcome) since a static site can't hold secrets. -->
+  <div id="chat-launcher"
+       style="position:fixed;right:16px;bottom:16px;z-index:60;
+              max-width:min(90vw,280px);background:#12161f;color:#fff;
+              border:1px solid rgba(255,255,255,.15);border-radius:16px;
+              padding:14px 16px;font:14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
               box-shadow:0 8px 24px rgba(0,0,0,.35);">
-    Chat's taking longer than it should. Call or text
-    <a href="tel:+12108711562" style="color:#9fb0c6;">(210) 871-1562</a> instead.
-    <div style="margin-top:8px;">
-      <button type="button" id="tavus-fallback-copy"
-              style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#9fb0c6;
-                     font-size:12px;border-radius:6px;padding:4px 10px;cursor:pointer;">Copy debug info</button>
-      <span id="tavus-fallback-copied" style="font-size:12px;color:#9fb0c6;margin-left:6px;display:none;">Copied</span>
-    </div>
-    <button type="button" aria-label="Dismiss" onclick="this.parentElement.hidden=true;"
-            style="position:absolute;top:6px;right:8px;background:none;border:none;color:#9fb0c6;font-size:16px;line-height:1;cursor:pointer;padding:4px;">&times;</button>
+    <div style="font-weight:600;margin-bottom:8px;">Hi! Want to chat?</div>
+    <button type="button" id="chat-launcher-btn"
+            style="width:100%;background:#c9a86a;color:#12161f;border:none;border-radius:10px;
+                   padding:10px 14px;font-weight:600;font-size:14px;cursor:pointer;">Start conversation</button>
+    <p id="chat-launcher-error" hidden style="margin:8px 0 0;font-size:12.5px;color:#e8b4b4;">
+      Couldn't connect right now. Call or text <a href="tel:+12108711562" style="color:#9fb0c6;">(210) 871-1562</a> instead.
+    </p>
   </div>
+
+  <div id="chat-modal" hidden
+       style="position:fixed;inset:0;z-index:70;background:rgba(5,7,12,.85);
+              display:flex;align-items:center;justify-content:center;padding:16px;">
+    <div style="position:relative;width:min(720px,100%);height:min(640px,90vh);
+                background:#05070c;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);">
+      <button type="button" id="chat-modal-close" aria-label="End conversation"
+              style="position:absolute;top:10px;right:10px;z-index:2;background:rgba(0,0,0,.5);
+                     color:#fff;border:none;border-radius:999px;width:32px;height:32px;font-size:18px;
+                     line-height:1;cursor:pointer;">&times;</button>
+      <iframe id="chat-modal-frame" title="Chat with Remy"
+              allow="camera; microphone; autoplay; fullscreen; display-capture"
+              style="width:100%;height:100%;border:0;"></iframe>
+    </div>
+  </div>
+
   <script>
     (function () {
-      var widget = document.querySelector('tavus-widget');
-      var fallback = document.getElementById('tavus-fallback');
-      if (!widget || !fallback) return;
+      var API_BASE = 'https://listedbyremy-lead-notify-1136.twil.io';
+      var SECRET = 'Xt8vwl5hURFMAY1alI82REPwTWqMbJeH';
 
-      var seenEvents = [];
-      ['tavus:ready','tavus:error','tavus:conversation-created','tavus:conversation-started','tavus:state-change'].forEach(function (evt) {
-        widget.addEventListener(evt, function (e) {
-          seenEvents.push(evt + (e.detail ? ':' + JSON.stringify(e.detail) : ''));
-        });
-      });
+      var launcher = document.getElementById('chat-launcher');
+      var btn = document.getElementById('chat-launcher-btn');
+      var errEl = document.getElementById('chat-launcher-error');
+      var modal = document.getElementById('chat-modal');
+      var frame = document.getElementById('chat-modal-frame');
+      var closeBtn = document.getElementById('chat-modal-close');
+      var currentConversationId = null;
 
-      var stuckSince = null, watchdog = null, shown = false;
-      function clearWatchdog() { if (watchdog) { clearTimeout(watchdog); watchdog = null; } stuckSince = null; }
-
-      async function collectDebugInfo() {
-        var lines = [];
-        lines.push('URL: ' + location.href);
-        lines.push('Time: ' + new Date().toISOString());
-        lines.push('UA: ' + navigator.userAgent);
+      function endCurrentConversation() {
+        if (!currentConversationId) return;
+        var body = new URLSearchParams();
+        body.append('secret', SECRET);
+        body.append('conversation_id', currentConversationId);
         try {
-          var mic = await navigator.permissions.query({ name: 'microphone' });
-          lines.push('Mic permission: ' + mic.state);
-        } catch (e) { lines.push('Mic permission query failed: ' + e); }
-        try {
-          var devices = await navigator.mediaDevices.enumerateDevices();
-          var mics = devices.filter(function (d) { return d.kind === 'audioinput'; });
-          lines.push('Audio input devices found: ' + mics.length);
-        } catch (e) { lines.push('enumerateDevices failed: ' + e); }
-        lines.push('Tavus events seen: ' + (seenEvents.length ? seenEvents.join(' | ') : 'none'));
-        return lines.join('\n');
+          navigator.sendBeacon(
+            API_BASE + '/tavus-end',
+            new Blob([body.toString()], { type: 'application/x-www-form-urlencoded' })
+          );
+        } catch (e) {
+          fetch(API_BASE + '/tavus-end', { method: 'POST', mode: 'no-cors', body: body });
+        }
+        currentConversationId = null;
       }
 
-      function widgetText() {
-        try { return widget.shadowRoot.textContent || ''; } catch (e) { return ''; }
+      function closeModal() {
+        endCurrentConversation();
+        modal.hidden = true;
+        frame.src = 'about:blank';
+        launcher.hidden = false;
       }
 
-      // Poll the widget's own visible text — this is what the visitor actually
-      // sees, so it's the one signal guaranteed to reflect reality regardless
-      // of which internal events do or don't fire.
-      setInterval(function () {
-        var stuck = widgetText().indexOf('Getting your microphone ready') !== -1;
-        if (stuck) {
-          if (!stuckSince) stuckSince = Date.now();
-          if (!shown && Date.now() - stuckSince > 15000) {
-            shown = true;
-            collectDebugInfo().then(function (info) {
-              console.warn('[Tavus stuck] ' + info);
-              fallback.hidden = false;
-              fallback.dataset.debug = info;
-            });
-          }
-        } else {
-          stuckSince = null;
-          shown = false;
-          fallback.hidden = true;
-        }
-      }, 1000);
+      btn.addEventListener('click', function () {
+        btn.disabled = true;
+        btn.textContent = 'Connecting…';
+        errEl.hidden = true;
 
-      document.getElementById('tavus-fallback-copy').addEventListener('click', function () {
-        var info = fallback.dataset.debug || 'no debug info captured';
-        var done = function () {
-          var s = document.getElementById('tavus-fallback-copied');
-          s.style.display = 'inline'; setTimeout(function () { s.style.display = 'none'; }, 2000);
-        };
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(info).then(done).catch(function () { prompt('Copy this:', info); });
-        } else {
-          prompt('Copy this:', info);
-        }
+        var body = new URLSearchParams();
+        body.append('secret', SECRET);
+
+        fetch(API_BASE + '/tavus-create', { method: 'POST', body: body })
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (!data || !data.ok || !data.conversation_url) throw new Error('bad response');
+            currentConversationId = data.conversation_id;
+            frame.src = data.conversation_url;
+            launcher.hidden = true;
+            modal.hidden = false;
+          })
+          .catch(function () {
+            errEl.hidden = false;
+          })
+          .finally(function () {
+            btn.disabled = false;
+            btn.textContent = 'Start conversation';
+          });
       });
 
-      widget.addEventListener('tavus:state-change', function (e) {
-        if (e.detail && e.detail.state === 'connected') {
-          clearWatchdog(); shown = false;
-          fallback.hidden = true;
-        }
-      });
+      closeBtn.addEventListener('click', closeModal);
+      window.addEventListener('pagehide', endCurrentConversation);
     })();
   </script>
 </body>
