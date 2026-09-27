@@ -2575,7 +2575,10 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
        @tavus/widget script and load that room directly in an iframe.
        A Twilio Function holds the Tavus API key server-side (same pattern
        as data-notify/data-welcome) since a static site can't hold secrets. -->
-  <div id="chat-launcher"
+  <!-- Hidden: Tavus account is out of conversational credits (tavus-create
+       returns 502 "out of conversational credits"). Remove the hidden
+       attribute once credits are topped up at tavus.io. -->
+  <div id="chat-launcher" hidden
        style="position:fixed;right:16px;bottom:16px;z-index:60;
               max-width:min(90vw,280px);background:#12161f;color:#fff;
               border:1px solid rgba(255,255,255,.15);border-radius:16px;
