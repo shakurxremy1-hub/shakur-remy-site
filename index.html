@@ -46,6 +46,83 @@
     }
     html, body { background: #05070c; }
 
+    /* ============ LIQUID GLASS — OS-material pass (2026-11-01) ============
+       Pushes the persistent chrome (top nav, flight nav/CTA bars, pill
+       buttons, cards) toward the iOS/visionOS "Liquid Glass" control
+       material: translucent blur+saturate, an inset bevel (bright top
+       edge / dark bottom edge), and — on nav bars + buttons — a soft
+       specular sheen that follows the pointer. The sheen sits at
+       z-index:-1 so it layers above each element's own background but
+       stays behind its label/icon, which is why it's safe to add to
+       elements with raw text children. */
+    .topnav, .sw-nav,
+    .topnav__cta, .sw-btn--primary, .sw-btn--ghost, .sw-topcta,
+    .df-btn--primary, .df-btn--ghost,
+    .founder__btn--primary, .founder__btn--ghost,
+    .tier__btn, .tier__btn--ghost,
+    .contact__btn, .contact__btn--primary {
+      position: relative;
+    }
+    .topnav {
+      background: color-mix(in srgb, #05070c 72%, transparent);
+      backdrop-filter: blur(22px) saturate(1.8) brightness(1.06);
+      -webkit-backdrop-filter: blur(22px) saturate(1.8) brightness(1.06);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.14), inset 0 -1px 0 rgba(0,0,0,.3);
+    }
+    .sw-nav {
+      backdrop-filter: blur(20px) saturate(1.7);
+      -webkit-backdrop-filter: blur(20px) saturate(1.7);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 -1px 0 rgba(0,0,0,.28);
+    }
+    .sw-btn--ghost, .df-btn--ghost, .founder__btn--ghost, .tier__btn--ghost, .contact__btn {
+      backdrop-filter: blur(14px) saturate(1.5);
+      -webkit-backdrop-filter: blur(14px) saturate(1.5);
+    }
+    .tier, .svc__card, .refs__card {
+      position: relative;
+      backdrop-filter: blur(16px) saturate(1.4);
+      -webkit-backdrop-filter: blur(16px) saturate(1.4);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -1px 0 rgba(0,0,0,.22);
+    }
+    .topnav::before, .sw-nav::before,
+    .topnav__cta::before, .sw-btn--primary::before, .sw-btn--ghost::before, .sw-topcta::before,
+    .df-btn--primary::before, .df-btn--ghost::before,
+    .founder__btn--primary::before, .founder__btn--ghost::before,
+    .tier__btn::before, .tier__btn--ghost::before,
+    .contact__btn::before, .contact__btn--primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .4s;
+      background: radial-gradient(140px circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,.4), transparent 60%);
+    }
+    .topnav:hover::before, .sw-nav:hover::before,
+    .topnav__cta:hover::before, .sw-btn--primary:hover::before, .sw-btn--ghost:hover::before, .sw-topcta:hover::before,
+    .df-btn--primary:hover::before, .df-btn--ghost:hover::before,
+    .founder__btn--primary:hover::before, .founder__btn--ghost:hover::before,
+    .tier__btn:hover::before, .tier__btn--ghost:hover::before,
+    .contact__btn:hover::before, .contact__btn--primary:hover::before { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) {
+      .topnav::before, .sw-nav::before,
+      .topnav__cta::before, .sw-btn--primary::before, .sw-btn--ghost::before, .sw-topcta::before,
+      .df-btn--primary::before, .df-btn--ghost::before,
+      .founder__btn--primary::before, .founder__btn--ghost::before,
+      .tier__btn::before, .tier__btn--ghost::before,
+      .contact__btn::before, .contact__btn--primary::before { display: none; }
+    }
+    /* .df-bar is the real WebGL LiquidGlass element during the flight
+       (see the init script near the bottom of the page) — its direct
+       children just need to stack above the injected <canvas>. Once the
+       shader is live, its own gradient background (injected by
+       injectDFCSS() into <head>, after this stylesheet — hence
+       !important to win the cascade) is redundant with the canvas. */
+    .df-bar > * { position: relative; z-index: 1; }
+    .df-bar.lg-active { background: transparent !important; }
+
     /* --- dark-theme fixes for engine chrome that bakes in #fff / --sw-ink-as-dark --- */
     .sw-nav {
       background: color-mix(in srgb, #0c1220 78%, transparent);
@@ -795,16 +872,8 @@
     "hasCredential": "Texas Real Estate Commission License #844622",
     "worksFor": {
       "@type": "RealEstateAgent",
-      "name": "Relive Real Estate Inc.",
-      "identifier": "TREC Firm License #9012318",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "500 W 2nd St, Ste 1900 #178",
-        "addressLocality": "Austin",
-        "addressRegion": "TX",
-        "postalCode": "78701",
-        "addressCountry": "US"
-      }
+      "name": "Relive Realty, LLC",
+      "identifier": "TREC Firm License #9015474"
     }
   }
   </script>
@@ -1559,7 +1628,7 @@
     <div class="creds__row">
       <span>Licensed REALTOR&reg;</span>
       <span>TREC License #844622</span>
-      <span>Relive Real Estate Inc.</span>
+      <span>Relive Realty, LLC</span>
       <span>Buyer &amp; seller representation</span>
       <span>Serving Greater San Antonio</span>
     </div>
@@ -1569,8 +1638,8 @@
     <div class="site-foot__inner">
       <div>
         <strong style="color:#96a3b7;font-weight:600;">Shakur Remy</strong>, Licensed Real Estate Sales Agent, TREC&nbsp;License&nbsp;#844622<br />
-        Sponsoring broker: <strong style="color:#96a3b7;font-weight:600;">Relive Real Estate Inc.</strong> &nbsp;·&nbsp; TREC&nbsp;Firm&nbsp;License&nbsp;#9012318<br />
-        500&nbsp;W&nbsp;2nd&nbsp;St, Ste&nbsp;1900&nbsp;#178, Austin,&nbsp;TX&nbsp;78701 &nbsp;·&nbsp; (737)&nbsp;285-7992 &nbsp;·&nbsp; Designated&nbsp;Broker:&nbsp;Alexa&nbsp;Ronci&nbsp;(#683611)
+        Sponsoring broker: <strong style="color:#96a3b7;font-weight:600;">Relive Realty, LLC</strong> &nbsp;·&nbsp; TREC&nbsp;Firm&nbsp;License&nbsp;#9015474<br />
+        (737)&nbsp;610-9110 &nbsp;·&nbsp; Designated&nbsp;Broker:&nbsp;Kilian&nbsp;Goldin&nbsp;(#675648)
       </div>
       <div class="site-foot__sitemap">
         <a href="/guides/buying-a-home-in-san-antonio.html">Buyer&rsquo;s guide</a>
@@ -1587,9 +1656,9 @@
         <a href="/areas/helotes.html">Helotes</a>
       </div>
       <div>
-        <a href="https://agent.reliverealty.com/TREC_ReliveRE.pdf" target="_blank" rel="noopener">Texas Real Estate Commission: Information About Brokerage Services</a>
+        <a href="/IABS_Relive_Realty.pdf" target="_blank" rel="noopener">Texas Real Estate Commission: Information About Brokerage Services</a>
         &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="https://agent.reliverealty.com/TCPN_ReliveRE.pdf" target="_blank" rel="noopener">TREC Consumer Protection Notice</a>
+        <a href="/TREC_Consumer_Protection_Notice.pdf" target="_blank" rel="noopener">TREC Consumer Protection Notice</a>
       </div>
       <div class="site-foot__marks">
         <span class="site-foot__mark">
@@ -1609,7 +1678,7 @@
       </div>
       <div class="site-foot__legal">
         All information is deemed reliable but not guaranteed and should be independently verified.
-        This site is not the official website of Relive Real Estate Inc. &nbsp;·&nbsp;
+        This site is not the official website of Relive Realty, LLC. &nbsp;·&nbsp;
         &copy; <span id="foot-year">2026</span> Shakur Remy.
       </div>
     </div>
@@ -1988,6 +2057,25 @@ function mountScrollWorld(container, config) {
 // Expose for module + global use.
 if (typeof module !== 'undefined' && module.exports) module.exports = { mountScrollWorld };
 if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
+
+// ── LIQUID GLASS: cursor-lit sheen on nav bars + pill buttons ──
+// Delegated (not queried up front) since .sw-nav/.df-nav/.df-btn-* are
+// built at runtime by mountDesktopFlight — a direct querySelectorAll here
+// would run before they exist.
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var GLASS_SEL = '.topnav, .sw-nav, .df-nav, .topnav__cta, .sw-btn--primary, ' +
+    '.sw-btn--ghost, .sw-topcta, .df-btn--primary, .df-btn--ghost, ' +
+    '.founder__btn--primary, .founder__btn--ghost, .tier__btn, ' +
+    '.tier__btn--ghost, .contact__btn, .contact__btn--primary';
+  document.addEventListener('pointermove', function (e) {
+    var el = e.target.closest && e.target.closest(GLASS_SEL);
+    if (!el) return;
+    var r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  }, { passive: true });
+})();
 
   </script>
   <script>
@@ -2580,10 +2668,11 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
        attribute once credits are topped up at tavus.io. -->
   <div id="chat-launcher" hidden
        style="position:fixed;right:16px;bottom:16px;z-index:60;
-              max-width:min(90vw,280px);background:#12161f;color:#fff;
-              border:1px solid rgba(255,255,255,.15);border-radius:16px;
+              max-width:min(90vw,280px);background:color-mix(in srgb,#12161f 70%,transparent);color:#fff;
+              backdrop-filter:blur(20px) saturate(1.7);-webkit-backdrop-filter:blur(20px) saturate(1.7);
+              border:1px solid rgba(255,255,255,.18);border-radius:16px;
               padding:14px 16px;font:14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-              box-shadow:0 8px 24px rgba(0,0,0,.35);">
+              box-shadow:0 8px 24px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.12),inset 0 -1px 0 rgba(0,0,0,.25);">
     <div style="font-weight:600;margin-bottom:8px;">Hi! Want to chat?</div>
     <button type="button" id="chat-launcher-btn"
             style="width:100%;background:#c9a86a;color:#12161f;border:none;border-radius:10px;
@@ -2594,13 +2683,19 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
   </div>
 
   <div id="chat-modal" hidden
-       style="position:fixed;inset:0;z-index:70;background:rgba(5,7,12,.85);
+       style="position:fixed;inset:0;z-index:70;background:rgba(5,7,12,.7);
+              backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
               align-items:center;justify-content:center;padding:16px;">
     <div style="position:relative;width:min(720px,100%);height:min(640px,90vh);
-                background:#05070c;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);">
+                background:color-mix(in srgb,#05070c 75%,transparent);
+                backdrop-filter:blur(26px) saturate(1.7);-webkit-backdrop-filter:blur(26px) saturate(1.7);
+                border:1px solid rgba(255,255,255,.1);
+                border-radius:16px;overflow:hidden;
+                box-shadow:0 20px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.12),inset 0 -1px 0 rgba(0,0,0,.3);">
       <button type="button" id="chat-modal-close" aria-label="End conversation"
-              style="position:absolute;top:10px;right:10px;z-index:2;background:rgba(0,0,0,.5);
-                     color:#fff;border:none;border-radius:999px;width:32px;height:32px;font-size:18px;
+              style="position:absolute;top:10px;right:10px;z-index:2;background:color-mix(in srgb,#000 50%,transparent);
+                     backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+                     color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:999px;width:32px;height:32px;font-size:18px;
                      line-height:1;cursor:pointer;">&times;</button>
       <iframe id="chat-modal-frame" title="Chat with Remy"
               allow="camera; microphone; autoplay; fullscreen; display-capture"
@@ -2675,6 +2770,53 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
 
       closeBtn.addEventListener('click', closeModal);
       window.addEventListener('pagehide', endCurrentConversation);
+    })();
+  </script>
+
+  <script type="module">
+    // ── LIQUID GLASS — real WebGL glass refraction for the flight bar ──
+    // Library: https://github.com/ybouane/liquidglass (MIT). .df-bar
+    // (brand + section nav + "Browse homes" CTA) is already a direct
+    // child of #world/.df-root — mountDesktopFlight builds it there —
+    // so it can refract the flight canvas (.df-bg, also a direct child
+    // of #world) behind it with the real shader instead of a CSS
+    // approximation. Skipped on touch/narrow viewports: mountScrollWorld
+    // swaps to mountMobileStory there, which doesn't build a .df-bar.
+    (async () => {
+      const isPhone = window.matchMedia('(hover: none) and (pointer: coarse)').matches || window.innerWidth <= 860;
+      const barEl = document.querySelector('.df-bar');
+      const worldEl = document.getElementById('world');
+      if (isPhone || !barEl || !worldEl || !window.WebGLRenderingContext) return;
+
+      barEl.dataset.config = JSON.stringify({
+        cornerRadius: 0,
+        zRadius: 12,
+        blurAmount: 0.16,
+        refraction: 0.50,
+        chromAberration: 0.035,
+        edgeHighlight: 0.08,
+        specular: 0.15,
+        fresnel: 1.0,
+        opacity: 0.90,
+        saturation: 0.10,
+        brightness: 0.02,
+        shadowOpacity: 0.30,
+        shadowSpread: 14,
+        shadowOffsetY: 2,
+      });
+
+      try {
+        // Self-hosted (not the jsdelivr CDN) — this page's CSP locks
+        // script-src to 'self', so the library is vendored locally.
+        const { LiquidGlass } = await import('./assets/vendor/liquidglass.min.js');
+        const instance = await LiquidGlass.init({ root: worldEl, glassElements: [barEl] });
+        barEl.classList.add('lg-active');
+        const markDirty = () => instance.markChanged();
+        window.addEventListener('scroll', markDirty, { passive: true });
+        window.addEventListener('resize', markDirty, { passive: true });
+      } catch (err) {
+        console.warn('[liquid-glass] init failed — .df-bar keeps its CSS fallback.', err);
+      }
     })();
   </script>
 </body>
