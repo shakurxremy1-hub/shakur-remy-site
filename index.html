@@ -965,6 +965,8 @@
     .toast { position: fixed; left: 50%; bottom: 84px; z-index: 9000; transform: translate(-50%,16px); opacity: 0; pointer-events: none; padding: 12px 20px; border-radius: 999px; background: #0b1220; color: #f2f6fc; border: 1px solid #c9a86a; font-size: .9rem; transition: opacity .3s ease, transform .3s cubic-bezier(.22,1,.36,1); }
     .toast--on { opacity: 1; transform: translate(-50%,0); }
 
+    .skipl { position: fixed; left: 12px; top: -64px; z-index: 10000; padding: 10px 16px; border-radius: 10px; background: #c9a86a; color: #05070c; font-weight: 700; text-decoration: none; transition: top .15s ease; }
+    .skipl:focus { top: 12px; }
     /* ---- find-your-path quiz ---- */
     .quiz__card { position: relative; max-width: 760px; margin: 0 auto; padding: clamp(24px,4vw,40px); border: 1px solid rgba(255,255,255,.10); border-radius: 20px;
       background: linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015)),#0b1220; }
@@ -1077,8 +1079,11 @@
       gtag('js', new Date()); gtag('config', GA_ID);
     })();
   </script>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Shakur Remy","url":"https://listedbyremy.com/","image":"https://listedbyremy.com/assets/img/og.jpg","email":"sremy@reliverealty.com","description":"San Antonio real estate agent helping buyers and sellers, from first-time homes to luxury estates.","address":{"@type":"PostalAddress","addressLocality":"San Antonio","addressRegion":"TX","addressCountry":"US"},"areaServed":[{"@type":"City","name":"San Antonio, TX"},{"@type":"Place","name":"Alamo Heights, TX"},{"@type":"Place","name":"Alamo Ranch, TX"},{"@type":"Place","name":"Boerne, TX"},{"@type":"Place","name":"Cibolo, TX"},{"@type":"Place","name":"Converse, TX"},{"@type":"Place","name":"Helotes, TX"},{"@type":"Place","name":"Olmos Park, TX"},{"@type":"Place","name":"Schertz, TX"},{"@type":"Place","name":"Stone Oak, TX"},{"@type":"Place","name":"The Dominion, TX"}],"worksFor":{"@type":"Organization","name":"Relive Realty, LLC"}}</script>
 </head>
 <body>
+<a class="skipl" href="#founder">Skip to content</a>
   <!-- ========================================================================
        CINEMATIC SCROLL TEMPLATE  ·  how to make a new site from this file
        ========================================================================
@@ -1970,6 +1975,8 @@
         <a href="/areas/cibolo.html">Cibolo</a>
         <a href="/areas/boerne.html">Boerne</a>
         <a href="/areas/helotes.html">Helotes</a>
+              <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
       </div>
       <div>
         <a href="/IABS_Relive_Realty.pdf" target="_blank" rel="noopener">Texas Real Estate Commission: Information About Brokerage Services</a>

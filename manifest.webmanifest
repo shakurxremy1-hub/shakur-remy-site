@@ -1,0 +1,14 @@
+{
+  "name": "Shakur Remy | San Antonio Real Estate",
+  "short_name": "Shakur Remy",
+  "description": "San Antonio homes with Shakur Remy at Relive Realty.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#05070c",
+  "theme_color": "#05070c",
+  "icons": [
+    {"src": "/assets/img/favicon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/assets/img/favicon-180.png", "sizes": "180x180", "type": "image/png"}
+  ]
+}
