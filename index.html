@@ -1081,6 +1081,7 @@
   </script>
   <link rel="manifest" href="/manifest.webmanifest" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Shakur Remy","url":"https://listedbyremy.com/","image":"https://listedbyremy.com/assets/img/og.jpg","email":"sremy@reliverealty.com","telephone":"+1-210-871-1562","description":"San Antonio real estate agent helping buyers and sellers, from first-time homes to luxury estates.","address":{"@type":"PostalAddress","addressLocality":"San Antonio","addressRegion":"TX","addressCountry":"US"},"areaServed":[{"@type":"City","name":"San Antonio, TX"},{"@type":"Place","name":"Alamo Heights, TX"},{"@type":"Place","name":"Alamo Ranch, TX"},{"@type":"Place","name":"Boerne, TX"},{"@type":"Place","name":"Cibolo, TX"},{"@type":"Place","name":"Converse, TX"},{"@type":"Place","name":"Helotes, TX"},{"@type":"Place","name":"Olmos Park, TX"},{"@type":"Place","name":"Schertz, TX"},{"@type":"Place","name":"Stone Oak, TX"},{"@type":"Place","name":"The Dominion, TX"}],"worksFor":{"@type":"Organization","name":"Relive Realty, LLC"}}</script>
+  <link rel="stylesheet" href="assets/vendor/lenis.css">
 </head>
 <body>
 <a class="skipl" href="#founder">Skip to content</a>
@@ -2007,6 +2008,18 @@
     </div>
   </footer>
 
+  <script src="assets/vendor/lenis.min.js"></script>
+  <script>
+    /* ---- Lenis smooth scroll (self-hosted); skipped for reduced-motion / touch ---- */
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+      if (reduce || !fine || typeof Lenis === 'undefined') return;
+      var lenis = new Lenis({ lerp: 0.1, prevent: function (n) { return !!(n.closest && n.closest('textarea, select, [data-lenis-prevent]')); } });
+      window.lenis = lenis;
+      (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(performance.now());
+    })();
+  </script>
   <script>
 /* ==== scrub-engine.js (inlined) ==== */
 /* ============================================================================
@@ -2220,7 +2233,7 @@ function mountDesktopFlight(container, config) {
     return 'rgb(' + a.map((v, k) => Math.round(v + (b[k] - v) * t)).join(',') + ')';
   };
 
-  function jumpTo(i) { window.scrollTo({ top: track.offsetTop + (i + 0.5) / N * (track.offsetHeight - window.innerHeight), behavior: reduce ? 'auto' : 'smooth' }); }
+  function jumpTo(i) { const y = track.offsetTop + (i + 0.5) / N * (track.offsetHeight - window.innerHeight); if (window.lenis) window.lenis.scrollTo(y, { duration: 1.4 }); else window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' }); }
 
   // kick off loading: frame 1 first (also preloaded in <head> → warm cache), then stream the rest
   want(0); pump();
@@ -2699,7 +2712,7 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
         e.preventDefault();
         var smt = parseFloat(getComputedStyle(el).scrollMarginTop) || 10;
         var top = id === 'top' || id === '' ? 0 : el.getBoundingClientRect().top + window.scrollY - smt;
-        scrollTo(top, Math.min(1100, 380 + Math.abs(top - window.scrollY) * 0.35));
+        if (window.lenis) window.lenis.scrollTo(top, { duration: Math.min(1.6, 0.6 + Math.abs(top - window.scrollY) / 4000) }); else scrollTo(top, Math.min(1100, 380 + Math.abs(top - window.scrollY) * 0.35));
         if (history.replaceState) history.replaceState(null, '', id ? '#' + id : location.pathname);
       }, { passive: false });
     })();
@@ -2950,7 +2963,7 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
           var media = card && card.querySelector('.vtour__media');
           if (!media) return;
           playInto(media, btn.getAttribute('data-video'), btn.getAttribute('data-poster'));
-          media.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          if (window.lenis) { const r = media.getBoundingClientRect(); if (r.top < 0 || r.bottom > innerHeight) window.lenis.scrollTo(media, { offset: -(innerHeight - r.height) / 2 }); } else media.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
       });
       document.querySelectorAll('.vtour__copy').forEach(function (btn) {
